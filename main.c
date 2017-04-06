@@ -20,23 +20,32 @@ int main(void)
 }
 */
 
-int main(void)
+void ft_ls_no_flags(void)
 {
     DIR *dir;
     struct dirent *sd;
 
-
     dir = opendir(".");
-
     if (!dir)
-    {
         ft_printf("Error: Unable to open directory");
+    else
+    {
+        while ((sd = readdir(dir)) != NULL)
+            if(ft_strncmp(sd->d_name, ".", 1) && ft_strcmp(sd->d_name, ".."))
+                ft_printf("%s\n", sd->d_name);
+    }
+    closedir(dir);
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 1)
+    {
+        ft_ls_no_flags();
         return (0);
     }
-    while ((sd = readdir(dir)) != NULL)
-        if(ft_strncmp(sd->d_name, ".", 1) && ft_strcmp(sd->d_name, ".."))
-            ft_printf("%s\n", sd->d_name);
-    closedir(dir);
+    ft_putchar(av[1][0]);
+    ft_putchar('\n');
     return (0);
 }
 
