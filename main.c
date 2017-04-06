@@ -20,12 +20,15 @@ int main(void)
 }
 */
 
-void ft_ls_no_flags(void)
+void ls_print_dir(char *name)
 {
-    DIR *dir;
-    struct dirent *sd;
+    /**
+    **  This fx writes a list of the directory name
+    */
+    DIR             *dir;
+    struct dirent   *sd;
 
-    dir = opendir(".");
+    dir = opendir(name);
     if (!dir)
         ft_printf("Error: Unable to open directory");
     else
@@ -41,10 +44,10 @@ int main(int ac, char **av)
 {
     if (ac == 1)
     {
-        ft_ls_no_flags();
+        ls_print_dir(".");
         return (0);
     }
-    ft_putchar(av[1][0]);
+    ls_print_dir(av[1]);
     ft_putchar('\n');
     return (0);
 }
