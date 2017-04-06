@@ -27,7 +27,7 @@ int main(int ac, char **av)
     if (ac == 1)
     {
         ls_print_dir(".");
-        ft_putchar('\n');    
+        ft_putchar('\n');
         return (0);
     }
     ls_print_dir(av[1]);
