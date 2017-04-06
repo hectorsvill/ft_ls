@@ -34,7 +34,7 @@ int main(void)
         return (0);
     }
     while ((sd = readdir(dir)) != NULL)
-        if(ft_strcmp(sd->d_name, "." ) && ft_strcmp(sd->d_name, ".."))
+        if(ft_strncmp(sd->d_name, ".", 1) && ft_strcmp(sd->d_name, ".."))
             ft_printf("%s\n", sd->d_name);
     closedir(dir);
     return (0);
