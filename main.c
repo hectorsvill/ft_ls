@@ -25,6 +25,7 @@ int main(void)
     DIR *dir;
     struct dirent *sd;
 
+
     dir = opendir(".");
 
     if (!dir)
@@ -33,7 +34,8 @@ int main(void)
         return (0);
     }
     while ((sd = readdir(dir)) != NULL)
-        ft_printf("%s\n", sd->d_name);
+        if(ft_strcmp(sd->d_name, "." ) && ft_strcmp(sd->d_name, ".."))
+            ft_printf("%s\n", sd->d_name);
     closedir(dir);
     return (0);
 }

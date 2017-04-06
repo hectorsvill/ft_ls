@@ -15,7 +15,7 @@ $(NAME): $(SRC)
 
 clean:
 	@make clean -C libft
-	@rm a.out
+	@rm $(NAME)
 
 fclean: clean
 	@make fclean -C libft
