@@ -7,7 +7,7 @@ CC = gcc -Wall -Wextra -Werror
 
 SRC = main.c
 
-all: $(NAME) 
+all: $(NAME)
 
 $(NAME): $(SRC) 
 	@make -C libft
