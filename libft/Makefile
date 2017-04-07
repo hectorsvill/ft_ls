@@ -187,7 +187,6 @@ $(NAME): $(SRC)
 	@$(CC) -c $(FLAGS) $(SRC) -Iinc/
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "libft.a"
 
 clean:
 	@make clean -C libft

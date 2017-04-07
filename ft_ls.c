@@ -22,6 +22,7 @@ void ls_openprintdir(char *name)
     closedir(dir);
 }
 
+
 int main(int ac, char **av)
 {
     if (ac == 1)
@@ -32,4 +33,3 @@ int main(int ac, char **av)
     ls_openprintdir(av[1]);
     return (0);
 }
-
