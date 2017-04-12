@@ -10,12 +10,12 @@ SRC = ft_ls.c
 all: $(NAME) $(SRC)
 
 $(NAME): $(SRC)
-	@make -C libft
-	@$(CC) $(SRC) -Iinc $(LIB) -o $(NAME)
+	#@make -C libft
+	@$(CC) $(SRC) libft/libft.a $(LIB) -o $(NAME)
 
 clean:
-	@make clean -C libft
+	#@make clean -C libft
 
 fclean: clean
-	@make fclean -C libft
+	#@make fclean -C libft
 	@rm $(NAME)

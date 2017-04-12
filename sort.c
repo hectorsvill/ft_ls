@@ -34,7 +34,7 @@ int main(int ac, char **av)
     }
    // int l = ac - 1;
 
-    qsort(av, ac, sizeof(char*), cstring_cmp);
+    qsort(av, ac, sizeof(char*), cstring_cmp); //ft_qsort!!!
     printstrarray(av);
     ft_putchar('\n');
 
