@@ -5,7 +5,6 @@
 # include <sys/types.h>
 # include <dirent.h>
 
-
-
+char **sort_str_array(int ac, char **av);
 
 #endif

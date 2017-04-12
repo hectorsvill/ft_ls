@@ -13,7 +13,7 @@ void printstrarray(char **av)
 }
 
 
-int cstring_cmp(const void *a, const void *b)
+int qsortstr_cmp(const void *a, const void *b)
 {
     const char **ia = (const char **)a;
     const char **ib = (const char **)b;
@@ -24,19 +24,11 @@ int cstring_cmp(const void *a, const void *b)
     */
 }
 
-int main(int ac, char **av)
+char **sort_str_array(int ac, char **av)
 {
-    //char *strings[] = {"bne", "dtwo", "afive", "look"};
-    if (ac == 1)
-    {
-        ft_putendl(av[0]);
-        return (0);
-    }
-   // int l = ac - 1;
-
-    qsort(av, ac, sizeof(char*), cstring_cmp); //ft_qsort!!!
+    qsort(av, ac, sizeof(char*), qsortstr_cmp); //ft_qsort!!!
     printstrarray(av);
     ft_putchar('\n');
 
-    return (0);
+    return (av);
 }

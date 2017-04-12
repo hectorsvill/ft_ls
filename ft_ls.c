@@ -1,5 +1,7 @@
 #include "ft_ls.h"
 
+
+
 void ls_openprintdir(char *name)
 {
     /**
@@ -7,8 +9,6 @@ void ls_openprintdir(char *name)
     */
     DIR             *dir;
     struct dirent   *sd;
-
-	files = NULL;
 
     dir = opendir(name);
     if (!dir)
@@ -33,11 +33,13 @@ int main(int ac, char **av)
 {
     if (ac == 1)
     {
-        ls_openprintdir(".");
-		ft_putchar('\n');
-		system ("ls");
+      //  ls_openprintdir(".");
+		//ft_putchar('\n');
+		///system ("ls");
         return (0);
     }
-    ls_openprintdir(av[1]);
+    //ls_openprintdir(av[1]);
+    
+    sort_str_array(ac, av);
     return (0);
 }
