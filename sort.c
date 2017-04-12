@@ -1,4 +1,4 @@
-#include "libft/inc/ft_printf.h"
+#include "ft_ls.h"
 
 void printstrarray(char **av)
 {
@@ -8,7 +8,7 @@ void printstrarray(char **av)
     while (av[i])
     {
         ft_putendl(av[i++]);
-    
+
     }
 }
 
@@ -37,6 +37,6 @@ int main(int ac, char **av)
     qsort(av, ac, sizeof(char*), cstring_cmp);
     printstrarray(av);
     ft_putchar('\n');
-    
+
     return (0);
 }

@@ -7,15 +7,15 @@ CC = gcc -Wall -Wextra -Werror
 
 SRC = ft_ls.c
 
-all: $(NAME)
+all: $(NAME) $(SRC)
 
-$(NAME): $(SRC) 
+$(NAME): $(SRC)
 	@make -C libft
-	@$(CC) $(SRC) -Iinc $(LIB) -o $(NAME) 
+	@$(CC) $(SRC) -Iinc $(LIB) -o $(NAME)
 
 clean:
 	@make clean -C libft
-	@rm $(NAME)
 
 fclean: clean
 	@make fclean -C libft
+	@rm $(NAME)

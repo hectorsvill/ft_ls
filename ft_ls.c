@@ -1,6 +1,4 @@
-#include "libft/inc/ft_printf.h"
-#include <sys/types.h>
-#include <dirent.h>
+#include "ft_ls.h"
 
 void ls_openprintdir(char *name)
 {
@@ -28,6 +26,8 @@ int main(int ac, char **av)
     if (ac == 1)
     {
         ls_openprintdir(".");
+		ft_putchar('\n');
+		system ("ls");
         return (0);
     }
     ls_openprintdir(av[1]);
