@@ -28,7 +28,6 @@ void opendir_getnames(t_list **name_list, char *name)
     */
     DIR             *dir;
     struct dirent   *sd;
-
 	t_list			*tmp;
 
     dir = opendir(name);
@@ -54,19 +53,16 @@ int main(int ac, char **av)
 	t_list *name_list;
 
 	name_list = NULL;
-    if (ac == 1)
-    {
+	if (ac == 1)
+	{
  		opendir_getnames(&name_list, ".");
-	//	print_list(name_list);
-		sort_str_array(name_list);
-
+		printstrarray(sort_str_array(name_list));
+		/*--test system ls---*/
 		//ft_putendl("\n");
 		//system ("ls");
 		return (0);
-    }
+	}
 	opendir_getnames(&name_list, av[1]);
-	print_list(name_list);
-
-	//sort_str_array(ac, av);
-    return (0);
+	printstrarray(sort_str_array(name_list));
+	return (0);
 }

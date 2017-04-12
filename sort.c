@@ -7,8 +7,9 @@ void printstrarray(char **av)
     i = 0;
     while (av[i])
     {
-        ft_putendl(av[i++]);
-
+		if (ft_strncmp(av[i], ".", 1))
+        	ft_putendl(av[i]);
+		i++;
     }
 }
 
@@ -55,14 +56,13 @@ char **get_name_array(size_t list_len, t_list *name_list)
 	return (names);
 }
 
-void sort_str_array(t_list *name_list)
+char **sort_str_array(t_list *name_list)
 {
 	size_t list_len;
 	char **names;
 
 	list_len = get_list_len(name_list);
 	names = get_name_array(list_len, name_list);
-	//list_len += 1;
 	qsort(names, list_len, sizeof(char*), qsortstr_cmp); //ft_qsort!!!
-	printstrarray(names);
+	return (names);
 }

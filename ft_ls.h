@@ -7,6 +7,6 @@
 
 
 
-void sort_str_array(t_list *name_list);
-
+char **sort_str_array(t_list *name_list);
+void printstrarray(char **av);
 #endif
