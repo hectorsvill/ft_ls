@@ -4,7 +4,7 @@
 #include <stdlib.h>
 struct node
 {
-	int data;
+	char *data;
 	struct node *next;
 };
 
@@ -57,7 +57,7 @@ struct node *sortedmerge(struct node *a, struct node *b)
 	else if (b == NULL)
 		return (a);
 /* pick either a or b, and recur */
-	if (a->data <= b->data)
+	if (ft_strcmp(a->data, b->data) < 0)
 	{
 		result = a;
 		result->next = sortedmerge(a->next , b);
@@ -88,7 +88,7 @@ void merge_sort(struct node **headref)
 	*headref = sortedmerge(a, b);
 }
 
-void push(struct node **head_ref, int new_data)
+void push(struct node **head_ref, char *new_data)
 {
 	/* insert node at the begining if least*/
 
@@ -102,7 +102,7 @@ void print_list(struct node *node)
 {
 	while (node)
 	{
-		printf("%d ", node->data);
+		printf("%s ", node->data);
 		node = node->next;
 	}
 	printf("\n");
@@ -116,19 +116,19 @@ int main(void)
 	struct node *a =  NULL;
 
 	/* unsorted list*/
-	push(&a, 15);
-	push(&a, 10);
-	push(&a, 5);
-	push(&a, 20);
-	push(&a, 3);
-	push(&a, 2);
-	push(&a, 1);
-	push(&a, 13);
-	push(&a, 72);
-	push(&a, 24);
-	push(&a, 12);
-	push(&a, 153);
-	push(&a, 79);
+	push(&a, "src");
+	push(&a, "Makefile");
+	push(&a, "apple");
+	push(&a, "Art");
+	push(&a, "down");
+	push(&a, "four2");
+	push(&a, "Voice");
+	push(&a, "libft");
+	push(&a, "reck");
+	push(&a, "high");
+	push(&a, "road");
+	push(&a, "rich");
+	push(&a, "one");
 
 	print_list(a);
 

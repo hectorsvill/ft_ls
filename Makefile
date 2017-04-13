@@ -5,7 +5,7 @@ LIB = libft/libft.a
 
 CC = gcc -Wall -Wextra -Werror
 
-SRC = 	ft_ls.c \
+SRC = 	main.c \
 		sort.c \
 
 all: $(NAME) $(SRC)
