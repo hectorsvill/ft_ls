@@ -12,7 +12,7 @@ all: $(NAME) $(SRC)
 
 $(NAME): $(SRC)
 	#@make -C libft
-	@$(CC) $(SRC) libft/libft.a $(LIB) -o $(NAME)
+	@$(CC) $(SRC) -g libft/libft.a $(LIB) -o $(NAME)
 
 clean:
 	#@make clean -C libft

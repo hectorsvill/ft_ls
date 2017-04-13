@@ -32,15 +32,18 @@ void opendir_getnames(t_list **name_list, char *name)
 
     dir = opendir(name);
     if (!dir)
-		ft_printf("ls: cannot access %s: No such file or directory\n", name);
-
-	//*name_list = ft_lstnew("", 0);
-	while ((sd = readdir(dir)) != NULL)
+		ft_printf("ls: %s: No such file or directory\n", name);
+	else
 	{
-		tmp = ft_lstnew(ft_strdup(sd->d_name), ft_strlen(sd->d_name));
-		ft_lstadd(name_list, tmp);
+		//*name_list = ft_lstnew("", 0);
+		while ((sd = readdir(dir)) != NULL)
+		{
+			tmp = ft_lstnew(ft_strdup(sd->d_name), ft_strlen(sd->d_name));
+			ft_lstadd(name_list, tmp);
+		}
+		closedir(dir);
 	}
-	closedir(dir);
+
 }
 /*
 	//store name to list;
@@ -59,10 +62,6 @@ int main(int ac, char **av)
  		opendir_getnames(&name_list, ".");
 		merge_sort(&name_list);
 		print_list(name_list);
-		//printstrarray(sort_str_array(name_list));
-/*-------test system ls--------------*/
-		//ft_putendl("\n");
-		//system ("ls");
 		return (0);
 	}
 	opendir_getnames(&name_list, av[1]);
