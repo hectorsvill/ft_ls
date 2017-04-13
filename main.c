@@ -70,7 +70,7 @@ int main(int ac, char **av)
 	if (ac == 1)
 	{
  		opendir_getnames(&name_list, ".");
-		//merge_sort(&name_list);
+		merge_sort(&name_list);
 		print_list(name_list);
 		return (0);
 	}

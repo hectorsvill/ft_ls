@@ -13,8 +13,7 @@ typedef struct	s_ftls
 }				t_ftls;
 
 
-char 	**sort_str_array(t_list *name_list);
-void 	printstrarray(char **av);
-void 	merge_sort(t_list **headref);
+char 	**sort_str_array(t_ftls *name_list);
+void 	merge_sort(t_ftls **headref);
 
 #endif
