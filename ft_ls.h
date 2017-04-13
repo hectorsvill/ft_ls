@@ -7,7 +7,8 @@
 
 
 
-char **sort_str_array(t_list *name_list);
-void printstrarray(char **av);
+char 	**sort_str_array(t_list *name_list);
+void 	printstrarray(char **av);
+void 	merge_sort(t_list **headref);
 
 #endif

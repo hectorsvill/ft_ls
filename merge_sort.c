@@ -1,23 +1,16 @@
 #include "ft_ls.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-struct node
-{
-	char *data;
-	struct node *next;
-};
-
 /*
 	split nodes into  front and back halves,
 	and return two list with a and b.
 	if list is odd extra node goes in front list.
 	look up fast slow pointer strategy.
 */
-void frontbacksplit(struct node *source,  struct node **frontref, struct node **backref)
+void frontbacksplit(t_list *source,
+		t_list **frontref, t_list **backref)
 {
-	struct node *fast;
-	struct node *slow;
+	t_list *fast;
+	t_list *slow;
 
 	if (source == NULL || source->next == NULL)
 	{
@@ -48,16 +41,16 @@ void frontbacksplit(struct node *source,  struct node **frontref, struct node **
 
 }
 
-struct node *sortedmerge(struct node *a, struct node *b)
+t_list *sortedmerge(t_list *a, t_list *b)
 {
-	struct node *result = NULL;
+	t_list *result = NULL;
 /* base case */
 	if (a == NULL)
 		return (b);
 	else if (b == NULL)
 		return (a);
 /* pick either a or b, and recur */
-	if (ft_strcmp(a->data, b->data) < 0)
+	if (ft_strcmp(a->content, b->content) < 0)
 	{
 		result = a;
 		result->next = sortedmerge(a->next , b);
@@ -70,12 +63,13 @@ struct node *sortedmerge(struct node *a, struct node *b)
 	return (result);
 }
 
-void merge_sort(struct node **headref)
+void merge_sort(t_list **headref)
 {
-	struct node *head = *headref;
-	struct node *a;
-	struct node *b;
+	t_list *head;
+	t_list *a;
+	t_list *b;
 
+	head = *headref;
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 
@@ -86,58 +80,4 @@ void merge_sort(struct node **headref)
 	merge_sort(&b);
 /* answer = merge the two sorted lists together */
 	*headref = sortedmerge(a, b);
-}
-
-void push(struct node **head_ref, char *new_data)
-{
-	/* insert node at the begining if least*/
-
-	struct node *new_node = (struct node*)malloc(sizeof(struct node));
-	new_node->data =  new_data;
-	new_node->next = *head_ref;
-	*head_ref = new_node;
-}
-
-void print_list(struct node *node)
-{
-	while (node)
-	{
-		printf("%s ", node->data);
-		node = node->next;
-	}
-	printf("\n");
-}
-
-int main(void)
-{
-	//test above fx
-	/* start with empy list */
-	struct node *res = NULL;
-	struct node *a =  NULL;
-
-	/* unsorted list*/
-	push(&a, "src");
-	push(&a, "Makefile");
-	push(&a, "apple");
-	push(&a, "Art");
-	push(&a, "down");
-	push(&a, "four2");
-	push(&a, "Voice");
-	push(&a, "libft");
-	push(&a, "reck");
-	push(&a, "high");
-	push(&a, "road");
-	push(&a, "rich");
-	push(&a, "one");
-
-	print_list(a);
-
-	/* sort the above created link list */
-
-	merge_sort(&a);
-
-	print_list(a);
-
-
-	return (0);
 }

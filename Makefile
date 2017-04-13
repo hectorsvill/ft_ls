@@ -6,7 +6,7 @@ LIB = libft/libft.a
 CC = gcc -Wall -Wextra -Werror
 
 SRC = 	main.c \
-		sort.c \
+		merge_sort.c \
 
 all: $(NAME) $(SRC)
 
