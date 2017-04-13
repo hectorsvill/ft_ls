@@ -38,15 +38,16 @@ void opendir_getnames(t_list **name_list, char *name)
 	while ((sd = readdir(dir)) != NULL)
 	{
 		tmp = ft_lstnew(ft_strdup(sd->d_name), ft_strlen(sd->d_name));
-		//store name to list;
-			//tmp->content = ft_strdup(sd->d_name);
-			//tmp->content_size = ft_strlen(sd->d_name);
-			//ft_printf("content: %s\nsize: %i\n", tmp->content, (int)tmp->content_size);
 		ft_lstadd(name_list, tmp);
 	}
 	closedir(dir);
 }
-
+/*
+	//store name to list;
+	//tmp->content = ft_strdup(sd->d_name);
+	//tmp->content_size = ft_strlen(sd->d_name);
+	//ft_printf("content: %s\nsize: %i\n", tmp->content, (int)tmp->content_size);
+*/
 
 int main(int ac, char **av)
 {
@@ -57,7 +58,7 @@ int main(int ac, char **av)
 	{
  		opendir_getnames(&name_list, ".");
 		printstrarray(sort_str_array(name_list));
-		/*--test system ls---*/
+/*-------test system ls--------------*/
 		//ft_putendl("\n");
 		//system ("ls");
 		return (0);

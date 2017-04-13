@@ -11,6 +11,7 @@ void printstrarray(char **av)
         	ft_putendl(av[i]);
 		i++;
     }
+	//ft_putchar('\n');
 }
 
 
