@@ -2,7 +2,7 @@
 
 /*
 	1.store directory names in link list.
-	2.sort list of names with qsort.
+	2.sort list of names with merge sort.
 	3.print list of names
 
 */
