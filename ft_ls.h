@@ -5,6 +5,12 @@
 # include <sys/types.h>
 # include <dirent.h>
 
+typedef struct	s_ftls
+{
+	char			*names;
+
+	struct s_ftls	*next;
+}				t_ftls;
 
 
 char 	**sort_str_array(t_list *name_list);
