@@ -5,9 +5,20 @@
 # include <sys/types.h>
 # include <dirent.h>
 
+typedef enum s_flags
+{
+	long_format = 1,	//	-l
+	recursive_list = 2, // 	-R
+	all_dirs = 4,		// -a
+	reverse_order = 8,	// -r
+ 	timemodified_sort = 16,	//-t
+	//all_flags_on =
+}			t_flags;
+
 typedef struct	s_ftls
 {
-	char			*names;
+	char		*names;
+	char		flags;
 
 	struct s_ftls	*next;
 }				t_ftls;

@@ -44,9 +44,23 @@ int main(int ac, char **av)
 		print_list(name_list);
 		return (0);
 	}
-	opendir_getnames(&name_list, av[1]);
-	merge_sort(&name_list);
-	print_list(name_list);
+	//get arg
+	if (av[1][0] == '-')
+	{
+	}
+	else
+	{
+
+			while (*av)
+			{
+				ft_putendl(*av);
+				av++;
+			}
+
+	}
+	//opendir_getnames(&name_list, av[1]);
+	//merge_sort(&name_list);
+	//print_list(name_list);
 
 	return (0);
 }
