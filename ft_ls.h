@@ -17,7 +17,7 @@ typedef enum s_flags
 
 typedef struct	s_files
 {
-	char			*files; //file name
+	char			*file; //file name
 	struct s_files	*next;
 }				t_files;
 
@@ -33,21 +33,23 @@ typedef struct s_entries
 	t_dirs		*dirs;	//hold list of dirs
 	t_files		*file_list; //hold list of files to output
 	t_files		*none_ex; //holds files that are non existent
+	t_flags		flags;
 }				t_entries;
 
 /*
 **	ftls_list.c
 */
-void 	print_list(t_files *list);
-void 	lstadd_files(t_files **head,char *file_name);
-void 	lstadd_dirs(t_dirs **alst, t_dirs *t_new);
-t_files	*lstnew_files(char *name);
-
+void 		print_list(t_files *list);
+void 		lstadd_files(t_files **head,char *file_name);
+void 		lstadd_dirs(t_dirs **alst, t_dirs *t_new);
+t_entries	entries_init(void);
 /*
 **	merge_sort.c
-
-void 	merge_sort(t_ftls **headref);
 */
+
+void 	merge_sort(t_files **headref);
+
+
 /*
 **
 */

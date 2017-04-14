@@ -4,8 +4,8 @@ void print_list(t_files *list)
 {
 	while (list)
 	{
-		//if (ft_strncmp(list->file_names, ".", 1))
-			ft_putendl(list->files);
+		if (ft_strncmp(list->file, ".", 1))
+			ft_putendl(list->file);
 		//ft_putstr("    ");
 		list = list->next;
 	}
@@ -25,13 +25,13 @@ void lstadd_files(t_files **head, char *file_name)
 	t_files *t_new;
 
 	t_new = (t_files*)malloc(sizeof(t_files));
-	t_new->files = ft_strdup(file_name);
+	t_new->file = ft_strdup(file_name);
 
 	t_new->next = *head;
 	*head = t_new;
 }
 
-
+/*
 t_files *lstnew_files(char *name)
 {
 	t_files *file;
@@ -40,4 +40,16 @@ t_files *lstnew_files(char *name)
 	file->files = ft_strdup(name);
 	file->next = NULL;
 	return (file);
+}
+*/
+t_entries entries_init(void)
+{
+	t_entries entries;
+
+	//entries = (t_entries*)malloc(sizeof(entries)); //if pointer
+	entries.dirs = (t_dirs*)malloc(sizeof(t_dirs));
+	entries.dirs->files = (t_files*)malloc(sizeof(t_dirs));
+	entries.file_list = (t_files*)malloc(sizeof(t_dirs));
+	entries.none_ex = (t_files*)malloc(sizeof(t_dirs));
+	return (entries);
 }
