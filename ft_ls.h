@@ -17,6 +17,7 @@ typedef struct	s_ftls
 */
 void 	print_list(t_ftls *list);
 void 	ftls_lstadd(t_ftls **alst, t_ftls *t_new);
+t_ftls 	*ftls_lstnew(char *name);
 /*
 **	merge_sort.c
 */

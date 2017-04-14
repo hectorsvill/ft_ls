@@ -7,34 +7,6 @@
 
 */
 
-void print_list(t_ftls *list)
-{
-	int sp;
-	sp = 0;
-	while (list)
-	{
-		if (ft_strncmp(list->names, ".", 1))
-			ft_putendl(list->names );
-		//ft_putstr("    ");
-		list = list->next;
-	}
-
-}
-
-void ftls_lstadd(t_ftls **alst, t_ftls *t_new)
-{
-	t_new->next = *alst;
-	*alst = t_new;
-}
-
-t_ftls *ftls_lstnew(char *name)
-{
-	t_ftls *link;
-
-	link = (t_ftls*)malloc(sizeof(t_ftls));
-	link->names = ft_strdup(name);
-	return (link);
-}
 
 void opendir_getnames(t_ftls **name_list, char *name)
 {
@@ -75,6 +47,6 @@ int main(int ac, char **av)
 	opendir_getnames(&name_list, av[1]);
 	merge_sort(&name_list);
 	print_list(name_list);
-	
+
 	return (0);
 }

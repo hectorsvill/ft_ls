@@ -1,3 +1,5 @@
+#include "ft_ls.h"
+
 void print_list(t_ftls *list)
 {
 	int sp;
