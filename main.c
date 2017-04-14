@@ -8,41 +8,54 @@
 */
 
 
-void opendir_getnames(t_entries **name_list, char *name)
+void opendir_getnames(t_files **files,char *name)
 {
-    /**
-    **  This fx writes a list of the directory name
-    */
+
     DIR             	*dir;
     struct dirent   	*sd;
-	t_entries			*tmp;
+	t_files			*tmp_file;
 
-	tmp = NULL;
+	//tdir->dir_name = ft_strdup(name);
+	tmp_file = NULL;
     dir = opendir(name);
-    if (!dir)
-		ft_printf("ls: %s: No such file or directory\n", name);
-	else
-	{
+//    if (!dir)
+	//	{}//ft_printf("ls: %s: No such file or directory\n", name);
+	//else
+	//{
 
-		while ((sd = readdir(dir)) != NULL)
-		{
-			tmp = ftls_lstnew_entries(sd->d_name);
-			ftls_lstadd(name_list, tmp);
-		}
-		closedir(dir);
+	while ((sd = readdir(dir)) != NULL)
+	{
+		tmp_file = lstnew_files(sd->d_name);
+		lstadd_files(files, tmp_file);
 	}
+	closedir(dir);
+	//}
+}
+
+
+
+t_entries entries_init(void)
+{
+	t_entries entries;
+
+	//entries = (t_entries*)malloc(sizeof(entries)); //if pointer
+	entries.dirs = (t_dirs*)malloc(sizeof(t_dirs));
+	entries.dirs->files = (t_files*)malloc(sizeof(t_dirs));
+//	entries->file_list = (t_files*)malloc(sizeof(t_dirs));
+//	entries->none_ex = (t_files*)malloc(sizeof(t_dirs));
+	return (entries);
 }
 
 int main(int ac, char **av)
 {
-	t_entries *entries;
+	t_entries entries;
 
-	entries = NULL;
+	entries = entries_init();
 	if (ac == 1)
 	{
- 		opendir_getnames(&entries, ".");
+ 		opendir_getnames(&entries.dirs->files, ".");
 		//merge_sort(&entries);
-		print_list(entries->files);
+		print_list(entries.dirs->files);
 		return (0);
 	}
 	//get arg
