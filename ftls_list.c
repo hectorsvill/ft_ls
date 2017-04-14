@@ -1,30 +1,30 @@
 #include "ft_ls.h"
 
-void print_list(t_ftls *list)
+void print_list(t_files *list)
 {
 	int sp;
 	sp = 0;
 	while (list)
 	{
-		if (ft_strncmp(list->names, ".", 1))
-			ft_putendl(list->names );
+		if (ft_strncmp(list->file_names, ".", 1))
+			ft_putendl(list->file_names );
 		//ft_putstr("    ");
 		list = list->next;
 	}
 
 }
 
-void ftls_lstadd(t_ftls **alst, t_ftls *t_new)
+void ftls_lstadd(t_entries **alst, t_entries *t_new)
 {
 	t_new->next = *alst;
 	*alst = t_new;
 }
 
-t_ftls *ftls_lstnew(char *name)
+t_entries *ftls_lstnew_entries(char *name)
 {
-	t_ftls *link;
+	t_entries *link;
 
-	link = (t_ftls*)malloc(sizeof(t_ftls));
-	link->names = ft_strdup(name);
+	link = (t_entries*)malloc(sizeof(t_entries));
+	link->files->file_names = ft_strdup(name);
 	return (link);
 }
