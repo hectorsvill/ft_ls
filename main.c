@@ -8,25 +8,25 @@
 */
 
 
-void opendir_getnames(t_files **files,char *name)
+void opendir_getnames(t_files **files, char *name)
 {
 
     DIR             	*dir;
     struct dirent   	*sd;
-	t_files			*tmp_file;
 
 	//tdir->dir_name = ft_strdup(name);
-	tmp_file = NULL;
-    dir = opendir(name);
+	//tmp_file = NULL;
+	*files = NULL;
+	dir = opendir(name);
 //    if (!dir)
 	//	{}//ft_printf("ls: %s: No such file or directory\n", name);
 	//else
 	//{
-
+//	*files = lstnew_files("");
 	while ((sd = readdir(dir)) != NULL)
 	{
-		tmp_file = lstnew_files(sd->d_name);
-		lstadd_files(files, tmp_file);
+		//tmp_file = lstnew_files(sd->d_name);
+		lstadd_files(files, sd->d_name);
 	}
 	closedir(dir);
 	//}

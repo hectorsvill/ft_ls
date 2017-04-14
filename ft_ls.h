@@ -39,7 +39,7 @@ typedef struct s_entries
 **	ftls_list.c
 */
 void 	print_list(t_files *list);
-void 	lstadd_files(t_files **alst, t_files *t_new);
+void 	lstadd_files(t_files **head,char *file_name);
 void 	lstadd_dirs(t_dirs **alst, t_dirs *t_new);
 t_files	*lstnew_files(char *name);
 
