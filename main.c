@@ -20,6 +20,7 @@ void print_list(t_ftls *list)
 	}
 
 }
+
 void ftls_lstadd(t_ftls **alst, t_ftls *t_new)
 {
 	t_new->next = *alst;
@@ -42,7 +43,6 @@ void opendir_getnames(t_ftls **name_list, char *name)
     */
     DIR             *dir;
     struct dirent   *sd;
-
 	t_ftls			*tmp;
 
 	tmp = NULL;
@@ -53,13 +53,11 @@ void opendir_getnames(t_ftls **name_list, char *name)
 	{
 		while ((sd = readdir(dir)) != NULL)
 		{
-			//tmp = ft_lstnew(ft_strdup(sd->d_name), ft_strlen(sd->d_name));
 			tmp = ftls_lstnew(sd->d_name);
 			ftls_lstadd(name_list, tmp);
 		}
 		closedir(dir);
 	}
-
 }
 
 int main(int ac, char **av)
@@ -75,5 +73,8 @@ int main(int ac, char **av)
 		return (0);
 	}
 	opendir_getnames(&name_list, av[1]);
+	merge_sort(&name_list);
+	print_list(name_list);
+	
 	return (0);
 }

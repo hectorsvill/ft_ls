@@ -12,8 +12,17 @@ typedef struct	s_ftls
 	struct s_ftls	*next;
 }				t_ftls;
 
-
-char 	**sort_str_array(t_ftls *name_list);
+/*
+**	ftls_list.c
+*/
+void 	print_list(t_ftls *list);
+void 	ftls_lstadd(t_ftls **alst, t_ftls *t_new);
+/*
+**	merge_sort.c
+*/
 void 	merge_sort(t_ftls **headref);
+/*
+**
+*/
 
 #endif

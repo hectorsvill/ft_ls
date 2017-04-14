@@ -6,7 +6,7 @@
 	if list is odd extra node goes in front list.
 	look up fast slow pointer strategy.
 */
-void frontbacksplit(t_ftls *source,
+static void frontbacksplit(t_ftls *source,
 		t_ftls **frontref, t_ftls **backref)
 {
 	t_ftls *fast;
@@ -41,7 +41,7 @@ void frontbacksplit(t_ftls *source,
 
 }
 
-t_ftls *sortedmerge(t_ftls *a, t_ftls *b)
+static t_ftls *sortedmerge(t_ftls *a, t_ftls *b)
 {
 	t_ftls *result = NULL;
 /* base case */
