@@ -48,8 +48,8 @@ t_entries entries_init(void)
 
 	//entries = (t_entries*)malloc(sizeof(entries)); //if pointer
 	entries.dirs = (t_dirs*)malloc(sizeof(t_dirs));
-	entries.dirs->files = (t_files*)malloc(sizeof(t_dirs));
-	entries.file_list = (t_files*)malloc(sizeof(t_dirs));
-	entries.none_ex = (t_files*)malloc(sizeof(t_dirs));
+	entries.dirs->files = (t_files*)malloc(sizeof(t_files));
+	entries.file_list = (t_files*)malloc(sizeof(t_files));
+	entries.none_ex = (t_files*)malloc(sizeof(t_files));
 	return (entries);
 }

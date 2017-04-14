@@ -22,9 +22,6 @@ void opendir_getnames(t_files **files, char *dir_name)
 	closedir(dir);
 }
 
-
-
-
 int main(int ac, char **av)
 {
 	t_entries entries;
@@ -32,6 +29,7 @@ int main(int ac, char **av)
 	entries = entries_init();
 	if (ac == 1)
 	{
+		entries.dirs->dir_name = ".";
  		opendir_getnames(&entries.dirs->files, ".");
 		merge_sort(&entries.dirs->files);
 		print_list(entries.dirs->files);
@@ -41,6 +39,7 @@ int main(int ac, char **av)
 	if (av[1][0] == '-')
 	{
 		/**
+		**	check for valid flags
 		**
 		*/
 
@@ -53,8 +52,19 @@ int main(int ac, char **av)
 		** check for invalid input
 		*/
 
-		opendir_getnames(&entries.file_list, av[1]); // open_dir and get all names
-		merge_sort(&entries.file_list);				//might not need to sort
+
+		// open current directory and get all names
+		//file names are now in file_list
+		entries.dirs->dir_name = ".";
+		opendir_getnames(&entries.dirs->files, ".");
+		merge_sort(&entries.dirs->files);
+
+		//check if file_list is valid else if not valid insert into none_ex
+
+		addto_file_list(av, &entries.file_list);
+		merge_sort(&entries.file_list);
+
+
 		//go through av list and compare with entries.file_list for valid files and dirs;
 		//insert all none existent into none_ex
 		//send error of all unexisting files then print dirs

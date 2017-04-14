@@ -8,6 +8,7 @@ CC = gcc -Wall -Wextra -Werror
 SRC = 	main.c \
 		ftls_list.c \
 		merge_sort.c \
+		none_ex.c \
 
 all: $(NAME) $(SRC)
 

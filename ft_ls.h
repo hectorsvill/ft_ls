@@ -43,15 +43,15 @@ void 		print_list(t_files *list);
 void 		lstadd_files(t_files **head,char *file_name);
 void 		lstadd_dirs(t_dirs **alst, t_dirs *t_new);
 t_entries	entries_init(void);
+
 /*
 **	merge_sort.c
 */
-
 void 	merge_sort(t_files **headref);
 
-
 /*
-**
+**	none_ex.c
 */
+void addto_file_list(char **av, t_files **files);
 
 #endif
