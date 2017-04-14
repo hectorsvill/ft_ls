@@ -53,9 +53,13 @@ int main(int ac, char **av)
 		** check for invalid input
 		*/
 
-			opendir_getnames(&entries.file_list, av[1]);
-			merge_sort(&entries.file_list);
-			print_list(entries.file_list);
+		opendir_getnames(&entries.file_list, av[1]); // open_dir and get all names
+		merge_sort(&entries.file_list);				//might not need to sort
+		//go through av list and compare with entries.file_list for valid files and dirs;
+		//insert all none existent into none_ex
+		//send error of all unexisting files then print dirs
+
+		print_list(entries.file_list);
 
 	}
 
