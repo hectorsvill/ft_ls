@@ -52,6 +52,7 @@ void 	merge_sort(t_files **headref);
 /*
 **	none_ex.c
 */
-void addto_file_list(char **av, t_files **files);
+void addto_file_list(char **av,
+	t_files **dirs, t_files **file_list, t_files **none_ex);
 
 #endif

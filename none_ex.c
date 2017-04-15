@@ -3,9 +3,26 @@
 #include "ft_ls.h"
 
 
-void addto_file_list(char **av, t_files **files)
+
+char isvalidfile(t_files *dirs, char *name)
 {
-	*files = NULL;
+	char valid;
+
+	valid = 0;
+	while(dirs)
+	{
+		if (!strcmp(dirs->file, name))
+			return (1);
+		dirs = dirs->next;
+	}
+	return (valid);
+}
+
+void addto_file_list(char **av,
+	t_files **dirs, t_files **file_list, t_files **none_ex)
+{
+	*file_list = NULL;
+	*none_ex = NULL;
 	while (*av)
 	{
 		/**
@@ -13,22 +30,12 @@ void addto_file_list(char **av, t_files **files)
 		**	if valid flag then add too file_list
 		**	else add to none_ex;
 		**/
-		lstadd_files(files, *av);
+
+		if (isvalidfile(*dirs, *av))
+			lstadd_files(file_list, *av);
+		else
+			lstadd_files(none_ex, *av);
+
 		av++;
 	}
-}
-
-
-char isvalidfile(t_files **dir_files, char *name)
-{
-	char valid;
-
-	valid = 0;
-	while(dir_files)
-	{
-		if (!strcmp(dir_files->file, name))
-			return (1);
-		dir_files = dir_files->next;
-	}
-	return (valid);
 }

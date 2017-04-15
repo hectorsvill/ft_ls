@@ -54,22 +54,39 @@ int main(int ac, char **av)
 
 
 		// open current directory and get all names
-		//file names are now in file_list
 		entries.dirs->dir_name = ".";
 		opendir_getnames(&entries.dirs->files, ".");
 		merge_sort(&entries.dirs->files);
 
 		//check if file_list is valid else if not valid insert into none_ex
+		//file names are now in file_list
 
-		addto_file_list(av, &entries.file_list);
+		addto_file_list(av,
+			&entries.dirs->files, &entries.file_list, &entries.none_ex);
 		merge_sort(&entries.file_list);
+		merge_sort( &entries.none_ex);
+
+
+		//merge_sort(&entries.file_list);
+
 
 
 		//go through av list and compare with entries.file_list for valid files and dirs;
 		//insert all none existent into none_ex
 		//send error of all unexisting files then print dirs
 
+		ft_putendl("dir->files");
+		print_list(entries.dirs->files);
+		ft_putendl("");
+
+		ft_putendl("file_list:");
 		print_list(entries.file_list);
+		ft_putendl("");
+
+
+		ft_putendl("none_ex");
+		print_list(entries.none_ex);
+		ft_putendl("");
 
 	}
 
