@@ -22,7 +22,8 @@ void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 		if ((stat(file_list->file, &sb)) == -1)
 		{
 			/**
-			**	add list to none_ex
+			**	unlink unexisting file from file_list and
+			**	add name to none_ex
 			**/
 			lstadd_files(none_ex, file_list->file);
 			//maybe remove from list none_ex file form file_list;
@@ -46,6 +47,10 @@ void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 			**/
 			if(S_ISDIR(sb.st_mode))
 			{
+				/**
+				**	unlink file from file_list and
+				**	add name to dirs
+				**/
 				lstadd_dirs(dirs, file_list->file);
 			}
 			/**
