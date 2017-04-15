@@ -22,7 +22,10 @@ void print_list_dirs(t_dirs *dir_list)
 }
 
 
-
+/**
+**	Add function to open directory and set
+**	t_files within t_dirs
+**/
 void lstadd_dirs(t_dirs **head, char *dir_name)
 {
 	t_dirs *t_new;
