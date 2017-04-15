@@ -3,22 +3,32 @@
 #include "ft_ls.h"
 
 
-
-void get_stat(t_files *file_list)
+/**
+**	Traverse throught file_list and use stat
+**	if file is not valid insert into none_ex
+**	else ...
+**	if file is dir create new link for dirs
+**	and get and sort those dirs
+**/
+void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 {
 	struct stat sb;
 
+	*none_ex = NULL;
+	*dirs = NULL;
 	while (file_list)
 	{
+
 		if ((stat(file_list->file, &sb)) == -1)
 		{
-			//ft_printf("%u\n",sb.st_mode); returns zero when file is not valid
-
 			/**
 			**	add list to none_ex
 			**/
 
-			ft_printf("Not valid file: %s\n", file_list->file);
+			lstadd_files(none_ex, file_list->file);
+			//ft_printf("Not valid file: %s\n", file_list->file);
+
+
 			//perror("stat == -1");
 			//exit(EXIT_FAILURE);
 		}
@@ -39,7 +49,7 @@ void get_stat(t_files *file_list)
 			if(S_ISDIR(sb.st_mode))
 				ft_putendl("ISDIR!");
 			/**
-			**	loop dirs and store files 
+			**	loop dirs and store files
 			**/
 		}
 		file_list = file_list->next;
@@ -58,6 +68,4 @@ void addto_file_list(char **av, t_files **file_list)
 		lstadd_files(file_list, *av);
 		av++;
 	}
-	get_stat(*file_list);
-	exit(1);
 }

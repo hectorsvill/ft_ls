@@ -67,13 +67,19 @@ int main(int ac, char **av)
 		**/
 		av++;
 		addto_file_list(av, &entries.file_list);
-		merge_sort(&entries.file_list);
+		get_stat(entries.file_list, &entries.dirs, &entries.none_ex);
+		//merge_sort(&entries.dirs->file);
+		//merge_sort(&entries.file_list);
+		//merge_sort(&entries.none_ex);
 
 
-		ft_putendl("file_list:");
+		ft_putendl("\nfile_list:");
 		print_list(entries.file_list);
 		ft_putendl("");
 
+		ft_putendl("\nnone_ex:");
+		print_list(entries.none_ex);
+		ft_putendl("");
 
 /*
 		ft_putendl("dir->files:");
