@@ -1,11 +1,11 @@
 #include "ft_ls.h"
 
-/*
-	split nodes into  front and back halves,
-	and return two list with a and b.
-	if list is odd extra node goes in front list.
-	look up fast slow pointer strategy.
-*/
+/**
+**	split nodes into  front and back halves,
+**	and return two list with a and b.
+**	if list is odd extra node goes in front list.
+**	look up fast slow pointer strategy.
+**/
 static void 	frontbacksplit(t_files *source, t_files **frontref,
 	t_files **backref)
 {
@@ -56,7 +56,10 @@ static t_files	*sortedmerge(t_files *a, t_files *b)
 	}
 	return (result);
 }
-
+/**
+**	I need a merge sort for dir_names!
+**	or just keep order in file_list!
+**/
 void 			merge_sort(t_files **headref)
 {
 	t_files		*head;
