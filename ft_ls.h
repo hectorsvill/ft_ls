@@ -18,6 +18,9 @@ typedef enum s_flags
 typedef struct	s_files
 {
 	char			*file; //file name
+
+
+
 	struct s_files	*next;
 }				t_files;
 
@@ -25,6 +28,10 @@ typedef struct	s_dirs
 {
 	char			*dir_name;		//name of specific dir
 	t_files			*files; //files of this dir_name
+
+
+
+
 	struct s_dirs	*next;
 }				t_dirs;
 
@@ -52,6 +59,6 @@ void 	merge_sort(t_files **headref);
 /*
 **	none_ex.c
 */
-void addto_file_list(char **av, t_files **file_list, t_files **none_ex);
+void addto_file_list(char **av, t_files **file_list);
 
 #endif

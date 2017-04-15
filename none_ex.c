@@ -19,22 +19,16 @@ char isvalidfile(t_files *dirs, char *name)
 	return (valid);
 }
 
-void addto_file_list(char **av, t_files **file_list, t_files **none_ex)
+void addto_file_list(char **av, t_files **file_list)
 {
 	/**
-	**	check if *av is a valid flags
-	**	if valid flag then add too file_list
-	**	else add to entries.none_ex;
+	**	add all av values to file list
+	**	to start checking for valid output
 	**/
 	*file_list = NULL;
-	*none_ex = NULL;
 	while (*av)
 	{
-	//	if (isvalidfile(*dirs, *av))
-	//		lstadd_files(file_list, *av);
-	//	else
-		lstadd_files(none_ex, *av);
-
+		lstadd_files(file_list, *av);
 		av++;
 	}
 }

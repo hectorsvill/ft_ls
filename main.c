@@ -66,25 +66,26 @@ int main(int ac, char **av)
 		**	file names are now in file_list and none existent in none_ex
 		**/
 		av++;
-		addto_file_list(av, &entries.file_list, &entries.none_ex);
+		addto_file_list(av, &entries.file_list);
 		merge_sort(&entries.file_list);
-		merge_sort(&entries.none_ex);
 
-
-
-		ft_putendl("dir->files:");
-		print_list(entries.dirs->files);
-		ft_putendl("");
 
 		ft_putendl("file_list:");
 		print_list(entries.file_list);
 		ft_putendl("");
 
 
+/*
+		ft_putendl("dir->files:");
+		print_list(entries.dirs->files);
+		ft_putendl("");
+
+
+
 		ft_putendl("none_ex:");
 		print_list(entries.none_ex);
 		ft_putendl("");
-
+*/
 	}
 
 	return (0);
