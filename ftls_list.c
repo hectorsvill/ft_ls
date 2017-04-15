@@ -11,11 +11,26 @@ void print_list(t_files *list)
 	}
 
 }
-
-void lstadd_dirs(t_dirs **alst, t_dirs *t_new)
+void print_list_dirs(t_dirs *dir_list)
 {
-	t_new->next = *alst;
-	*alst = t_new;
+	while (dir_list)
+	{
+		ft_putendl(dir_list->dir_name);
+		dir_list = dir_list->next;
+	}
+
+}
+
+
+
+void lstadd_dirs(t_dirs **head, char *dir_name)
+{
+	t_dirs *t_new;
+
+	t_new = (t_dirs*)malloc(sizeof(t_dirs));
+	t_new->dir_name = ft_strdup(dir_name);
+	t_new->next = *head;
+	*head = t_new;
 }
 
 

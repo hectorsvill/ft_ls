@@ -24,13 +24,8 @@ void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 			/**
 			**	add list to none_ex
 			**/
-
 			lstadd_files(none_ex, file_list->file);
-			//ft_printf("Not valid file: %s\n", file_list->file);
-
-
-			//perror("stat == -1");
-			//exit(EXIT_FAILURE);
+			//maybe remove from list none_ex file form file_list;
 		}
 		else
 		{
@@ -38,16 +33,21 @@ void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 			/**
 			**	add list to file_list
 			**/
-			//ft_printf("Is valid file: %s\n", file_list->file);
-			ft_printf("%u\n",sb.st_mode);
 			if(S_ISREG(sb.st_mode))
-				ft_putendl("ISREG!");
+			{
+				//do nothing for now
+				//file would be in cureent directory
+				//ft_printf("ISREG!:%i\n", S_ISREG(sb.st_mode));
+			}
 
 			/**
 			**	add list to dirs
+			**	and get files from dir
 			**/
 			if(S_ISDIR(sb.st_mode))
-				ft_putendl("ISDIR!");
+			{
+				lstadd_dirs(dirs, file_list->file);
+			}
 			/**
 			**	loop dirs and store files
 			**/

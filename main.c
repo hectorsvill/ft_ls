@@ -52,15 +52,7 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		/*
-		**	if no flags and only files names
-		**	store list and sort open dirs one by one
-		** check for invalid input
-		*/
 
-	//	entries.dirs->dir_name = ".";
-	//	opendir_getnames(&entries.dirs->files, ".");
-	//	merge_sort(&entries.dirs->files);
 		/**
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
@@ -69,8 +61,8 @@ int main(int ac, char **av)
 		addto_file_list(av, &entries.file_list);
 		get_stat(entries.file_list, &entries.dirs, &entries.none_ex);
 		//merge_sort(&entries.dirs->file);
-		//merge_sort(&entries.file_list);
-		//merge_sort(&entries.none_ex);
+		merge_sort(&entries.file_list);
+		merge_sort(&entries.none_ex);
 
 
 		ft_putendl("\nfile_list:");
@@ -81,10 +73,14 @@ int main(int ac, char **av)
 		print_list(entries.none_ex);
 		ft_putendl("");
 
-/*
-		ft_putendl("dir->files:");
-		print_list(entries.dirs->files);
+
+
+		ft_putendl("\ndir->files:");
+		print_list_dirs(entries.dirs);
 		ft_putendl("");
+
+/*
+
 
 
 
