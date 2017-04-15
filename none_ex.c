@@ -14,18 +14,33 @@ void get_stat(t_files *file_list)
 		{
 			//ft_printf("%u\n",sb.st_mode); returns zero when file is not valid
 
+			/**
+			**	add list to none_ex
+			**/
+
 			ft_printf("Not valid file: %s\n", file_list->file);
 			//perror("stat == -1");
 			//exit(EXIT_FAILURE);
 		}
 		else
 		{
-			ft_printf("Is valid file: %s\n", file_list->file);
+
+			/**
+			**	add list to file_list
+			**/
+			//ft_printf("Is valid file: %s\n", file_list->file);
 			ft_printf("%u\n",sb.st_mode);
 			if(S_ISREG(sb.st_mode))
 				ft_putendl("ISREG!");
+
+			/**
+			**	add list to dirs
+			**/
 			if(S_ISDIR(sb.st_mode))
 				ft_putendl("ISDIR!");
+			/**
+			**	loop dirs and store files 
+			**/
 		}
 		file_list = file_list->next;
 	}

@@ -19,7 +19,7 @@ typedef struct	s_files
 {
 	char			*file; //file name
 
-
+	struct stat 	sb;
 
 	struct s_files	*next;
 }				t_files;

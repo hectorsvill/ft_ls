@@ -58,9 +58,9 @@ int main(int ac, char **av)
 		** check for invalid input
 		*/
 
-		entries.dirs->dir_name = ".";
-		opendir_getnames(&entries.dirs->files, ".");
-		merge_sort(&entries.dirs->files);
+	//	entries.dirs->dir_name = ".";
+	//	opendir_getnames(&entries.dirs->files, ".");
+	//	merge_sort(&entries.dirs->files);
 		/**
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
