@@ -3,16 +3,16 @@
 
 # include "libft/inc/ft_printf.h"
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 
 typedef enum s_flags
 {
-	long_format = 1,	//	-l
-	recursive_list = 2, // 	-R
-	all_dirs = 4,		// -a
-	reverse_order = 8,	// -r
- 	timemodified_sort = 16,	//-t
-	//all_flags_on =
+	LONG_FORMAT = 1,	//	-l
+	RECURISIVE_LIST = 2, // 	-R
+	ALL_DIRS = 4,		// -a
+	REVERSE_ORDER = 8,	// -r
+ 	TIMEMODIFIED_SORT = 16,	//-t
 }			t_flags;
 
 typedef struct	s_files

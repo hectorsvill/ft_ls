@@ -2,28 +2,32 @@
 
 #include "ft_ls.h"
 
-char isvalidfile(t_files *dirs, char *name)
+
+
+void get_stat(t_files *file_list)
 {
-	char valid;
-	/**
-	**	Traverse list to check if name is a valid
-	**	file in directory
-	**/
-	valid = 0;
-	while(dirs)
+	struct stat sb;
+
+	while (file_list)
 	{
-		if (!strcmp(dirs->file, name))
-			return (1);
-		dirs = dirs->next;
+		if ((stat(file_list->file, &sb)) == -1)
+		{
+			ft_printf("Not valid file: %s\n", file_list->file);
+			//perror("stat == -1");
+			//exit(EXIT_FAILURE);
+		}
+
+		ft_printf("Is valid file: %s\n", file_list->file);
+
+		file_list = file_list->next;
 	}
-	return (valid);
 }
 
 void addto_file_list(char **av, t_files **file_list)
 {
 	/**
 	**	add all av values to file list
-	**	to start checking for valid output
+	**	to start checking files with stat6
 	**/
 	*file_list = NULL;
 	while (*av)
@@ -31,4 +35,6 @@ void addto_file_list(char **av, t_files **file_list)
 		lstadd_files(file_list, *av);
 		av++;
 	}
+	get_stat(*file_list);
+	exit(1);
 }
