@@ -17,6 +17,12 @@ void opendir_getnames(t_files **files, char *dir_name)
 	*files = NULL;
 	if (!(dir = opendir(dir_name)))
 		return ;
+	/**
+	**	make this function return 0
+	**	if dir_name is invalid directory
+	**	if invalid d irectory then send to entries.none_ex
+	**/
+
 	while ((sd = readdir(dir)) != NULL)
 		lstadd_files(files, sd->d_name);
 	closedir(dir);
@@ -52,30 +58,21 @@ int main(int ac, char **av)
 		** check for invalid input
 		*/
 
-
-		// open current directory and get all names
 		entries.dirs->dir_name = ".";
 		opendir_getnames(&entries.dirs->files, ".");
 		merge_sort(&entries.dirs->files);
-
-		//check if file_list is valid else if not valid insert into none_ex
-		//file names are now in file_list
-
-		addto_file_list(av,
-			&entries.dirs->files, &entries.file_list, &entries.none_ex);
+		/**
+		**	check if file_list is valid else if not valid insert into none_ex
+		**	file names are now in file_list and none existent in none_ex
+		**/
+		av++;
+		addto_file_list(av, &entries.file_list, &entries.none_ex);
 		merge_sort(&entries.file_list);
-		merge_sort( &entries.none_ex);
-
-
-		//merge_sort(&entries.file_list);
+		merge_sort(&entries.none_ex);
 
 
 
-		//go through av list and compare with entries.file_list for valid files and dirs;
-		//insert all none existent into none_ex
-		//send error of all unexisting files then print dirs
-
-		ft_putendl("dir->files");
+		ft_putendl("dir->files:");
 		print_list(entries.dirs->files);
 		ft_putendl("");
 
@@ -84,7 +81,7 @@ int main(int ac, char **av)
 		ft_putendl("");
 
 
-		ft_putendl("none_ex");
+		ft_putendl("none_ex:");
 		print_list(entries.none_ex);
 		ft_putendl("");
 

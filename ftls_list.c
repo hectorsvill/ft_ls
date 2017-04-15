@@ -4,7 +4,7 @@ void print_list(t_files *list)
 {
 	while (list)
 	{
-		if (ft_strncmp(list->file, ".", 1))
+//		if (ft_strncmp(list->file, ".", 1))
 			ft_putendl(list->file);
 		//ft_putstr("    ");
 		list = list->next;
@@ -26,7 +26,6 @@ void lstadd_files(t_files **head, char *file_name)
 
 	t_new = (t_files*)malloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
-
 	t_new->next = *head;
 	*head = t_new;
 }
