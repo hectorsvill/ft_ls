@@ -78,8 +78,6 @@ int main(int ac, char **av)
 
 		addto_list(av, &entries);
 
-		//addto_file_list(av, &entries.file_list);
-		//get_stat(entries.file_list, &entries.dirs, &entries.none_ex);
 		//merge_sort(&entries.dirs->file);
 		//merge_sort(&entries.file_list);
 		//merge_sort(&entries.none_ex);
