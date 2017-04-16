@@ -13,20 +13,23 @@ void print_list(t_files *list)
 
 }
 
-/*
-void print_list_dirs(t_dirs *dir_list)
+
+void print_error_none_ex(t_files *none_ex)
 {
-	while (dir_list)
+
+
+	while (none_ex)
 	{
-		ft_putendl(dir_list->dir_name);
-		dir_list = dir_list->next;
+		ft_printf("ls: %s: No such file or directory\n", none_ex->file);
+		none_ex = none_ex->next;
 	}
 
-}*/
+}
 
 void print_all_dirs(t_dirs *dir_list)
 {
 
+	//first print all invalid files
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);

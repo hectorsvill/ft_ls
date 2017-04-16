@@ -76,8 +76,9 @@ int main(int ac, char **av)
 
 		//test
 		//ft_putendl("\ndir->files:");
+		print_error_none_ex(entries.none_ex);
 		print_all_dirs(entries.dirs);
-		ft_putendl("");
+		//ft_putendl("");
 
 
 
