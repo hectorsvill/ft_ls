@@ -65,6 +65,12 @@ int main(int ac, char **av)
 		merge_sort(&entries.none_ex);
 
 
+		//test
+		//ft_putendl("\ndir->files:");
+		print_all_dirs(entries.dirs);
+		ft_putendl("");
+
+
 
 
 /*

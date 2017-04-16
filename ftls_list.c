@@ -11,6 +11,8 @@ void print_list(t_files *list)
 	}
 
 }
+
+/*
 void print_list_dirs(t_dirs *dir_list)
 {
 	while (dir_list)
@@ -19,6 +21,18 @@ void print_list_dirs(t_dirs *dir_list)
 		dir_list = dir_list->next;
 	}
 
+}*/
+
+void print_all_dirs(t_dirs *dir_list)
+{
+
+	while (dir_list)
+	{
+		ft_printf("%s:\n", dir_list->dir_name);
+		print_list(dir_list->files);
+		putchar('\n');
+		dir_list = dir_list->next;
+	}
 }
 
 
@@ -38,7 +52,7 @@ void lstadd_dirs(t_dirs **head, char *dir_name)
 	t_new->dir_name = ft_strdup(dir_name);
 
 	opendir_getnames(&t_new->files, dir_name);
-
+	merge_sort(&t_new->files);
 	t_new->next = *head;
 	*head = t_new;
 }

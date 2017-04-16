@@ -53,7 +53,9 @@ void 	opendir_getnames(t_files **files, char *dir_name);
 /*
 **	ftls_list.c
 */
-void 		print_list_dirs(t_dirs *dir_list);
+void print_all_dirs(t_dirs *dir_list);
+
+//void 		print_list_dirs(t_dirs *dir_list);
 void 		print_list(t_files *list);
 void 		lstadd_files(t_files **head,char *file_name);
 void 		lstadd_dirs(t_dirs **head, char *dir_name);
