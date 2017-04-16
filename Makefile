@@ -7,7 +7,8 @@ CC = gcc -Wall -Wextra -Werror
 
 SRC = 	main.c \
 		ftls_list.c \
-		merge_sort.c \
+		mergesort_files.c \
+		mergesort_dirs.c \
 		addto_spec_list.c \
 
 all: $(NAME) $(SRC)

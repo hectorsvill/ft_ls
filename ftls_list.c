@@ -55,7 +55,7 @@ void lstadd_dirs(t_dirs **head, char *dir_name)
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
 	opendir_getnames(&t_new->files, dir_name);
-	merge_sort(&t_new->files);
+	mergesort_files(&t_new->files);
 	t_new->next = *head;
 	*head = t_new;
 }

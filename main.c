@@ -38,7 +38,7 @@ int main(int ac, char **av)
 	{
 		entries.dirs->dir_name = ".";
  		opendir_getnames(&entries.dirs->files, ".");
-		merge_sort(&entries.dirs->files);
+		mergesort_files(&entries.dirs->files);
 		print_list_noflags(entries.dirs->files);
 		return (0);
 	}
@@ -61,7 +61,7 @@ int main(int ac, char **av)
 			ft_printf("ls: %s: No such file or directory\n", av[1]);
 		else
 		{
-			merge_sort(&entries.dirs->files);
+			mergesort_files(&entries.dirs->files);
 			print_list_noflags(entries.dirs->files);
 		}
 		return (0);
@@ -78,10 +78,10 @@ int main(int ac, char **av)
 		av++;
 
 		addto_list(av, &entries);
-
-		merge_sort(&entries.dirs->files);
-		merge_sort(&entries.file_list);
-		merge_sort(&entries.none_ex);
+		mergesort_dirs(&entries.dirs);
+		mergesort_files(&entries.dirs->files);
+		mergesort_files(&entries.file_list);
+		mergesort_files(&entries.none_ex);
 
 
 		//test

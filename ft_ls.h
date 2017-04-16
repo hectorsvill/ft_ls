@@ -64,10 +64,14 @@ void 		lstadd_files(t_files **head,char *file_name);
 void 		lstadd_dirs(t_dirs **head, char *dir_name);
 t_entries	entries_init(void);
 
-/*
-**	merge_sort.c
-*/
-void 	merge_sort(t_files **headref);
+/**
+**	mergesort_files.c
+**/
+void 	mergesort_files(t_files **headref);
+/**
+**	mergesort_dirs.c
+**/
+void 	mergesort_dirs(t_dirs **headref);
 
 /*
 **	none_ex.c
