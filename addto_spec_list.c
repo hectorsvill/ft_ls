@@ -4,14 +4,6 @@
 
 
 /**
-**	Traverse throught file_list and use stat
-**	if file is not valid insert into none_ex
-**	else ...
-**	if file is dir create new link for dirs
-**	and get and sort those dirs
-**/
-
-/**
 ** 	use stat to collect file information imidiately
 ** send files to proper list!
 **/
@@ -27,9 +19,8 @@ void addto_list(char **av, t_entries *ent)
 		if ((stat(*av, &sb)) == -1)
 		{
 			lstadd_files(&ent->none_ex, *av);
-			//ft_putendl(*av);
 		}
-		if (S_ISREG(sb.st_mode))
+		else if (S_ISREG(sb.st_mode))
 		{
 			lstadd_files(&ent->file_list, *av);
 		}

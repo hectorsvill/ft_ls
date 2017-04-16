@@ -71,6 +71,7 @@ int main(int ac, char **av)
 	{
 
 		/**
+		**	only go in if no flags only file names
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
@@ -78,9 +79,9 @@ int main(int ac, char **av)
 
 		addto_list(av, &entries);
 
-		//merge_sort(&entries.dirs->file);
-		//merge_sort(&entries.file_list);
-		//merge_sort(&entries.none_ex);
+		merge_sort(&entries.dirs->files);
+		merge_sort(&entries.file_list);
+		merge_sort(&entries.none_ex);
 
 
 		//test
