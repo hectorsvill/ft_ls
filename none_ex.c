@@ -48,8 +48,8 @@ void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex)
 			if(S_ISDIR(sb.st_mode))
 			{
 				/**
-				**	unlink file from file_list and
-				**	add name to dirs
+				**	?unlink file from file_list and?
+				**	add name to dirs and files to dirs->files
 				**/
 				lstadd_dirs(dirs, file_list->file);
 			}

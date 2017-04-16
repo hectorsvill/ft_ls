@@ -65,6 +65,10 @@ int main(int ac, char **av)
 		merge_sort(&entries.none_ex);
 
 
+
+
+/*
+
 		ft_putendl("\nfile_list:");
 		print_list(entries.file_list);
 		ft_putendl("");
@@ -79,14 +83,7 @@ int main(int ac, char **av)
 		print_list_dirs(entries.dirs);
 		ft_putendl("");
 
-/*
 
-
-
-
-		ft_putendl("none_ex:");
-		print_list(entries.none_ex);
-		ft_putendl("");
 */
 	}
 
