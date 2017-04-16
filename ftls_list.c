@@ -32,9 +32,9 @@ void print_all_dirs(t_dirs *dir_list)
 	//first print all invalid files
 	while (dir_list)
 	{
+		putchar('\n');
 		ft_printf("%s:\n", dir_list->dir_name);
 		print_list_noflags(dir_list->files);
-		putchar('\n');
 		dir_list = dir_list->next;
 	}
 }
