@@ -69,6 +69,7 @@ void 	merge_sort(t_files **headref);
 /*
 **	none_ex.c
 */
+void addto_list(char **av, t_entries *ent);
 void get_stat(t_files *file_list, t_dirs **dirs, t_files **none_ex);
 void addto_file_list(char **av, t_files **file_list);
 

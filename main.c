@@ -53,6 +53,9 @@ int main(int ac, char **av)
 	}
 	else if (ac == 2)
 	{
+		/**
+		**	when there are no flags and only one param
+		**/
 		entries.dirs->dir_name = av[1];
 		if (!opendir_getnames(&entries.dirs->files, av[1]))
 			ft_printf("ls: %s: No such file or directory\n", av[1]);
@@ -72,20 +75,25 @@ int main(int ac, char **av)
 		**	file names are now in file_list and none existent in none_ex
 		**/
 		av++;
-		addto_file_list(av, &entries.file_list);
-		get_stat(entries.file_list, &entries.dirs, &entries.none_ex);
+
+		addto_list(av, &entries);
+
+		//addto_file_list(av, &entries.file_list);
+		//get_stat(entries.file_list, &entries.dirs, &entries.none_ex);
 		//merge_sort(&entries.dirs->file);
-		merge_sort(&entries.file_list);
-		merge_sort(&entries.none_ex);
+		//merge_sort(&entries.file_list);
+		//merge_sort(&entries.none_ex);
 
 
 		//test
 		//ft_putendl("\ndir->files:");
-		print_error_none_ex(entries.none_ex);
-		print_all_dirs(entries.dirs);
+		//print_error_none_ex(entries.none_ex);
+		//print files in current dir that are listed
+
+		//print_all_dirs(entries.dirs);
 		//ft_putendl("");
 
-/*
+
 
 		ft_putendl("\nfile_list:");
 		print_list_noflags(entries.file_list);
@@ -98,11 +106,11 @@ int main(int ac, char **av)
 
 
 		ft_putendl("\ndir->files:");
-		print_list_noflags_dirs(entries.dirs);
+		print_all_dirs(entries.dirs);
 		ft_putendl("");
 
 
-*/
+
 	}
 
 	return (0);
