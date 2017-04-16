@@ -10,6 +10,7 @@ SRC = 	main.c \
 		mergesort_files.c \
 		mergesort_dirs.c \
 		addto_spec_list.c \
+		valid_flags.c \
 
 all: $(NAME) $(SRC)
 

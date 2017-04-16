@@ -1,3 +1,5 @@
+
+
 #ifndef FT_LS_H
 #define FT_LS_H
 
@@ -77,5 +79,12 @@ void 	mergesort_dirs(t_dirs **headref);
 **	none_ex.c
 */
 void addto_list(char **av, t_entries *ent);
+/*
+**	valid_flags.c
+*/
+
+
+
+
 
 #endif

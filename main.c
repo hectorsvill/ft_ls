@@ -49,6 +49,11 @@ int main(int ac, char **av)
 		**	check for valid flags
 		**
 		*/
+		if (validflags(av[1]))
+		{
+			//TODO: Do operation
+
+		}
 
 	}
 	else if (ac == 2)
@@ -61,6 +66,7 @@ int main(int ac, char **av)
 			ft_printf("ls: %s: No such file or directory\n", av[1]);
 		else
 		{
+
 			mergesort_files(&entries.dirs->files);
 			print_list_noflags(entries.dirs->files);
 		}
@@ -69,32 +75,22 @@ int main(int ac, char **av)
 	}
 	else
 	{
-
 		/**
 		**	only go in if no flags only file names
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
 		av++;
-
 		addto_list(av, &entries);
 		mergesort_dirs(&entries.dirs);
-
-		/** bug when no dir pressent **/
 		if (entries.dirs != NULL)
 			mergesort_files(&entries.dirs->files);
-
 		mergesort_files(&entries.file_list);
 		mergesort_files(&entries.none_ex);
-
-
 		//print
 		print_error_none_ex(entries.none_ex);
 		print_list_noflags(entries.file_list);
 		print_all_dirs(entries.dirs);
-		//ft_putendl("");
-
-
 /*
 		ft_putendl("\nfile_list:");
 		print_list_noflags(entries.file_list);
@@ -110,8 +106,6 @@ int main(int ac, char **av)
 		print_all_dirs(entries.dirs);
 		ft_putendl("");
 */
-
-
 	}
 
 	return (0);
