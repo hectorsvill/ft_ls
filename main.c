@@ -79,7 +79,11 @@ int main(int ac, char **av)
 
 		addto_list(av, &entries);
 		mergesort_dirs(&entries.dirs);
-		mergesort_files(&entries.dirs->files);
+
+		/** bug when no dir pressent **/
+		if (entries.dirs != NULL)
+			mergesort_files(&entries.dirs->files);
+
 		mergesort_files(&entries.file_list);
 		mergesort_files(&entries.none_ex);
 

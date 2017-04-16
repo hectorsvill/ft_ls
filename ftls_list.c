@@ -29,7 +29,7 @@ void print_error_none_ex(t_files *none_ex)
 void print_all_dirs(t_dirs *dir_list)
 {
 
-	//first print all invalid files
+	//dir_list->files = NULL;
 	while (dir_list)
 	{
 		putchar('\n');
