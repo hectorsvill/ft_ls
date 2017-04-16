@@ -4,7 +4,8 @@ void print_list(t_files *list)
 {
 	while (list)
 	{
-//		if (ft_strncmp(list->file, ".", 1))
+		/**if flag a is not on**/
+		if (ft_strncmp(list->file, ".", 1))
 			ft_putendl(list->file);
 		//ft_putstr("    ");
 		list = list->next;

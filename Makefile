@@ -16,6 +16,8 @@ $(NAME): $(SRC)
 	#@make -C libft
 	@$(CC) $(SRC) -g libft/libft.a $(LIB) -o $(NAME)
 
+re: $(NAME) $(SRC)
+
 clean:
 	#@make clean -C libft
 

@@ -50,6 +50,15 @@ int main(int ac, char **av)
 		*/
 
 	}
+	else if (ac == 2)
+	{
+		entries.dirs->dir_name = av[1];
+		opendir_getnames(&entries.dirs->files, av[1]);
+		merge_sort(&entries.dirs->files);
+		print_list(entries.dirs->files);
+		return (0);
+
+	}
 	else
 	{
 
