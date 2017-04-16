@@ -8,7 +8,7 @@
 */
 
 
-void opendir_getnames(t_files **files, char *dir_name)
+int opendir_getnames(t_files **files, char *dir_name)
 {
 
     DIR             	*dir;
@@ -16,7 +16,7 @@ void opendir_getnames(t_files **files, char *dir_name)
 
 	*files = NULL;
 	if (!(dir = opendir(dir_name)))
-		return ;
+		return (0);
 	/**
 	**	make this function return 0
 	**	if dir_name is invalid directory
@@ -26,6 +26,7 @@ void opendir_getnames(t_files **files, char *dir_name)
 	while ((sd = readdir(dir)) != NULL)
 		lstadd_files(files, sd->d_name);
 	closedir(dir);
+	return (1);
 }
 
 int main(int ac, char **av)
@@ -53,9 +54,13 @@ int main(int ac, char **av)
 	else if (ac == 2)
 	{
 		entries.dirs->dir_name = av[1];
-		opendir_getnames(&entries.dirs->files, av[1]);
-		merge_sort(&entries.dirs->files);
-		print_list(entries.dirs->files);
+		if (!opendir_getnames(&entries.dirs->files, av[1]))
+			ft_printf("ls: %s: No such file or directory\n", av[1]);
+		else
+		{
+			merge_sort(&entries.dirs->files);
+			print_list(entries.dirs->files);
+		}
 		return (0);
 
 	}

@@ -45,7 +45,7 @@ typedef struct s_entries
 /**
 **	main.c
 **/
-void 	opendir_getnames(t_files **files, char *dir_name);
+int 	opendir_getnames(t_files **files, char *dir_name);
 
 
 
