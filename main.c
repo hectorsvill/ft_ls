@@ -84,16 +84,14 @@ int main(int ac, char **av)
 		mergesort_files(&entries.none_ex);
 
 
-		//test
-		//ft_putendl("\ndir->files:");
-		//print_error_none_ex(entries.none_ex);
-		//print files in current dir that are listed
-
-		//print_all_dirs(entries.dirs);
+		//print
+		print_error_none_ex(entries.none_ex);
+		print_list_noflags(entries.file_list);
+		print_all_dirs(entries.dirs);
 		//ft_putendl("");
 
 
-
+/*
 		ft_putendl("\nfile_list:");
 		print_list_noflags(entries.file_list);
 		ft_putendl("");
@@ -107,7 +105,7 @@ int main(int ac, char **av)
 		ft_putendl("\ndir->files:");
 		print_all_dirs(entries.dirs);
 		ft_putendl("");
-
+*/
 
 
 	}
