@@ -39,7 +39,7 @@ int main(int ac, char **av)
 		entries.dirs->dir_name = ".";
  		opendir_getnames(&entries.dirs->files, ".");
 		merge_sort(&entries.dirs->files);
-		print_list(entries.dirs->files);
+		print_list_noflags(entries.dirs->files);
 		return (0);
 	}
 	//get arg
@@ -59,7 +59,7 @@ int main(int ac, char **av)
 		else
 		{
 			merge_sort(&entries.dirs->files);
-			print_list(entries.dirs->files);
+			print_list_noflags(entries.dirs->files);
 		}
 		return (0);
 
@@ -85,23 +85,20 @@ int main(int ac, char **av)
 		print_all_dirs(entries.dirs);
 		//ft_putendl("");
 
-
-
-
 /*
 
 		ft_putendl("\nfile_list:");
-		print_list(entries.file_list);
+		print_list_noflags(entries.file_list);
 		ft_putendl("");
 
 		ft_putendl("\nnone_ex:");
-		print_list(entries.none_ex);
+		print_list_noflags(entries.none_ex);
 		ft_putendl("");
 
 
 
 		ft_putendl("\ndir->files:");
-		print_list_dirs(entries.dirs);
+		print_list_noflags_dirs(entries.dirs);
 		ft_putendl("");
 
 
