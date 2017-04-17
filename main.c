@@ -52,8 +52,10 @@ int main(int ac, char **av)
 		**	TODO: Whe Flags are pressent.
 		**
 		*/
-		if (!ft_strcmp(*av, "-"))
+		if (!ft_strcmp(*av, "-")){
 			ft_putendl("ls: -: No such file or directory");
+			return (0);
+		}
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
 		{
@@ -61,6 +63,7 @@ int main(int ac, char **av)
 			**	TODO: Store flag information into t_flags.
 			**/
 
+			entries.flags = setfield(*av);
 			ft_printf("t_flags:%i\n", entries.flags);
 		}
 		else
