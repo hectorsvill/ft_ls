@@ -82,9 +82,6 @@ void addto_list(char **av, t_entries *ent);
 /*
 **	valid_flags.c
 */
-
-
-
-
+char checkflags(char *cf);
 
 #endif

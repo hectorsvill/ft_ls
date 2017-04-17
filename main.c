@@ -33,6 +33,7 @@ int main(int ac, char **av)
 {
 	t_entries entries;
 
+
 	entries = entries_init();
 	if (ac == 1)
 	{
@@ -42,18 +43,26 @@ int main(int ac, char **av)
 		print_list_noflags(entries.dirs->files);
 		return (0);
 	}
-	//get arg
-	if (av[1][0] == '-')
+	else
+		av++;
+	if (**av == '-')
 	{
+		//ft_putendl(*av);exit(1);
+		//if ( == NULL)
+		//	ft_putendl("ls: -: No Such file or directory");
 		/**
 		**	check for valid flags
 		**
 		*/
-		if (validflags(av[1]))
+		int check = checkflags(*av);
+		if (check == 1)
+			puts("valid");
+		else
 		{
-			//TODO: Do operation
-
+			ft_printf("ls: illegal option -- %c\n", check);
+			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
+
 
 	}
 	else if (ac == 2)
@@ -61,9 +70,9 @@ int main(int ac, char **av)
 		/**
 		**	when there are no flags and only one param
 		**/
-		entries.dirs->dir_name = av[1];
+		entries.dirs->dir_name = *av;
 		if (!opendir_getnames(&entries.dirs->files, av[1]))
-			ft_printf("ls: %s: No such file or directory\n", av[1]);
+			ft_printf("ls: %s: No such file or directory\n", *av);
 		else
 		{
 
@@ -80,7 +89,6 @@ int main(int ac, char **av)
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
-		av++;
 		addto_list(av, &entries);
 		mergesort_dirs(&entries.dirs);
 		if (entries.dirs != NULL)
