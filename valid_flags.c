@@ -19,6 +19,12 @@ t_flags setfield(char *str_flags)
 			flags |= LONG_FORMAT;
 		else if (*str_flags == 'R')
 			flags |= RECURISIVE_LIST;
+		else if (*str_flags == 'a')
+			flags |= ALL_DIRS;
+		else if (*str_flags == 'r')
+			flags |= REVERSE_ORDER;
+		else if (*str_flags == 't')
+			flags |= TIMEMODIFIED_SORT;
 		str_flags++;
 	}
 	return (flags);
