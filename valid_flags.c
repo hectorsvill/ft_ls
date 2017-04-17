@@ -2,9 +2,9 @@
 
 
 /**
-**	TODO:Check for valid flags.
-**		 retunr 1 if all valid flags else 0.
-**		 valid flags: l R a r t
+**	TODO: Check for valid flags.
+**		  retunr 1 if all valid flags else 0.
+**		  valid flags: l R a r t
 **/
 
 char checkflag(char cf)

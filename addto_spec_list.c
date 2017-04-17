@@ -4,7 +4,7 @@
 
 
 /**
-** 	use stat to collect file information imidiately
+** 	TODO: use stat to collect file information imidiately
 ** send files to proper list!
 **/
 void addto_list(char **av, t_entries *ent)

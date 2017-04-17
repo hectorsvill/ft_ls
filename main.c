@@ -49,24 +49,31 @@ int main(int ac, char **av)
 	if (**av == '-')
 	{
 		/**
-		**	flagcheck for valid flags
+		**	TODO: Whe Flags are pressent.
 		**
 		*/
 		if (!ft_strcmp(*av, "-"))
 			ft_putendl("ls: -: No such file or directory");
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
-		{}
+		{
+			/**
+			**	TODO: Store flag information into t_flags.
+			**/
+
+			ft_printf("t_flags:%i\n", entries.flags);
+		}
 		else
 		{
 			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
+		return (0);
 	}
 	else if (ac == 2)
 	{
 		/**
-		**	when there are no flags and only one param
+		**	TODO: When there are no flags and only one file paramter.
 		**/
 		entries.dirs->dir_name = *av;
 		if (!opendir_getnames(&entries.dirs->files, av[1]))

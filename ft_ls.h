@@ -10,10 +10,10 @@
 
 typedef enum s_flags
 {
-	LONG_FORMAT = 1,	//	-l
-	RECURISIVE_LIST = 2, // 	-R
-	ALL_DIRS = 4,		// -a
-	REVERSE_ORDER = 8,	// -r
+	LONG_FORMAT = 1,		//	-l
+	RECURISIVE_LIST = 2, 	// 	-R
+	ALL_DIRS = 4,			// -a
+	REVERSE_ORDER = 8,		// -r
  	TIMEMODIFIED_SORT = 16,	//-t
 }			t_flags;
 

@@ -76,7 +76,7 @@ t_entries entries_init(void)
 {
 	t_entries entries;
 
-	//entries = (t_entries*)malloc(sizeof(entries)); //if pointer
+	entries.flags = 0;
 	entries.dirs = (t_dirs*)malloc(sizeof(t_dirs));
 	entries.dirs->files = (t_files*)malloc(sizeof(t_files));
 	entries.file_list = (t_files*)malloc(sizeof(t_files));
