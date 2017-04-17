@@ -32,8 +32,9 @@ int opendir_getnames(t_files **files, char *dir_name)
 int main(int ac, char **av)
 {
 	t_entries entries;
+	char flagcheck;
 
-
+	flagcheck = 0;
 	entries = entries_init();
 	if (ac == 1)
 	{
@@ -51,15 +52,17 @@ int main(int ac, char **av)
 		//if ( == NULL)
 		//	ft_putendl("ls: -: No Such file or directory");
 		/**
-		**	check for valid flags
+		**	flagcheck for valid flags
 		**
 		*/
-		int check = checkflags(*av);
-		if (check == 1)
-			puts("valid");
+		if (!ft_strcmp(*av, "-"))
+			ft_putendl("ls: -: No such file or directory");
+		flagcheck = checkflags(*av);
+		if (flagcheck == 1)
+		{}
 		else
 		{
-			ft_printf("ls: illegal option -- %c\n", check);
+			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
 

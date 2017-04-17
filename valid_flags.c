@@ -23,7 +23,6 @@ char checkflag(char cf)
 
 char checkflags(char *cf)
 {
-	//ft_putendl(checkflags);exit(2);
 	cf++;
 	while (*cf)
 	{
