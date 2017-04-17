@@ -48,9 +48,6 @@ int main(int ac, char **av)
 		av++;
 	if (**av == '-')
 	{
-		//ft_putendl(*av);exit(1);
-		//if ( == NULL)
-		//	ft_putendl("ls: -: No Such file or directory");
 		/**
 		**	flagcheck for valid flags
 		**
@@ -65,8 +62,6 @@ int main(int ac, char **av)
 			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
-
-
 	}
 	else if (ac == 2)
 	{
@@ -78,12 +73,10 @@ int main(int ac, char **av)
 			ft_printf("ls: %s: No such file or directory\n", *av);
 		else
 		{
-
 			mergesort_files(&entries.dirs->files);
 			print_list_noflags(entries.dirs->files);
 		}
 		return (0);
-
 	}
 	else
 	{
@@ -98,7 +91,6 @@ int main(int ac, char **av)
 			mergesort_files(&entries.dirs->files);
 		mergesort_files(&entries.file_list);
 		mergesort_files(&entries.none_ex);
-		//print
 		print_error_none_ex(entries.none_ex);
 		print_list_noflags(entries.file_list);
 		print_all_dirs(entries.dirs);
