@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FT_LS_H
 #define FT_LS_H
 
@@ -97,6 +96,6 @@ t_flags setfield(char *str_flags);
 /*
 **	recursiveprint.c
 */
-void 	recursiveprint(t_entries *ent);
+void 	recursiveprint(t_entries ent);
 
 #endif

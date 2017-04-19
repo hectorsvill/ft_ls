@@ -120,11 +120,14 @@ int main(int ac, char **av)
 		}
 		else if (ac == 2)
 		{
-			entries.dirs->dir_name = ".";
+			/**
+			**	open dir get names
+			**/
+			entries.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&entries.dirs->files, ".");
 			mergesort_files(&entries.dirs->files);
 			if (entries.flags & RECURISIVE_LIST)
-				recursiveprint(&entries);
+				recursiveprint(entries);
 			else
 				print_list_noflags(entries.dirs->files, entries.flags);
 		}
