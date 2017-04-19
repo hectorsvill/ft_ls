@@ -33,7 +33,8 @@ void print_all_dirs(t_dirs *dir_list, t_flags flags)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
 		print_list_noflags(dir_list->files, flags);
-	//	write(1, "\n", 1);
+		if (dir_list->next != NULL)
+			write(1, "\n", 1);
 		dir_list = dir_list->next;
 	}
 }
