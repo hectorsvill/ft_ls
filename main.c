@@ -96,25 +96,19 @@ int main(int ac, char **av)
 			//collect files
 			av++;
 			addto_list(av, &entries);
+			//sort
+			mergesort_files(&entries.file_list);
+			mergesort_files(&entries.none_ex);
+			//print
+			print_error_none_ex(entries.none_ex);
+			print_list_noflags(entries.file_list);
+			print_all_dirs(entries.dirs);
 		}
-		print_error_none_ex(entries.none_ex);
-		print_list_noflags(entries.file_list);
-		print_all_dirs(entries.dirs);
-	}
-	else if (ac == 2)
-	{
-		/**
-		**	TODO: When there are no flags and only one file paramter.
-		**/
-		entries.dirs->dir_name = *av;
-		if (!opendir_getnames(&entries.dirs->files, av[1]))
-			ft_printf("ls: %s: No such file or directory\n", *av);
 		else
 		{
-			mergesort_files(&entries.dirs->files);
-			print_list_noflags(entries.dirs->files);
+
+
 		}
-		return (0);
 	}
 	else
 	{
@@ -127,8 +121,8 @@ int main(int ac, char **av)
 		addto_list(av, &entries);
 		//sort
 		mergesort_dirs(&entries.dirs);
-		if (entries.dirs != NULL)
-			mergesort_files(&entries.dirs->files);
+		//if (entries.dirs != NULL)
+			//mergesort_files(&entries.dirs->files);
 		mergesort_files(&entries.file_list);
 		mergesort_files(&entries.none_ex);
 
