@@ -104,11 +104,15 @@ int main(int ac, char **av)
 			print_list_noflags(entries.file_list);
 			print_all_dirs(entries.dirs);
 		}
-		else
+		else if (ac == 2)
 		{
-
-
+			entries.dirs->dir_name = ".";
+	 		opendir_getnames(&entries.dirs->files, ".");
+			mergesort_files(&entries.dirs->files);
+			print_list_noflags(entries.dirs->files);
 		}
+
+
 	}
 	else
 	{

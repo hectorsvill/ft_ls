@@ -17,7 +17,7 @@ void print_list_noflags(t_files *list)
 	while (list)
 	{
 		/**if flag a is not on**/
-		if (ft_strncmp(list->file, ".", 1))
+		if (ft_strncmp(list->file, ".", 1)) //ALL_DIRS is off
 			ft_putendl(list->file);
 		//ft_putstr("    ");
 		list = list->next;
@@ -45,6 +45,7 @@ void print_all_dirs(t_dirs *dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
 		print_list_noflags(dir_list->files);
+		write(1, "\n", 1);
 		dir_list = dir_list->next;
 	}
 }
