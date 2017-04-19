@@ -1,3 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ftls_list.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/18 18:04:44 by hvillasa          #+#    #+#             */
+/*   Updated: 2017/04/18 18:04:45 by hvillasa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
+
 #include "ft_ls.h"
 
 void print_list_noflags(t_files *list)
@@ -32,7 +47,6 @@ void print_all_dirs(t_dirs *dir_list)
 	//dir_list->files = NULL;
 	while (dir_list)
 	{
-		putchar('\n');
 		ft_printf("%s:\n", dir_list->dir_name);
 		print_list_noflags(dir_list->files);
 		dir_list = dir_list->next;

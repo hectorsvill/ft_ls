@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_flags.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/18 18:03:56 by hvillasa          #+#    #+#             */
+/*   Updated: 2017/04/18 18:03:57 by hvillasa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
+
 #include "ft_ls.h"
 
 
 
 
 /**
-**	TODO: Go through flag str and set bitfield
+**	TODO: Go through flag str and set bitfield for entries.flags
 **/
-
 t_flags setfield(char *str_flags)
 {
 	t_flags flags;
@@ -36,7 +50,7 @@ t_flags setfield(char *str_flags)
 **		  valid flags: l R a r t
 **/
 
-char checkflag(char cf)
+static char checkflag(char cf)
 {
 	char *flags;
 

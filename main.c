@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
+/*   Updated: 2017/04/18 18:04:33 by hvillasa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
 #include "ft_ls.h"
 
 /*
@@ -65,13 +79,19 @@ int main(int ac, char **av)
 
 			entries.flags = setfield(*av);
 			ft_printf("t_flags:%i\n", entries.flags);
+
+			/**
+			**	TODO: if av[2] not NULL
+			**		  store files and folders in proper list
+			**/
+
+
 		}
 		else
 		{
 			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
-		return (0);
 	}
 	else if (ac == 2)
 	{
