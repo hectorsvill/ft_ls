@@ -12,43 +12,42 @@
 
 #include "ft_ls.h"
 
-void print_list_noflags(t_files *list)
+void print_list_noflags(t_files *list, t_flags flags)
 {
 	while (list)
 	{
 		/**if flag a is not on**/
-		if (ft_strncmp(list->file, ".", 1)) //ALL_DIRS is off
+		if (!(ALL_DIRS & flags))
+		{	if (ft_strncmp(list->file, ".", 1))
+				ft_putendl(list->file);
+		}
+		else
 			ft_putendl(list->file);
-		//ft_putstr("    ");
 		list = list->next;
 	}
+}
 
+void print_all_dirs(t_dirs *dir_list, t_flags flags)
+{
+	while (dir_list)
+	{
+		ft_printf("%s:\n", dir_list->dir_name);
+		print_list_noflags(dir_list->files, flags);
+	//	write(1, "\n", 1);
+		dir_list = dir_list->next;
+	}
 }
 
 void print_error_none_ex(t_files *none_ex)
 {
-
-
 	while (none_ex)
 	{
 		ft_printf("ls: %s: No such file or directory\n", none_ex->file);
 		none_ex = none_ex->next;
 	}
-
 }
 
-void print_all_dirs(t_dirs *dir_list)
-{
 
-	//dir_list->files = NULL;
-	while (dir_list)
-	{
-		ft_printf("%s:\n", dir_list->dir_name);
-		print_list_noflags(dir_list->files);
-		write(1, "\n", 1);
-		dir_list = dir_list->next;
-	}
-}
 /**
 **	Add function to open directory and set
 **	t_files within t_dirs

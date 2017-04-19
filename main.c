@@ -55,7 +55,7 @@ int main(int ac, char **av)
 		entries.dirs->dir_name = ".";
  		opendir_getnames(&entries.dirs->files, ".");
 		mergesort_files(&entries.dirs->files);
-		print_list_noflags(entries.dirs->files);
+		print_list_noflags(entries.dirs->files, entries.flags);
 		return (0);
 	}
 	else
@@ -90,7 +90,6 @@ int main(int ac, char **av)
 		**	TODO: if ac > 2 not NULL
 		**		  store files and folders in proper list
 		**/
-
 		if (ac > 2)
 		{
 			//collect files
@@ -101,18 +100,18 @@ int main(int ac, char **av)
 			mergesort_files(&entries.none_ex);
 			//print
 			print_error_none_ex(entries.none_ex);
-			print_list_noflags(entries.file_list);
-			print_all_dirs(entries.dirs);
+			print_list_noflags(entries.file_list, entries.flags);
+			print_all_dirs(entries.dirs, entries.flags);
 		}
 		else if (ac == 2)
 		{
 			entries.dirs->dir_name = ".";
-	 		opendir_getnames(&entries.dirs->files, ".");
+			opendir_getnames(&entries.dirs->files, ".");
 			mergesort_files(&entries.dirs->files);
-			print_list_noflags(entries.dirs->files);
+			flags_ops(&entries);
+
+		//	print_list_noflags(entries.dirs->files);
 		}
-
-
 	}
 	else
 	{
@@ -132,8 +131,13 @@ int main(int ac, char **av)
 
 		//make this into funtion
 		print_error_none_ex(entries.none_ex);
-		print_list_noflags(entries.file_list);
-		print_all_dirs(entries.dirs);
+		print_list_noflags(entries.file_list, entries.flags);
+		print_all_dirs(entries.dirs, entries.flags);
+	}
+	return (0);
+}
+
+
 /*
 		ft_putendl("\nfile_list:");
 		print_list_noflags(entries.file_list);
@@ -149,7 +153,3 @@ int main(int ac, char **av)
 		print_all_dirs(entries.dirs);
 		ft_putendl("");
 */
-	}
-
-	return (0);
-}

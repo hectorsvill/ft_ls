@@ -67,9 +67,10 @@ int 	opendir_getnames(t_files **files, char *dir_name);
 **	ftls_list.c
 */
 
-void 		print_all_dirs(t_dirs *dir_list);
+void 		print_all_dirs(t_dirs *dir_list, t_flags flags);
+void 		print_list_noflags(t_files *list, t_flags flags);
+
 void 		print_error_none_ex(t_files *none_ex);
-void 		print_list_noflags(t_files *list);
 
 
 
@@ -87,8 +88,9 @@ void 	mergesort_files(t_files **headref);
 void 	mergesort_dirs(t_dirs **headref);
 
 /*
-**	none_ex.c
+**	addto_spec_list.c
 */
+void flags_ops(t_entries *ent);
 void addto_list(char **av, t_entries *ent);
 /*
 **	valid_flags.c
