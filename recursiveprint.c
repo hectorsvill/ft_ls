@@ -38,9 +38,9 @@ t_dirs *find_dirs(t_files *files)
 
 void recursiveprint(t_entries ent)
 {
-	//puts("here");
-	//print_list_noflags(ent->dirs->files, ent->flags);
-	ent.dirs = find_dirs(ent.dirs->files);
-	//mergesort_dirs(&ent.dirs);
-	print_dirnames(ent.dirs);
+	t_dirs *tmp;
+
+	tmp = find_dirs(ent.dirs->files);
+	mergesort_dirs(&tmp);
+	print_dirnames(tmp);
 }
