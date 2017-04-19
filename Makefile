@@ -25,6 +25,7 @@ SRC = 	main.c \
 		mergesort_dirs.c \
 		addto_spec_list.c \
 		valid_flags.c \
+		recursiveprint.c \
 
 all: $(NAME) $(SRC)
 

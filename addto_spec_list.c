@@ -39,14 +39,3 @@ void addto_list(char **av, t_entries *ent)
 		av++;
 	}
 }
-
-void flags_ops(t_entries *ent)
-{
-	ft_printf("%i\n", (ent->flags & RECURISIVE_LIST));exit(2);
-
-	if(ent->flags & RECURISIVE_LIST)
-	{
-		puts("flag :-R");
-	}
-
-}

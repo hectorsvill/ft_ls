@@ -86,8 +86,7 @@ void 	mergesort_dirs(t_dirs **headref);
 /*
 **	addto_spec_list.c
 */
-
-void addto_list(char **av, t_entries *ent);
+void 	addto_list(char **av, t_entries *ent);
 /*
 **	valid_flags.c
 */
@@ -95,5 +94,9 @@ void addto_list(char **av, t_entries *ent);
 char 	checkflags(char *cf);
 t_flags setfield(char *str_flags);
 
+/*
+**	recursiveprint.c
+*/
+void 	recursiveprint(t_entries *ent);
 
 #endif

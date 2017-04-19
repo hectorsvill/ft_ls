@@ -104,14 +104,29 @@ int main(int ac, char **av)
 			if (ac == 4 && entries.dirs != NULL)
 				print_list_noflags(entries.dirs->files, entries.flags);
 			else
-				print_all_dirs(entries.dirs, entries.flags);
+			{
+				/**
+				**	TODO:	Check if -R is set
+				**		 	if is set Dir walk!
+				**/
+
+				if (entries.flags & RECURISIVE_LIST)
+				{
+					//recursiveprint(&entries);
+				}
+
+				//print_all_dirs(entries.dirs, entries.flags);
+			}
 		}
 		else if (ac == 2)
 		{
 			entries.dirs->dir_name = ".";
 			opendir_getnames(&entries.dirs->files, ".");
 			mergesort_files(&entries.dirs->files);
-			print_list_noflags(entries.dirs->files, entries.flags);
+			if (entries.flags & RECURISIVE_LIST)
+				recursiveprint(&entries);
+			else
+				print_list_noflags(entries.dirs->files, entries.flags);
 		}
 	}
 	else
