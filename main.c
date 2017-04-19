@@ -70,28 +70,36 @@ int main(int ac, char **av)
 			ft_putendl("ls: -: No such file or directory");
 			return (0);
 		}
+
+		/**
+		**	TODO: Store flag information into t_flags.
+		**/
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
 		{
-			/**
-			**	TODO: Store flag information into t_flags.
-			**/
-
 			entries.flags = setfield(*av);
-			ft_printf("t_flags:%i\n", entries.flags);
-
-			/**
-			**	TODO: if av[2] not NULL
-			**		  store files and folders in proper list
-			**/
-
-
+			//ft_printf("t_flags:%i\n", entries.flags);
 		}
 		else
 		{
 			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
+
+		/**
+		**	TODO: if ac > 2 not NULL
+		**		  store files and folders in proper list
+		**/
+
+		if (ac > 2)
+		{
+			//collect files
+			av++;
+			addto_list(av, &entries);
+		}
+		print_error_none_ex(entries.none_ex);
+		print_list_noflags(entries.file_list);
+		print_all_dirs(entries.dirs);
 	}
 	else if (ac == 2)
 	{
@@ -115,12 +123,16 @@ int main(int ac, char **av)
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
+		//add to list
 		addto_list(av, &entries);
+		//sort
 		mergesort_dirs(&entries.dirs);
 		if (entries.dirs != NULL)
 			mergesort_files(&entries.dirs->files);
 		mergesort_files(&entries.file_list);
 		mergesort_files(&entries.none_ex);
+
+		//make this into funtion
 		print_error_none_ex(entries.none_ex);
 		print_list_noflags(entries.file_list);
 		print_all_dirs(entries.dirs);

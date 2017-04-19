@@ -10,14 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "ft_ls.h"
-
-
-
-
 /**
 **	TODO: Go through flag str and set bitfield for entries.flags
 **/
@@ -43,13 +36,11 @@ t_flags setfield(char *str_flags)
 	}
 	return (flags);
 }
-
 /**
 **	TODO: Check for valid flags.
 **		  retunr 1 if all valid flags else 0.
 **		  valid flags: l R a r t
 **/
-
 static char checkflag(char cf)
 {
 	char *flags;

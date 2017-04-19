@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "ft_ls.h"
 
 void print_list_noflags(t_files *list)
@@ -27,7 +24,6 @@ void print_list_noflags(t_files *list)
 	}
 
 }
-
 
 void print_error_none_ex(t_files *none_ex)
 {
@@ -52,16 +48,10 @@ void print_all_dirs(t_dirs *dir_list)
 		dir_list = dir_list->next;
 	}
 }
-
-
 /**
 **	Add function to open directory and set
 **	t_files within t_dirs
 **/
-
-
-
-
 void lstadd_dirs(t_dirs **head, char *dir_name)
 {
 	t_dirs *t_new;
@@ -73,8 +63,6 @@ void lstadd_dirs(t_dirs **head, char *dir_name)
 	t_new->next = *head;
 	*head = t_new;
 }
-
-
 
 void lstadd_files(t_files **head, char *file_name)
 {
