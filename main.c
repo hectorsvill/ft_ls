@@ -63,7 +63,7 @@ int main(int ac, char **av)
 	if (**av == '-')
 	{
 		/**
-		**	TODO: Whe Flags are pressent.
+		**	TODO: When Flags are pressent.
 		**
 		*/
 		if (!ft_strcmp(*av, "-")){
@@ -100,17 +100,18 @@ int main(int ac, char **av)
 			mergesort_files(&entries.none_ex);
 			//print
 			print_error_none_ex(entries.none_ex);
-			print_list_noflags(entries.file_list, entries.flags);
-			print_all_dirs(entries.dirs, entries.flags);
+			//print_list_noflags(entries.file_list, entries.flags);
+			if (ac == 4 && entries.dirs != NULL)
+				print_list_noflags(entries.dirs->files, entries.flags);
+			else
+				print_all_dirs(entries.dirs, entries.flags);
 		}
 		else if (ac == 2)
 		{
 			entries.dirs->dir_name = ".";
 			opendir_getnames(&entries.dirs->files, ".");
 			mergesort_files(&entries.dirs->files);
-			flags_ops(&entries);
-
-		//	print_list_noflags(entries.dirs->files);
+			print_list_noflags(entries.dirs->files, entries.flags);
 		}
 	}
 	else
