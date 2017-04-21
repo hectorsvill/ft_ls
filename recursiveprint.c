@@ -16,10 +16,14 @@ void recursiveprint(t_entries ent)
 	t_files *files;
 
 	files = ent.dirs->files;
+
 	while (files)
 	{
 		if (S_ISDIR(files->st_mode))
+		{
+			ft_strcat(files->file, "/");
 			ft_putendl(files->file);
+		}
 		files = files->next;
 	}
 }

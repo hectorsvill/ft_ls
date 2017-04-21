@@ -49,7 +49,8 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 	if (!(dir = opendir(dir_name)))
 		return (0);
 	while ((sd = readdir(dir)) != NULL)
-		lstadd_files(files, sd->d_name, flags);
+		if (ft_strcmp(sd->d_name, ".") && ft_strcmp(sd->d_name, ".."))
+			lstadd_files(files, sd->d_name, flags);
 	closedir(dir);
 	return (1);
 }
@@ -110,17 +111,12 @@ int main(int ac, char **av)
 			print_error_none_ex(ent.none_ex);
 			if (ac == 4 && ent.dirs != NULL)
 				printfileslist(ent.dirs->files);
+
+			else if ((ac == 4) && (ent.flags & RECURISIVE_LIST))
+				recursiveprint(ent);
 			else
 			{
-				/**
-				**	TODO:	Check if -R is set
-				**		 	if is set Dir walk!
-				**/
-
-				if (ent.flags & RECURISIVE_LIST)
-				{
-					//recursiveprint(&ent);
-				}
+				exit(1);//use recursiveprint on every folder from list
 				printfileslist(ent.file_list);
 				print_all_dirs(ent.dirs);
 			}
@@ -138,6 +134,7 @@ int main(int ac, char **av)
 			else
 				printfileslist(ent.dirs->files);
 		}
+		return (0);
 	}
 	else
 	{
