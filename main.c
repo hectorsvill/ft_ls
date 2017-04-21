@@ -22,11 +22,11 @@
 */
 
 
-int opendir_getnames(t_files **files, char *dir_name)
+int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 {
 
-    DIR             	*dir;
-    struct dirent   	*sd;
+	DIR             *dir;
+	struct dirent   *sd;
 
 	*files = NULL;
 	if (!(dir = opendir(dir_name)))
@@ -36,49 +36,50 @@ int opendir_getnames(t_files **files, char *dir_name)
 	**	if dir_name is invalid directory
 	**	if invalid d irectory then send to entries.none_ex
 	**/
-
 	while ((sd = readdir(dir)) != NULL)
-		lstadd_files(files, sd->d_name);
+		lstadd_files(files, sd->d_name, flags);
 	closedir(dir);
 	return (1);
 }
 
 int main(int ac, char **av)
 {
-	t_entries entries;
+	t_entries ent;
 	char flagcheck;
 
 	flagcheck = 0;
-	entries = entries_init();
+	ent = entries_init();
 	if (ac == 1)
 	{
-		entries.dirs->dir_name = ".";
- 		opendir_getnames(&entries.dirs->files, ".");
-		mergesort_files(&entries.dirs->files);
-		print_list_noflags(entries.dirs->files, entries.flags);
+		/**
+		**	When no arguments pressent open current directory
+		**/
+		ent.dirs->dir_name = ".";
+ 		opendir_getnames(&ent.dirs->files, ".", ent.flags);
+		mergesort_files(&ent.dirs->files);
+		print_list_noflags(ent.dirs->files);
 		return (0);
 	}
 	else
 		av++;
+
 	if (**av == '-')
 	{
 		/**
-		**	TODO: When Flags are pressent.
-		**
+		**	TODO: Only enter when Flags are pressent.
 		*/
 		if (!ft_strcmp(*av, "-")){
 			ft_putendl("ls: -: No such file or directory");
 			return (0);
 		}
-
 		/**
 		**	TODO: Store flag information into t_flags.
 		**/
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
 		{
-			entries.flags = setfield(*av);
-			//ft_printf("t_flags:%i\n", entries.flags);
+			ent.flags = setfield(*av);
+			//ft_printf("t_flags:%i\n", ent.flags);
 		}
 		else
 		{
@@ -94,15 +95,15 @@ int main(int ac, char **av)
 		{
 			//collect files
 			av++;
-			addto_list(av, &entries);
+			addto_list(av, &ent);
 			//sort
-			mergesort_files(&entries.file_list);
-			mergesort_files(&entries.none_ex);
+			mergesort_files(&ent.file_list);
+			mergesort_files(&ent.none_ex);
 			//print
-			print_error_none_ex(entries.none_ex);
-			//print_list_noflags(entries.file_list, entries.flags);
-			if (ac == 4 && entries.dirs != NULL)
-				print_list_noflags(entries.dirs->files, entries.flags);
+			print_error_none_ex(ent.none_ex);
+			//print_list_noflags(ent.file_list, ent.flags);
+			if (ac == 4 && ent.dirs != NULL)
+				print_list_noflags(ent.dirs->files);
 			else
 			{
 				/**
@@ -110,12 +111,12 @@ int main(int ac, char **av)
 				**		 	if is set Dir walk!
 				**/
 
-				if (entries.flags & RECURISIVE_LIST)
+				if (ent.flags & RECURISIVE_LIST)
 				{
-					//recursiveprint(&entries);
+					//recursiveprint(&ent);
 				}
 
-				//print_all_dirs(entries.dirs, entries.flags);
+				//print_all_dirs(ent.dirs, ent.flags);
 			}
 		}
 		else if (ac == 2)
@@ -123,13 +124,13 @@ int main(int ac, char **av)
 			/**
 			**	open dir get names
 			**/
-			entries.dirs->dir_name = ft_strdup(".");
-			opendir_getnames(&entries.dirs->files, ".");
-			mergesort_files(&entries.dirs->files);
-			if (entries.flags & RECURISIVE_LIST)
-				recursiveprint(entries);
+			ent.dirs->dir_name = ft_strdup(".");
+			opendir_getnames(&ent.dirs->files, ".", ent.flags);
+			mergesort_files(&ent.dirs->files);
+			if (ent.flags & RECURISIVE_LIST)
+				recursiveprint(ent);
 			else
-				print_list_noflags(entries.dirs->files, entries.flags);
+				print_list_noflags(ent.dirs->files);
 		}
 	}
 	else
@@ -140,18 +141,18 @@ int main(int ac, char **av)
 		**	file names are now in file_list and none existent in none_ex
 		**/
 		//add to list
-		addto_list(av, &entries);
+		addto_list(av, &ent);
 		//sort
-		mergesort_dirs(&entries.dirs);
-		//if (entries.dirs != NULL)
-			//mergesort_files(&entries.dirs->files);
-		mergesort_files(&entries.file_list);
-		mergesort_files(&entries.none_ex);
+		mergesort_dirs(&ent.dirs);
+		//if (ent.dirs != NULL)
+			//mergesort_files(&ent.dirs->files);
+		mergesort_files(&ent.file_list);
+		mergesort_files(&ent.none_ex);
 
 		//make this into funtion
-		print_error_none_ex(entries.none_ex);
-		print_list_noflags(entries.file_list, entries.flags);
-		print_all_dirs(entries.dirs, entries.flags);
+		print_error_none_ex(ent.none_ex);
+		print_list_noflags(ent.file_list);
+		print_all_dirs(ent.dirs);
 	}
 	return (0);
 }
