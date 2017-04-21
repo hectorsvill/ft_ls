@@ -10,17 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "ft_ls.h"
 
-/*
-	1.store directory names in link list.
-	2.sort list of names with merge sort.
-	3.print list of names
+/**
+**	make this function return 0
+**	if dir_name is invalid directory
+**	if invalid d irectory then send to entries.none_ex
+**/
 
-*/
+void printfileslist(t_files *list)
+{
+	while (list)
+	{
+		ft_putendl(list->file);
+		list = list->next;
+	}
+}
 
+void print_all_dirs(t_dirs *dir_list)
+{
+	while (dir_list)
+	{
+		ft_printf("%s:\n", dir_list->dir_name);
+		printfileslist(dir_list->files);
+		if (dir_list->next != NULL)
+			write(1, "\n", 1);
+		dir_list = dir_list->next;
+	}
+}
 
 int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 {
@@ -31,11 +48,6 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 	*files = NULL;
 	if (!(dir = opendir(dir_name)))
 		return (0);
-	/**
-	**	make this function return 0
-	**	if dir_name is invalid directory
-	**	if invalid d irectory then send to entries.none_ex
-	**/
 	while ((sd = readdir(dir)) != NULL)
 		lstadd_files(files, sd->d_name, flags);
 	closedir(dir);
@@ -77,16 +89,12 @@ int main(int ac, char **av)
 		**/
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
-		{
 			ent.flags = setfield(*av);
-			//ft_printf("t_flags:%i\n", ent.flags);
-		}
 		else
 		{
 			ft_printf("ls: illegal option -- %c\n", flagcheck);
 			ft_putendl("usage: ls [-lRart] [file ...]");
 		}
-
 		/**
 		**	TODO: if ac > 2 not NULL
 		**		  store files and folders in proper list
@@ -99,9 +107,7 @@ int main(int ac, char **av)
 			//sort
 			mergesort_files(&ent.file_list);
 			mergesort_files(&ent.none_ex);
-			//print
 			print_error_none_ex(ent.none_ex);
-			//printfileslist(ent.file_list, ent.flags);
 			if (ac == 4 && ent.dirs != NULL)
 				printfileslist(ent.dirs->files);
 			else
@@ -115,8 +121,8 @@ int main(int ac, char **av)
 				{
 					//recursiveprint(&ent);
 				}
-
-				//print_all_dirs(ent.dirs, ent.flags);
+				printfileslist(ent.file_list);
+				print_all_dirs(ent.dirs);
 			}
 		}
 		else if (ac == 2)

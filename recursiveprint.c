@@ -18,7 +18,8 @@ void recursiveprint(t_entries ent)
 	files = ent.dirs->files;
 	while (files)
 	{
-		ft_putendl(files->file);
+		if (S_ISDIR(files->st_mode))
+			ft_putendl(files->file);
 		files = files->next;
 	}
 }

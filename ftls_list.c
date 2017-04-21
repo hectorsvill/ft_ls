@@ -12,26 +12,6 @@
 
 #include "ft_ls.h"
 
-void printfileslist(t_files *list)
-{
-	while (list)
-	{
-		ft_putendl(list->file);
-		list = list->next;
-	}
-}
-
-void print_all_dirs(t_dirs *dir_list)
-{
-	while (dir_list)
-	{
-		ft_printf("%s:\n", dir_list->dir_name);
-		printfileslist(dir_list->files);
-		if (dir_list->next != NULL)
-			write(1, "\n", 1);
-		dir_list = dir_list->next;
-	}
-}
 
 void print_error_none_ex(t_files *none_ex)
 {
