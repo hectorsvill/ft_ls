@@ -65,7 +65,7 @@ int 	opendir_getnames(t_files **files, char *dir_name, t_flags flags);
 */
 
 void 		print_all_dirs(t_dirs *dir_list);
-void 		print_list_noflags(t_files *list);
+void 		printfileslist(t_files *list);
 
 void 		print_error_none_ex(t_files *none_ex);
 

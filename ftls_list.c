@@ -12,17 +12,11 @@
 
 #include "ft_ls.h"
 
-void print_list_noflags(t_files *list)
+void printfileslist(t_files *list)
 {
 	while (list)
 	{
-		/**if flag a is not on**/
-/*		if (!(ALL_DIRS & flags))
-		{	if (ft_strncmp(list->file, ".", 1))
-				ft_putendl(list->file);
-		}
-		else */
-			ft_putendl(list->file);
+		ft_putendl(list->file);
 		list = list->next;
 	}
 }
@@ -32,7 +26,7 @@ void print_all_dirs(t_dirs *dir_list)
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
-		print_list_noflags(dir_list->files);
+		printfileslist(dir_list->files);
 		if (dir_list->next != NULL)
 			write(1, "\n", 1);
 		dir_list = dir_list->next;

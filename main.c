@@ -57,7 +57,7 @@ int main(int ac, char **av)
 		ent.dirs->dir_name = ".";
  		opendir_getnames(&ent.dirs->files, ".", ent.flags);
 		mergesort_files(&ent.dirs->files);
-		print_list_noflags(ent.dirs->files);
+		printfileslist(ent.dirs->files);
 		return (0);
 	}
 	else
@@ -101,9 +101,9 @@ int main(int ac, char **av)
 			mergesort_files(&ent.none_ex);
 			//print
 			print_error_none_ex(ent.none_ex);
-			//print_list_noflags(ent.file_list, ent.flags);
+			//printfileslist(ent.file_list, ent.flags);
 			if (ac == 4 && ent.dirs != NULL)
-				print_list_noflags(ent.dirs->files);
+				printfileslist(ent.dirs->files);
 			else
 			{
 				/**
@@ -130,7 +130,7 @@ int main(int ac, char **av)
 			if (ent.flags & RECURISIVE_LIST)
 				recursiveprint(ent);
 			else
-				print_list_noflags(ent.dirs->files);
+				printfileslist(ent.dirs->files);
 		}
 	}
 	else
@@ -151,7 +151,7 @@ int main(int ac, char **av)
 
 		//make this into funtion
 		print_error_none_ex(ent.none_ex);
-		print_list_noflags(ent.file_list);
+		printfileslist(ent.file_list);
 		print_all_dirs(ent.dirs);
 	}
 	return (0);
@@ -160,11 +160,11 @@ int main(int ac, char **av)
 
 /*
 		ft_putendl("\nfile_list:");
-		print_list_noflags(entries.file_list);
+		printfileslist(entries.file_list);
 		ft_putendl("");
 
 		ft_putendl("\nnone_ex:");
-		print_list_noflags(entries.none_ex);
+		printfileslist(entries.none_ex);
 		ft_putendl("");
 
 
