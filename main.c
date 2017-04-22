@@ -113,7 +113,7 @@ int main(int ac, char **av)
 				printfileslist(ent.dirs->files);
 
 			else if ((ac == 4) && (ent.flags & RECURISIVE_LIST))
-				recursiveprint(ent);
+				recursiveprint(ent.dirs->dir_name);
 			else
 			{
 				exit(1);//use recursiveprint on every folder from list
@@ -130,9 +130,9 @@ int main(int ac, char **av)
 			opendir_getnames(&ent.dirs->files, ".", ent.flags);
 			mergesort_files(&ent.dirs->files);
 			if (ent.flags & RECURISIVE_LIST)
-				recursiveprint(ent);
+				recursiveprint(ent.dirs->dir_name);
 			else
-				printfileslist(ent.dirs->files);
+				{}//printfileslist(ent.dirs->files);
 		}
 		return (0);
 	}
