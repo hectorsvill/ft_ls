@@ -100,23 +100,7 @@ int main(int ac, char **av)
 		**	TODO: if ac > 2 not NULL
 		**		  store files and folders in proper list
 		**/
-
-		if (ac > 2)
-		{
-			//collect files
-			av++;
-			addto_list(av, &ent);
-			//sort
-			mergesort_files(&ent.file_list);
-			mergesort_files(&ent.none_ex);
-			print_error_none_ex(ent.none_ex);
-			if ((ac == 4) && (ent.flags & RECURISIVE_LIST))
-				recursiveprint(ent);
-			else if (ac == 4 && ent.dirs != NULL)
-				printfileslist(ent.dirs->files);
-
-		}
-		else if (ac == 2)
+		if (ac == 2)
 		{
 			ent.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&ent.dirs->files, ".", ent.flags);
@@ -126,9 +110,23 @@ int main(int ac, char **av)
 				recursiveprint(ent);
 			else
 				printfileslist(ent.dirs->files);
+		}
+		else if (ac > 2)
+		{
+			av++;
+			//ft_putendl(*av);exit(2);
+			addto_list(av, &ent);
+			mergesort_files(&ent.file_list);
+			mergesort_files(&ent.none_ex);
+			print_error_none_ex(ent.none_ex);
+			if ( (ent.flags & RECURISIVE_LIST))
+				recursiveprint(ent);
+			else if (ac == 4 && ent.dirs != NULL)
+				printfileslist(ent.dirs->files);
 
 
 		}
+
 		return (0);
 	}
 	else
