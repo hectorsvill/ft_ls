@@ -96,6 +96,5 @@ t_flags setfield(char *str_flags);
 /*
 **	recursiveprint.c
 */
-void 	recursiveprint(char *dir_name);
-
+void 	recursiveprint(t_entries ent);
 #endif

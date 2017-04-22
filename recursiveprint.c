@@ -10,7 +10,7 @@ void print_dirnames(t_dirs *head)
 	}
 }
 
-void 	recursiveprint(char *dir_name)//, t_dirs **head)
+void 	rec(char *dir_name)//, t_dirs **head)
 {
 	DIR 			*dir;
 	struct dirent	*sd;
@@ -29,9 +29,15 @@ void 	recursiveprint(char *dir_name)//, t_dirs **head)
 			ft_strcpy(tmp,dir_name);
 			ft_strcat(tmp, "/");
 			ft_strcat(tmp, sd->d_name);
-			recursiveprint(tmp);
+			rec(tmp);
 		}
 	}
 	closedir(dir);
 	return ;
+}
+void 	recursiveprint(t_entries ent)
+{
+	char *rootdir = ent.dirs->dir_name;
+	rec(rootdir);
+
 }
