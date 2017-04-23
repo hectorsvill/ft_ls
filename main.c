@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/18 18:04:33 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/04/23 08:49:54 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int main(int ac, char **av)
 		/**
 		**	When no arguments pressent open current directory
 		**/
-		ent.dirs->dir_name = ".";
- 		opendir_getnames(&ent.dirs->files, ".", ent.flags);
+		ent.dirs->dir_name = ft_strdup(".");
+ 		opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 		mergesort_files(&ent.dirs->files);
 		printfileslist(ent.dirs->files);
 		return (0);
@@ -103,7 +103,7 @@ int main(int ac, char **av)
 		if (ac == 2)
 		{
 			ent.dirs->dir_name = ft_strdup(".");
-			opendir_getnames(&ent.dirs->files, ".", ent.flags);
+			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 			mergesort_files(&ent.dirs->files);
 
 			if (ent.flags & RECURISIVE_LIST)
@@ -119,12 +119,11 @@ int main(int ac, char **av)
 			mergesort_files(&ent.file_list);
 			mergesort_files(&ent.none_ex);
 			print_error_none_ex(ent.none_ex);
-			if ( (ent.flags & RECURISIVE_LIST))
+			printfileslist(ent.file_list);
+			if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
 			else if (ac == 4 && ent.dirs != NULL)
 				printfileslist(ent.dirs->files);
-
-
 		}
 
 		return (0);
@@ -152,20 +151,3 @@ int main(int ac, char **av)
 	}
 	return (0);
 }
-
-
-/*
-		ft_putendl("\nfile_list:");
-		printfileslist(entries.file_list);
-		ft_putendl("");
-
-		ft_putendl("\nnone_ex:");
-		printfileslist(entries.none_ex);
-		ft_putendl("");
-
-
-
-		ft_putendl("\ndir->files:");
-		print_all_dirs(entries.dirs);
-		ft_putendl("");
-*/
