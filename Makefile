@@ -6,7 +6,7 @@
 #    By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/18 18:04:21 by hvillasa          #+#    #+#              #
-#    Updated: 2017/04/18 18:04:22 by hvillasa         ###   ########.fr        #
+#    Updated: 2017/04/23 10:20:03 by n                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC = 	main.c \
 		addto_spec_list.c \
 		valid_flags.c \
 		recursiveprint.c \
+		ls-l.c	\
 
 all: $(NAME) $(SRC)
 

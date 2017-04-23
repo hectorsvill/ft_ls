@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/18 18:04:54 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/04/23 10:30:48 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_files
 {
 	char		*file; //file name
 	short		st_mode;
+	char		fileprotection[10];
 
 	struct s_files	*next;
 }				t_files;
@@ -97,4 +98,10 @@ t_flags setfield(char *str_flags);
 **	recursiveprint.c
 */
 void 	recursiveprint(t_entries ent);
+
+/*
+**	ls-l.c
+*/
+char *fileprotection(short st_mode);
+
 #endif
