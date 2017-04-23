@@ -18,32 +18,6 @@ char *fileprotection(short st_mode)
 	ft_strcat((char*)str, (st_mode & S_IXOTH ? "x" : "-"));
 	return (str);
 }
-
-
-
-/*
-
-int main(int ac, char **av)
-{
-	struct stat sb;
-	char 		*str;
-
-	if(stat(av[1], &sb) < 0)
-		return (0);
-
-
-	ft_putendl(av[1]);
-	str = fileprotection(sb.st_mode);
-
-
-	ft_putendl("File Permission: ");
-	ft_putendl(str);
-
-	return (0);
-}
-*/
-
-
 /*
 
 ➜  ft_ls git:(master) ✗ ls -l
