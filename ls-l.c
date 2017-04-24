@@ -6,16 +6,16 @@ char *fileprotection(short st_mode)
 	char *str;
 
 	str = ft_strnew(10);
-	ft_strcat((char*)str, (S_ISDIR(st_mode) ? "d" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IRUSR ? "r" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IWUSR ? "w" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IXUSR ? "x" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IRGRP ? "r" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IWGRP ? "w" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IXGRP ? "x" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IROTH ? "r" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IWOTH ? "w" : "-"));
-	ft_strcat((char*)str, (st_mode & S_IXOTH ? "x" : "-"));
+	str[0] = (S_ISDIR(st_mode) ? 'd' : '-');
+	str[1] = (st_mode & S_IRUSR ? 'r' : '-');
+	str[2] = (st_mode & S_IWUSR ? 'w' : '-');
+	str[3] = (st_mode & S_IXUSR ? 'x' : '-');
+	str[4] = (st_mode & S_IRGRP ? 'r' : '-');
+	str[5] = (st_mode & S_IWGRP ? 'w' : '-');
+	str[6] = (st_mode & S_IXGRP ? 'x' : '-');
+	str[7] = (st_mode & S_IROTH ? 'r' : '-');
+	str[8] = (st_mode & S_IWOTH ? 'w' : '-');
+	str[9] = (st_mode & S_IXOTH ? 'x' : '-');
 	return (str);
 }
 /*

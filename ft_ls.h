@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/23 10:30:48 by n                ###   ########.fr       */
+/*   Updated: 2017/04/23 13:22:42 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void 	mergesort_files(t_files **headref);
 **	mergesort_dirs.c
 **/
 void 	mergesort_dirs(t_dirs **headref);
-
 /*
 **	addto_spec_list.c
 */
@@ -90,7 +89,6 @@ void 	addto_list(char **av, t_entries *ent);
 /*
 **	valid_flags.c
 */
-
 char 	checkflags(char *cf);
 t_flags setfield(char *str_flags);
 
@@ -98,10 +96,8 @@ t_flags setfield(char *str_flags);
 **	recursiveprint.c
 */
 void 	recursiveprint(t_entries ent);
-
 /*
 **	ls-l.c
 */
 char *fileprotection(short st_mode);
-
 #endif

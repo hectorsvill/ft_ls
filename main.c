@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/23 12:39:47 by n                ###   ########.fr       */
+/*   Updated: 2017/04/23 13:23:30 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 	if (!(dir = opendir(dir_name)))
 		return (0);
 	while ((sd = readdir(dir)) != NULL)
-		//if (ft_strcmp(sd->d_name, ".") && ft_strcmp(sd->d_name, ".."))
 		lstadd_files(files, sd->d_name, flags);
 	closedir(dir);
 	return (1);
