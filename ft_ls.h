@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 08:50:53 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 12:50:23 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_files
 	char		*file;
 	short		mode;
 	long		size;
+	long		nlink;
 	char		fileprotection[10];
 	char		*mtime;
 	struct s_files	*next;
@@ -67,8 +68,8 @@ int 	opendir_getnames(t_files **files, char *dir_name, t_flags flags);
 **	ftls_list.c
 */
 
-void 		print_all_dirs(t_dirs *dir_list);
-void 		printfileslist(t_files *list);
+void 		print_all_dirs(t_dirs *dir_list, t_flags flags);
+void 		printfileslist(t_files *list, t_flags flags);
 
 void 		print_error_none_ex(t_files *none_ex);
 
@@ -102,6 +103,7 @@ void 	recursiveprint(t_entries ent);
 **	ls-l.c
 */
 char *fileprotection(short st_mode);
-char *file_mtime(const time_t *timer);
+char *file_mtime(time_t *timer);
+void printlongformat(t_files file);
 
 #endif

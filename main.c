@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/23 13:23:30 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 12:51:21 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,26 @@
 **	if invalid d irectory then send to entries.none_ex
 **/
 
-void printfileslist(t_files *list)
+void printfileslist(t_files *list, t_flags flags)
 {
 	while (list)
 	{
-		ft_putendl(list->file);
+
+		if (LONG_FORMAT & flags)
+			printlongformat(*list);
+		else
+			ft_putendl(list->file);
 		list = list->next;
 	}
 }
 
-void print_all_dirs(t_dirs *dir_list)
+
+void print_all_dirs(t_dirs *dir_list, t_flags flags)
 {
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
-		printfileslist(dir_list->files);
+		printfileslist(dir_list->files, flags);
 		if (dir_list->next != NULL)
 			write(1, "\n", 1);
 		dir_list = dir_list->next;
@@ -69,7 +74,7 @@ int main(int ac, char **av)
 		ent.dirs->dir_name = ft_strdup(".");
  		opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 		mergesort_files(&ent.dirs->files);
-		printfileslist(ent.dirs->files);
+		printfileslist(ent.dirs->files, ent.flags);
 		return (0);
 	}
 	else
@@ -108,7 +113,7 @@ int main(int ac, char **av)
 			if (ent.flags & RECURISIVE_LIST)
 				recursiveprint(ent);
 			else
-				printfileslist(ent.dirs->files);
+				printfileslist(ent.dirs->files, ent.flags);
 		}
 		else if (ac > 2)
 		{
@@ -118,11 +123,11 @@ int main(int ac, char **av)
 			mergesort_files(&ent.file_list);
 			mergesort_files(&ent.none_ex);
 			print_error_none_ex(ent.none_ex);
-			printfileslist(ent.file_list);
+			printfileslist(ent.file_list, ent.flags);
 			if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
 			else if (ac == 4 && ent.dirs != NULL)
-				printfileslist(ent.dirs->files);
+				printfileslist(ent.dirs->files, ent.flags);
 		}
 
 		return (0);
@@ -145,8 +150,8 @@ int main(int ac, char **av)
 
 		//make this into funtion
 		print_error_none_ex(ent.none_ex);
-		printfileslist(ent.file_list);
-		print_all_dirs(ent.dirs);
+		printfileslist(ent.file_list, ent.flags);
+		print_all_dirs(ent.dirs, ent.flags);
 	}
 	return (0);
 }

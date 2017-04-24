@@ -1,14 +1,28 @@
 #include "ft_ls.h"
-#include <stdio.h>
 
 
-char *file_mtime(const time_t *timer)
+//-rw-rw-r-- 1 n n  3904 Apr 23 08:49 main.c
+
+void printlongformat(t_files file)
 {
-	char *s;
+	ft_printf("%s uid gid %li %li %s %s\n", file.fileprotection,
+		file.nlink, file.size, file.mtime, file.file);
+}
 
-	s = ft_strdup(ctime(timer));
-
-	return (s);
+char *file_mtime(time_t *timer)
+{
+	char *sctime;
+	char *new_stime;
+/**
+**	The last time the file was modified. If the last
+**	modification occurred more than six months in the past,
+**	the date and year are displayed. Otherwise, the time of day is shown.
+**/
+	sctime = ctime(timer);
+	sctime += 4;
+	new_stime = ft_strnew(12);
+	ft_strncpy(new_stime, sctime, 12);
+	return (new_stime);
 }
 
 char *fileprotection(short st_mode)
@@ -16,16 +30,16 @@ char *fileprotection(short st_mode)
 	char *str;
 
 	str = ft_strnew(10);
-	str[0] = (S_ISDIR(st_mode) ? 'd' : '-');
-	str[1] = (st_mode & S_IRUSR ? 'r' : '-');
-	str[2] = (st_mode & S_IWUSR ? 'w' : '-');
-	str[3] = (st_mode & S_IXUSR ? 'x' : '-');
-	str[4] = (st_mode & S_IRGRP ? 'r' : '-');
-	str[5] = (st_mode & S_IWGRP ? 'w' : '-');
-	str[6] = (st_mode & S_IXGRP ? 'x' : '-');
-	str[7] = (st_mode & S_IROTH ? 'r' : '-');
-	str[8] = (st_mode & S_IWOTH ? 'w' : '-');
-	str[9] = (st_mode & S_IXOTH ? 'x' : '-');
+	str[0] = S_ISDIR(st_mode) ? 'd' : '-';
+	str[1] = st_mode & S_IRUSR ? 'r' : '-';
+	str[2] = st_mode & S_IWUSR ? 'w' : '-';
+	str[3] = st_mode & S_IXUSR ? 'x' : '-';
+	str[4] = st_mode & S_IRGRP ? 'r' : '-';
+	str[5] = st_mode & S_IWGRP ? 'w' : '-';
+	str[6] = st_mode & S_IXGRP ? 'x' : '-';
+	str[7] = st_mode & S_IROTH ? 'r' : '-';
+	str[8] = st_mode & S_IWOTH ? 'w' : '-';
+	str[9] = st_mode & S_IXOTH ? 'x' : '-';
 	return (str);
 }
 /*
