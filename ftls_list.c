@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:44 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/23 13:51:20 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 08:07:50 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	{
 		ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
 		ft_printf("long format:%s\n", t_new->fileprotection);
+
+
 		ft_printf("ownership: uid:%ld gid:%ld\n", (long)sb.st_uid, (long)sb.st_gid);
+		ft_printf("file size in bytes: %lli\n", (long long)sb.st_size);
+
 		exit(1);
 	}
 

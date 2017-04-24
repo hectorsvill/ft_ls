@@ -20,6 +20,32 @@ char *fileprotection(short st_mode)
 }
 /*
 
+
+-rw-------   1 bshotts  bshotts       576 Apr 17  1998 weather.txt
+drwxr-xr-x   6 bshotts  bshotts      1024 Oct  9  1999 web_page
+-rw-rw-r--   1 bshotts  bshotts    276480 Feb 11 20:41 web_site.tar
+-rw-------   1 bshotts  bshotts      5743 Dec 16  1998 xmas_file.txt
+
+----------     -------  -------  -------- ------------ -------------
+    |             |        |         |         |             |
+    |             |        |         |         |         File Name
+    |             |        |         |         |
+    |             |        |         |         +---  Modification Time
+    |             |        |         |
+    |             |        |         +-------------   Size (in bytes)
+    |             |        |
+    |             |        +-----------------------        Group
+    |             |
+    |             +--------------------------------        Owner
+    |
+    +----------------------------------------------   File Permissions
+
+
+
+
+
+
+
 ➜  ft_ls git:(master) ✗ ls -l
 total 108
 -rw-rw-r-- 1 n n  1402 Apr 22 19:05 addto_spec_list.c
