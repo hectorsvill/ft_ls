@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/23 13:22:42 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 08:12:39 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct	s_files
 	char		*file; //file name
 	short		st_mode;
 	char		fileprotection[10];
-
+	long		st_size;
 	struct s_files	*next;
 }				t_files;
 

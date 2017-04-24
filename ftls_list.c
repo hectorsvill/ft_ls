@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:44 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 08:07:50 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 08:13:37 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 
 	t_new->file = ft_strdup(file_name);
 	t_new->st_mode = sb.st_mode;
-
+	t_new->st_size = sb.st_size;
+	
 	if (LONG_FORMAT & flags)
 	{
 		ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
@@ -61,6 +62,7 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 
 
 		ft_printf("ownership: uid:%ld gid:%ld\n", (long)sb.st_uid, (long)sb.st_gid);
+
 		ft_printf("file size in bytes: %lli\n", (long long)sb.st_size);
 
 		exit(1);
@@ -80,6 +82,7 @@ t_entries entries_init(void)
 	ent.dirs->files = (t_files*)malloc(sizeof(t_files));
 	//init dir->files
 	ent.dirs->files->st_mode = 0;
+	ent.dirs->files->st_size = 0;
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
 	return (ent);
