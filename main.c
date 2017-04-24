@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 14:15:44 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 14:19:08 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,6 @@ int main(int ac, char **av)
 			ent.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 			mergesort_files(&ent.dirs->files);
-
-			if (!(ent.flags & LONG_FORMAT))
-			{
-				ft_putendl("fuxk odd\n");
-				exit(1);
-			}
 			if (ent.flags & RECURISIVE_LIST)
 				recursiveprint(ent);
 			else
