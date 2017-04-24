@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 08:12:39 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 08:34:22 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <dirent.h>
+# include <time.h>
 
 typedef enum s_flags
 {
@@ -31,8 +32,10 @@ typedef struct	s_files
 {
 	char		*file; //file name
 	short		st_mode;
-	char		fileprotection[10];
 	long		st_size;
+	char		fileprotection[10];
+
+//	char		*st_mtime;
 	struct s_files	*next;
 }				t_files;
 
