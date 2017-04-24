@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 08:34:22 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 08:50:53 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ typedef enum s_flags
 
 typedef struct	s_files
 {
-	char		*file; //file name
-	short		st_mode;
-	long		st_size;
+	char		*file;
+	short		mode;
+	long		size;
 	char		fileprotection[10];
-
-//	char		*st_mtime;
+	char		*mtime;
 	struct s_files	*next;
 }				t_files;
 
@@ -103,4 +102,6 @@ void 	recursiveprint(t_entries ent);
 **	ls-l.c
 */
 char *fileprotection(short st_mode);
+char *file_mtime(const time_t *timer);
+
 #endif
