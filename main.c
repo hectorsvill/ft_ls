@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:32 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 12:51:21 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 14:15:44 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void printfileslist(t_files *list, t_flags flags)
 
 void print_all_dirs(t_dirs *dir_list, t_flags flags)
 {
+
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
@@ -110,6 +111,11 @@ int main(int ac, char **av)
 			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 			mergesort_files(&ent.dirs->files);
 
+			if (!(ent.flags & LONG_FORMAT))
+			{
+				ft_putendl("fuxk odd\n");
+				exit(1);
+			}
 			if (ent.flags & RECURISIVE_LIST)
 				recursiveprint(ent);
 			else
@@ -126,10 +132,9 @@ int main(int ac, char **av)
 			printfileslist(ent.file_list, ent.flags);
 			if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
-			else if (ac == 4 && ent.dirs != NULL)
+			else if (ent.dirs != NULL)
 				printfileslist(ent.dirs->files, ent.flags);
 		}
-
 		return (0);
 	}
 	else

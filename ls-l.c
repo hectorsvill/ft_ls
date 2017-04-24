@@ -5,7 +5,8 @@
 
 void printlongformat(t_files file)
 {
-	ft_printf("%s uid gid %li %li %s %s\n", file.fileprotection,
+
+	ft_printf("%s %li uid gid %li %s %s\n", file.fileprotection,
 		file.nlink, file.size, file.mtime, file.file);
 }
 

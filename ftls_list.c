@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:44 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 12:47:32 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 14:08:11 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 	t_new->dir_name = ft_strdup(dir_name);
 	opendir_getnames(&t_new->files, dir_name, flags);
 	mergesort_files(&t_new->files);
+
 	t_new->next = *head;
 	*head = t_new;
 }
@@ -57,22 +58,20 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	t_new->mtime = file_mtime(&sb.st_mtime);
 	t_new->nlink = sb.st_nlink;
 	ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
-/*
-	if (LONG_FORMAT & flags)
-	{
-		ft_printf("long format:%s\n", t_new->fileprotection);
-
-
-		ft_printf("ownership: uid:%ld gid:%ld\n", (long)sb.st_uid, (long)sb.st_gid);
-
-		ft_printf("file size in bytes: %lli\n", (long long)sb.st_size);
-		ft_printf("st_mtime:%s\nst_nlink: %li\n", t_new->mtime, t_new->nlink);
-		exit(1);
-	}
-*/
-
 	t_new->next = *head;
 	*head = t_new;
+}
+
+t_lmaxlen *lmaxlen_init(void)
+{
+	t_lmaxlen *lm;
+
+	lm = (t_lmaxlen*)malloc(sizeof(lm));
+	lm->nbr_nlink = 0;
+	lm->nbr_size = 0;
+	lm->str_uid = 0;
+	lm->str_gid = 0;
+	return (lm);
 }
 
 t_entries entries_init(void)
