@@ -39,24 +39,10 @@ typedef struct	s_files
 	struct s_files	*next;
 }				t_files;
 
-
-
-typedef struct s_lmaxlen
-{
-//-rw-rw-r-- 1 n n  3904 Apr 23 08:49 main.c
-
-	size_t	nbr_nlink;
-	size_t	nbr_size;
-	size_t	str_uid;
-	size_t	str_gid;
-}				t_lmaxlen;
-
-
 typedef struct	s_dirs
 {
 	char			*dir_name;		//name of specific dir
 	t_files			*files; //files of this dir_name
-	t_lmaxlen		*lm;
 
 	struct s_dirs	*next;
 }				t_dirs;
@@ -87,7 +73,6 @@ void 		print_error_none_ex(t_files *none_ex);
 void 		lstadd_files(t_files **head,char *file_name, t_flags flags);
 void 		lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags);
 t_entries	entries_init(void);
-t_lmaxlen 	*lmaxlen_init(void);
 /**
 **	mergesort_files.c
 **/

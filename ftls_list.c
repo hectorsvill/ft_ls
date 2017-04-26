@@ -62,18 +62,6 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	*head = t_new;
 }
 
-t_lmaxlen *lmaxlen_init(void)
-{
-	t_lmaxlen *lm;
-
-	lm = (t_lmaxlen*)malloc(sizeof(lm));
-	lm->nbr_nlink = 0;
-	lm->nbr_size = 0;
-	lm->str_uid = 0;
-	lm->str_gid = 0;
-	return (lm);
-}
-
 t_entries entries_init(void)
 {
 	t_entries ent;
@@ -82,9 +70,7 @@ t_entries entries_init(void)
 	ent.dirs = (t_dirs*)malloc(sizeof(t_dirs));
 	ent.dirs->files = (t_files*)malloc(sizeof(t_files));
 	//init dir->files
-	ent.dirs->files->mode = 0;
-	ent.dirs->files->size = 0;
-	ent.dirs->files->nlink = 0;
+
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
 	return (ent);

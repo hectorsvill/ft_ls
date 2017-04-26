@@ -26,7 +26,7 @@ SRC = 	main.c \
 		addto_spec_list.c \
 		valid_flags.c \
 		recursiveprint.c \
-		ls-l.c	\
+		lsl.c	\
 
 all: $(NAME) $(SRC)
 

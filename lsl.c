@@ -29,7 +29,7 @@ char *file_mtime(time_t *timer)
 char *fileprotection(short st_mode)
 {
 	char *str;
-
+ 
 	str = ft_strnew(10);
 	str[0] = S_ISDIR(st_mode) ? 'd' : '-';
 	str[1] = st_mode & S_IRUSR ? 'r' : '-';

@@ -12,17 +12,10 @@
 
 #include "ft_ls.h"
 
-/**
-**	make this function return 0
-**	if dir_name is invalid directory
-**	if invalid d irectory then send to entries.none_ex
-**/
-
 void printfileslist(t_files *list, t_flags flags)
 {
 	while (list)
 	{
-
 		if (LONG_FORMAT & flags)
 			printlongformat(*list);
 		else
@@ -34,7 +27,6 @@ void printfileslist(t_files *list, t_flags flags)
 
 void print_all_dirs(t_dirs *dir_list, t_flags flags)
 {
-
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
@@ -129,7 +121,7 @@ int main(int ac, char **av)
 			else if (ent.dirs != NULL)
 				printfileslist(ent.dirs->files, ent.flags);
 		}
-		return (0);
+
 	}
 	else
 	{
@@ -138,19 +130,27 @@ int main(int ac, char **av)
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
-		//add to list
-		addto_list(av, &ent);
-		//sort
-		mergesort_dirs(&ent.dirs);
-		if (ent.dirs != NULL)
+		if (ac == 2)
+		{
+			ent.dirs->dir_name = ft_strdup(*av);
+			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 			mergesort_files(&ent.dirs->files);
-		mergesort_files(&ent.file_list);
-		mergesort_files(&ent.none_ex);
-
-		//make this into funtion
-		print_error_none_ex(ent.none_ex);
-		printfileslist(ent.file_list, ent.flags);
-		print_all_dirs(ent.dirs, ent.flags);
+			printfileslist(ent.dirs->files, ent.flags);
+		}
+		else
+		{
+			addto_list(av, &ent);
+			mergesort_dirs(&ent.dirs);
+			if (ent.dirs != NULL)
+				mergesort_files(&ent.dirs->files);
+			mergesort_files(&ent.file_list);
+			mergesort_files(&ent.none_ex);
+			print_error_none_ex(ent.none_ex);
+			printfileslist(ent.file_list, ent.flags);
+			if (ent.file_list != NULL)
+				ft_putchar('\n');
+			print_all_dirs(ent.dirs, ent.flags);
+		}
 	}
 	return (0);
 }
