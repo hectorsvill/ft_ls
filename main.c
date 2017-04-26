@@ -30,6 +30,8 @@ void print_all_dirs(t_dirs *dir_list, t_flags flags)
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
+		opendir_getnames(&dir_list->files, dir_list->dir_name, flags);
+		mergesort_files(&dir_list->files);
 		printfileslist(dir_list->files, flags);
 		if (dir_list->next != NULL)
 			write(1, "\n", 1);
@@ -44,8 +46,13 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 	struct dirent   *sd;
 
 	*files = NULL;
+
 	if (!(dir = opendir(dir_name)))
+	{
+		ft_printf("ft_ls: %s: ", dir_name);
+		perror("");
 		return (0);
+	}
 	while ((sd = readdir(dir)) != NULL)
 		lstadd_files(files, sd->d_name, flags);
 	closedir(dir);
@@ -77,11 +84,12 @@ int main(int ac, char **av)
 	{
 		/**
 		**	TODO: Only enter when Flags are pressent.
-		*/
+		**/
 		if (!ft_strcmp(*av, "-")){
-			ft_putendl("ls: -: No such file or directory");
+			ft_putendl("ft_ls: -: No such file or directory");
 			return (0);
 		}
+
 		/**
 		**	TODO: Store flag information into t_flags.
 		**/
@@ -90,9 +98,13 @@ int main(int ac, char **av)
 			ent.flags = setfield(*av);
 		else
 		{
-			ft_printf("ls: illegal option -- %c\n", flagcheck);
-			ft_putendl("usage: ls [-lRart] [file ...]");
+			if (flagcheck != '1')
+			{
+				ft_printf("ft_ls: illegal option -- %c\n", flagcheck);
+				ft_putendl("usage: ft_ls [-lRart] [file ...]");
+			}
 		}
+
 		/**
 		**	TODO: if ac > 2 not NULL
 		**		  store files and folders in proper list
@@ -102,9 +114,9 @@ int main(int ac, char **av)
 			ent.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
 			mergesort_files(&ent.dirs->files);
-			if (ent.flags & RECURISIVE_LIST)
-				recursiveprint(ent);
-			else
+			//if (ent.flags & RECURISIVE_LIST)
+			//	recursiveprint(ent);
+			//else
 				printfileslist(ent.dirs->files, ent.flags);
 		}
 		else if (ac > 2)
@@ -116,10 +128,12 @@ int main(int ac, char **av)
 			mergesort_files(&ent.none_ex);
 			print_error_none_ex(ent.none_ex);
 			printfileslist(ent.file_list, ent.flags);
-			if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
+			print_all_dirs(ent.dirs, ent.flags);
+		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
 			else if (ent.dirs != NULL)
 				printfileslist(ent.dirs->files, ent.flags);
+		*/
 		}
 
 	}
@@ -132,8 +146,6 @@ int main(int ac, char **av)
 		**/
 		addto_list(av, &ent);
 		mergesort_dirs(&ent.dirs);
-		if (ent.dirs != NULL)
-			mergesort_files(&ent.dirs->files);
 		mergesort_files(&ent.file_list);
 		mergesort_files(&ent.none_ex);
 		print_error_none_ex(ent.none_ex);
@@ -143,7 +155,11 @@ int main(int ac, char **av)
 			if (ent.file_list != NULL)
 				ft_putchar('\n');
 			if (ac == 2)
+			{
+				opendir_getnames(&ent.dirs->files, *av, ent.flags);
+				mergesort_files(&ent.dirs->files);
 				printfileslist(ent.dirs->files, ent.flags);
+			}
 			else
 				print_all_dirs(ent.dirs, ent.flags);
 		}

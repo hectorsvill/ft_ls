@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-void 	rec(char *dir_name, t_dirs **head, t_flags flags)
+void 	rec(char *dir_name, t_dirs **head)
 {
 	struct stat		sb;
 	DIR 			*dir;
@@ -22,9 +22,9 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 			ft_strcat(tmp, sd->d_name);
 			stat(tmp, &sb);
 			if (S_ISDIR(sb.st_mode))
-				lstadd_dirs(head, tmp, flags);
+				lstadd_dirs(head, tmp);
 
-			rec(tmp, head, flags);
+			rec(tmp, head);
 		}
 	}
 	closedir(dir);
@@ -36,7 +36,7 @@ void 	recursiveprint(t_entries ent)
 	char *rootdir;
 
 	rootdir = ent.dirs->dir_name;
-	rec(rootdir, &ent.dirs, ent.flags);
+	rec(rootdir, &ent.dirs);
 	mergesort_dirs(&ent.dirs);
 	print_all_dirs(ent.dirs, ent.flags);
 }

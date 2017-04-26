@@ -20,7 +20,7 @@ void print_error_none_ex(t_files *none_ex)
 		if (!ft_strcmp(none_ex->file, "-1"))
 			;
 		else
-			ft_printf("ls: %s: No such file or directory\n", none_ex->file);
+			ft_printf("ft_ls: %s: No such file or directory\n", none_ex->file);
 		none_ex = none_ex->next;
 	}
 }
@@ -30,15 +30,12 @@ void print_error_none_ex(t_files *none_ex)
 **	Add function to open directory and set
 **	t_files within t_dirs
 **/
-void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
+void lstadd_dirs(t_dirs **head, char *dir_name)
 {
 	t_dirs *t_new;
 
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
-	opendir_getnames(&t_new->files, dir_name, flags);
-	mergesort_files(&t_new->files);
-
 	t_new->next = *head;
 	*head = t_new;
 }

@@ -71,7 +71,7 @@ void 		printfileslist(t_files *list, t_flags flags);
 void 		print_error_none_ex(t_files *none_ex);
 
 void 		lstadd_files(t_files **head,char *file_name, t_flags flags);
-void 		lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags);
+void 		lstadd_dirs(t_dirs **head, char *dir_name);
 t_entries	entries_init(void);
 /**
 **	mergesort_files.c

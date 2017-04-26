@@ -29,7 +29,7 @@ void addto_list(char **av, t_entries *ent)
 		else if (S_ISREG(sb.st_mode))
 			lstadd_files(&ent->file_list, *av, ent->flags);
 		else if(S_ISDIR(sb.st_mode))
-			lstadd_dirs(&ent->dirs, *av, ent->flags);
+			lstadd_dirs(&ent->dirs, *av);
 		av++;
 	}
 }
