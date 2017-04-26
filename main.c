@@ -130,27 +130,20 @@ int main(int ac, char **av)
 		**	check if file_list is valid else if not valid insert into none_ex
 		**	file names are now in file_list and none existent in none_ex
 		**/
-		if (ac == 2)
-		{
-			ent.dirs->dir_name = ft_strdup(*av);
-			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-			mergesort_files(&ent.dirs->files);
+		addto_list(av, &ent);
+		mergesort_dirs(&ent.dirs);
+		if (ent.dirs != NULL)
+		mergesort_files(&ent.dirs->files);
+		mergesort_files(&ent.file_list);
+		mergesort_files(&ent.none_ex);
+		print_error_none_ex(ent.none_ex);
+		printfileslist(ent.file_list, ent.flags);
+		if (ent.file_list != NULL)
+		ft_putchar('\n');
+		if (ent.dirs->next == NULL)
 			printfileslist(ent.dirs->files, ent.flags);
-		}
 		else
-		{
-			addto_list(av, &ent);
-			mergesort_dirs(&ent.dirs);
-			if (ent.dirs != NULL)
-				mergesort_files(&ent.dirs->files);
-			mergesort_files(&ent.file_list);
-			mergesort_files(&ent.none_ex);
-			print_error_none_ex(ent.none_ex);
-			printfileslist(ent.file_list, ent.flags);
-			if (ent.file_list != NULL)
-				ft_putchar('\n');
 			print_all_dirs(ent.dirs, ent.flags);
-		}
 	}
 	return (0);
 }
