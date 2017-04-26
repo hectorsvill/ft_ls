@@ -17,7 +17,10 @@ void print_error_none_ex(t_files *none_ex)
 {
 	while (none_ex)
 	{
-		ft_printf("ls: %s: No such file or directory\n", none_ex->file);
+		if (!ft_strcmp(none_ex->file, "-1"))
+			;
+		else
+			ft_printf("ls: %s: No such file or directory\n", none_ex->file);
 		none_ex = none_ex->next;
 	}
 }
@@ -30,7 +33,6 @@ void print_error_none_ex(t_files *none_ex)
 void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 {
 	t_dirs *t_new;
-
 
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
