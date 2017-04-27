@@ -76,7 +76,6 @@ t_entries entries_init(void)
 	//init dir->files
 	ent.dirs->files->uid = NULL;
 	ent.dirs->files->gid = NULL;
-
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
 	return (ent);

@@ -34,10 +34,10 @@ typedef struct	s_files
 	char		fileprotection[10];
 	char		*uid;
 	char		*gid;
+	char		*mtime;
 	short		mode;
 	long		size;
 	long		nlink;
-	char		*mtime;
 	struct s_files	*next;
 }				t_files;
 
