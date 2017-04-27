@@ -6,10 +6,8 @@
 
 void printlongformat(t_files file)
 {
-
 	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
 		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
-
 }
 
 int	gettotalblocks(t_files *files)
@@ -19,9 +17,11 @@ int	gettotalblocks(t_files *files)
 	total = 0;
 	while (files)
 	{
+//		ft_printf("%i\n", files->blocks);
 		total += files->blocks;
 		files = files->next;
 	}
+//	ft_printf("total = %i\n", total);exit(1);
 	return (total);
 }
 
