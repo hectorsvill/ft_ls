@@ -82,17 +82,6 @@ int main(int ac, char **av)
 
 	if (**av == '-')
 	{
-		/**
-		**	TODO: Only enter when Flags are pressent.
-		**/
-		if (!ft_strcmp(*av, "-")){
-			ft_putendl("ft_ls: -: No such file or directory");
-			return (0);
-		}
-
-		/**
-		**	TODO: Store flag information into t_flags.
-		**/
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
 			ent.flags = setfield(*av);
@@ -105,7 +94,6 @@ int main(int ac, char **av)
 				exit(1);
 			}
 		}
-
 		/**
 		**	TODO: if ac > 2 not NULL
 		**		  store files and folders in proper list
