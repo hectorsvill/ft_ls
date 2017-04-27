@@ -45,7 +45,7 @@ static char checkflag(char cf)
 {
 	char *flags;
 
-	flags = ft_strndup("lRart", 5);
+	flags = ft_strndup("1lRart", 5);
 	while (*flags)
 	{
 		if (cf == *flags)
