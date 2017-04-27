@@ -31,10 +31,12 @@ typedef enum s_flags
 typedef struct	s_files
 {
 	char		*file;
+	char		fileprotection[10];
+	char		*uid;
+	char		*gid;
 	short		mode;
 	long		size;
 	long		nlink;
-	char		fileprotection[10];
 	char		*mtime;
 	struct s_files	*next;
 }				t_files;
@@ -101,5 +103,6 @@ void 	recursiveprint(t_entries ent);
 char *fileprotection(short st_mode);
 char *file_mtime(time_t *timer);
 void printlongformat(t_files file);
-
+char	*get_uid(uid_t sb_uid);
+char	*get_gid(gid_t sb_gid);
 #endif

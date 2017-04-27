@@ -1,4 +1,8 @@
 #include "ft_ls.h"
+#include <pwd.h>
+#include <uuid/uuid.h>
+#include <grp.h>
+#include <sys/types.h>
 
 
 //-rw-rw-r-- 1 n n  3904 Apr 23 08:49 main.c
@@ -6,8 +10,8 @@
 void printlongformat(t_files file)
 {
 
-	ft_printf("%s %li uid gid %li %s %s\n", file.fileprotection,
-		file.nlink, file.size, file.mtime, file.file);
+	ft_printf("%s %li %s %s %li %s %s\n", file.fileprotection,
+		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
 }
 
 char *file_mtime(time_t *timer)
@@ -26,10 +30,34 @@ char *file_mtime(time_t *timer)
 	return (new_stime);
 }
 
+//get uid and gid
+char	*get_uid(uid_t sb_uid)
+{
+	struct passwd	*pwd;
+	char			*str;
+
+	pwd = getpwuid(sb_uid);
+	str = ft_strdup(pwd->pw_name);
+	//ft_putendl(str);//exit(1);
+	return (str);
+}
+char	*get_gid(gid_t sb_gid)
+{
+	struct group	*grp;
+	char			*str;
+
+	grp = getgrgid(sb_gid);
+	str = ft_strdup(grp->gr_name);
+	//ft_putendl(str);exit(2);
+	return (str);
+}
+
+
+
 char *fileprotection(short st_mode)
 {
 	char *str;
- 
+
 	str = ft_strnew(10);
 	str[0] = S_ISDIR(st_mode) ? 'd' : '-';
 	str[1] = st_mode & S_IRUSR ? 'r' : '-';

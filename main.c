@@ -114,18 +114,20 @@ int main(int ac, char **av)
 			mergesort_dirs(&ent.dirs);
 			print_error_none_ex(ent.none_ex);
 			printfileslist(ent.file_list, ent.flags);
-			if (ent.file_list != NULL)
-				ft_putchar('\n');
-			if (ent.dirs->next == NULL)
+
+			if (ent.dirs != NULL)
 			{
-				opendir_getnames(&ent.dirs->files, *av, ent.flags);
-				mergesort_files(&ent.dirs->files);
-				printfileslist(ent.dirs->files, ent.flags);
+				if (ent.file_list != NULL)
+					ft_putchar('\n');
+				if (ent.dirs->next == NULL)
+				{
+					opendir_getnames(&ent.dirs->files, *av, ent.flags);
+					mergesort_files(&ent.dirs->files);
+					printfileslist(ent.dirs->files, ent.flags);
+				}
+				else
+					print_all_dirs(ent.dirs, ent.flags);
 			}
-			else
-				print_all_dirs(ent.dirs, ent.flags);
-
-
 		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
 			else if (ent.dirs != NULL)

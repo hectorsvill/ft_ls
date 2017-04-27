@@ -60,6 +60,8 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	t_new->mtime = file_mtime(&sb.st_mtime);
 	t_new->nlink = sb.st_nlink;
 	ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
+	t_new->uid = get_uid(sb.st_uid);
+	t_new->gid = get_gid(sb.st_gid);
 	t_new->next = *head;
 	*head = t_new;
 }
@@ -72,6 +74,8 @@ t_entries entries_init(void)
 	ent.dirs = (t_dirs*)malloc(sizeof(t_dirs));
 	ent.dirs->files = (t_files*)malloc(sizeof(t_files));
 	//init dir->files
+	ent.dirs->files->uid = NULL;
+	ent.dirs->files->gid = NULL;
 
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
