@@ -24,7 +24,9 @@ void addto_list(char **av, t_entries *ent)
 	ent->none_ex = NULL;
 	while (*av)
 	{
-		if ((stat(*av, &sb)) == -1)
+		if (!ft_strcmp(*av, "--"))
+			;
+		else if ((stat(*av, &sb)) == -1)
 			lstadd_files(&ent->none_ex, *av, ent->flags);
 		else if (S_ISREG(sb.st_mode))
 			lstadd_files(&ent->file_list, *av, ent->flags);

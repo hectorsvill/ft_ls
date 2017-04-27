@@ -94,10 +94,6 @@ int main(int ac, char **av)
 				exit(1);
 			}
 		}
-		/**
-		**	TODO: if ac > 2 not NULL
-		**		  store files and folders in proper list
-		**/
 		if (ac == 2)
 		{
 			ent.dirs->dir_name = ft_strdup(".");
