@@ -19,6 +19,7 @@ void addto_list(char **av, t_entries *ent)
 {
 	struct stat sb;
 
+
 	ent->dirs = NULL;
 	ent->file_list = NULL;
 	ent->none_ex = NULL;
