@@ -102,6 +102,7 @@ int main(int ac, char **av)
 			{
 				ft_printf("ft_ls: illegal option -- %c\n", flagcheck);
 				ft_putendl("usage: ft_ls [-lRart] [file ...]");
+				exit(1);
 			}
 		}
 
@@ -126,8 +127,11 @@ int main(int ac, char **av)
 			addto_list(av, &ent);
 			mergesort_files(&ent.file_list);
 			mergesort_files(&ent.none_ex);
+			mergesort_dirs(&ent.dirs);
 			print_error_none_ex(ent.none_ex);
 			printfileslist(ent.file_list, ent.flags);
+			if (ent.file_list != NULL)
+				ft_putchar('\n');
 			print_all_dirs(ent.dirs, ent.flags);
 		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
