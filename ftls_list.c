@@ -62,6 +62,10 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
 	t_new->uid = get_uid(sb.st_uid);
 	t_new->gid = get_gid(sb.st_gid);
+	t_new->blocks = (int)sb.st_blocks;
+
+	//printf("st_blocks: %li\n", t_new->blocks);//exit(2);
+
 	t_new->next = *head;
 	*head = t_new;
 }

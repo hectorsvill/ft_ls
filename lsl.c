@@ -7,8 +7,22 @@
 void printlongformat(t_files file)
 {
 
-	ft_printf("%s %li %s %s %li %s %s\n", file.fileprotection,
+	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
 		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
+
+}
+
+int	gettotalblocks(t_files *files)
+{
+	int total;
+
+	total = 0;
+	while (files)
+	{
+		total += files->blocks;
+		files = files->next;
+	}
+	return (total);
 }
 
 char		*file_mtime(time_t *timer)

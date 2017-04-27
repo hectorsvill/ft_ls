@@ -32,6 +32,8 @@ void print_all_dirs(t_dirs *dir_list, t_flags flags)
 		ft_printf("%s:\n", dir_list->dir_name);
 		opendir_getnames(&dir_list->files, dir_list->dir_name, flags);
 		mergesort_files(&dir_list->files);
+		if (flags & LONG_FORMAT)
+			ft_printf("total:  %i\n", gettotalblocks(dir_list->files));
 		printfileslist(dir_list->files, flags);
 		if (dir_list->next != NULL)
 			write(1, "\n", 1);
@@ -102,7 +104,9 @@ int main(int ac, char **av)
 			//if (ent.flags & RECURISIVE_LIST)
 			//	recursiveprint(ent);
 			//else
-				printfileslist(ent.dirs->files, ent.flags);
+			if (ent.flags & LONG_FORMAT)
+				ft_printf("total:  %i\n", gettotalblocks(ent.dirs->files));
+			printfileslist(ent.dirs->files, ent.flags);
 		}
 		else if (ac > 2)
 		{

@@ -38,6 +38,7 @@ typedef struct	s_files
 	short		mode;
 	long		size;
 	long		nlink;
+	int			blocks;
 	struct s_files	*next;
 }				t_files;
 
@@ -45,7 +46,6 @@ typedef struct	s_dirs
 {
 	char			*dir_name;		//name of specific dir
 	t_files			*files; //files of this dir_name
-
 	struct s_dirs	*next;
 }				t_dirs;
 
@@ -100,9 +100,12 @@ void 	recursiveprint(t_entries ent);
 /*
 **	ls-l.c
 */
-char *fileprotection(short st_mode);
-char *file_mtime(time_t *timer);
-void printlongformat(t_files file);
+
+int		gettotalblocks(t_files *files);
+char	*fileprotection(short st_mode);
+char	*file_mtime(time_t *timer);
+void 	printlongformat(t_files file);
 char	*get_uid(uid_t sb_uid);
 char	*get_gid(gid_t sb_gid);
+
 #endif
