@@ -116,7 +116,16 @@ int main(int ac, char **av)
 			printfileslist(ent.file_list, ent.flags);
 			if (ent.file_list != NULL)
 				ft_putchar('\n');
-			print_all_dirs(ent.dirs, ent.flags);
+			if (ent.dirs->next == NULL)
+			{
+				opendir_getnames(&ent.dirs->files, *av, ent.flags);
+				mergesort_files(&ent.dirs->files);
+				printfileslist(ent.dirs->files, ent.flags);
+			}
+			else
+				print_all_dirs(ent.dirs, ent.flags);
+
+
 		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
 			else if (ent.dirs != NULL)
