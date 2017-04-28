@@ -34,7 +34,16 @@ void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int siz
 	writeformatsp(sizemax - len);
 	ft_printf("%li ", file.size);
 	ft_printf("%s ", file.mtime);
-	ft_putendl(file.file);
+	if (S_ISLNK(file.mode))
+	{
+		ft_putstr(file.file);
+		ft_putstr(" -> ");
+		ft_putendl(file.lnklocstr);
+	}
+	else
+		ft_putendl(file.file);
+
+
 //	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
 //		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
 }

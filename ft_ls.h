@@ -6,7 +6,7 @@
 /*   By: hvillasa <hvillasa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 18:04:53 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/04/24 13:53:53 by n                ###   ########.fr       */
+/*   Updated: 2017/04/24 13:53:5«3 by n                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_files
 	char		*uid;
 	char		*gid;
 	char		*mtime;
+	char		*lnklocstr;
 	short		mode;
 	long		size;
 	long		nlink;

@@ -38,11 +38,11 @@ void lstadd_dirs(t_dirs **head, char *dir_name)
 void lstadd_files(t_files **head, char *file_name, t_flags flags)
 {
 	t_files		*t_new;
-	char		*linkname;
+	char		*lnklocstr;
 	struct stat	sb;
 
 
-	linkname = NULL;
+	lnklocstr = NULL;
 	if(!(flags & ALL_DIRS) && *file_name == '.')
 	{
 		if (!ft_strncmp(file_name, "../", 3))
@@ -53,6 +53,12 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	lstat(file_name, &sb);
 	t_new = (t_files*)malloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
+	if (S_ISLNK(sb.st_mode))
+	{
+		lnklocstr = (char*)malloc(sb.st_size + 1);
+		readlink(file_name, lnklocstr, sb.st_size);
+		t_new->lnklocstr = ft_strdup(lnklocstr);
+	}
 	t_new->mode = (short)sb.st_mode;
 	t_new->size = (long)sb.st_size;
 	t_new->mtime = file_mtime(&sb.st_mtime);
@@ -61,15 +67,6 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	t_new->uid = get_uid(sb.st_uid);
 	t_new->gid = get_gid(sb.st_gid);
 	t_new->blocks = (int)sb.st_blocks;
-	if (S_ISLNK(sb.st_mode))
-	{
-		linkname = (char*)malloc(sb.st_size + 1);
-		readlink(file_name, linkname, sb.st_size);
-		ft_printf("linkname:%s\n", linkname);
-		exit(1);
-	}
-
-
 	//printf("st_blocks: %li\n", t_new->blocks);//exit(2);
 
 	t_new->next = *head;
@@ -86,6 +83,7 @@ t_entries entries_init(void)
 	//init dir->files
 	ent.dirs->files->uid = NULL;
 	ent.dirs->files->gid = NULL;
+	ent.dirs->files->lnklocstr = NULL;
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
 	return (ent);
