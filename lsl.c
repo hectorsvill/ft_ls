@@ -4,10 +4,41 @@
 #include <uuid/uuid.h>
 #include <sys/types.h>
 
-void printlongformat(t_files file)
+
+
+
+void writeformatsp(int len)
 {
-	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
-		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
+	while (len)
+	{
+		ft_putchar(' ');
+		len--;
+	}
+}
+
+void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax)
+{
+
+	ft_printf("%s  ", file.fileprotection);
+
+	writeformatsp(nlinkmax - ft_intmax_tlen((intmax_t)file.nlink));
+	ft_printf("%i ", file.nlink);
+
+	ft_printf("%s  ", file.uid);
+	writeformatsp(uidmax - (int)ft_strlen(file.uid));
+
+	ft_printf("%s  ", file.gid);
+	writeformatsp(gidmax - (int)ft_strlen(file.gid));
+
+	writeformatsp(sizemax - ft_intmax_tlen((intmax_t)file.size));
+	ft_printf("%li ", file.size);
+
+	ft_printf("%s ", file.mtime);
+
+	ft_putendl(file.file);
+
+//	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
+//		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
 }
 
 int	gettotalblocks(t_files *files)

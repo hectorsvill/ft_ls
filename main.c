@@ -15,8 +15,8 @@
 /*
 ➜  ft_ls git:(master) ✗ ls -l
 total 144
--rw-r--r--  1 hvillasa  august   1316 Apr 25 19:30 Makefile
--rw-r--r--  1 hvillasa  august   1431 Apr 26 18:10 addto_spec_list.c
+-rw-r--r--  1 hvillasa  august    764 Apr 26 13:15 recursiveprint.c
+-rw-r--r--  1 hvillasa  august   1792 Apr 26 23:55 valid_flags.c
 */
 
 
@@ -59,12 +59,12 @@ void printfileslist(t_files *list, t_flags flags)
 		getmax_nbr(list, &gidmax, 'g');
 	}
 
-	ft_printf("n:%i s:%i u:%i g:%i\n", nlinkmax, sizemax, uidmax, gidmax);
-	exit(1);
+//	ft_printf("n:%i s:%i u:%i g:%i\n", nlinkmax, sizemax, uidmax, gidmax);
+//	exit(1);
 	while (list)
 	{
 		if (LONG_FORMAT & flags)
-			printlongformat(*list);
+			printlongformat(*list, nlinkmax, uidmax, gidmax, sizemax);
 		else
 			ft_putendl(list->file);
 		list = list->next;

@@ -104,7 +104,8 @@ void 	recursiveprint(t_entries ent);
 int		gettotalblocks(t_files *files);
 char	*fileprotection(short st_mode);
 char	*file_mtime(time_t *timer);
-void 	printlongformat(t_files file);
+void 	printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax);
+
 char	*get_uid(uid_t sb_uid);
 char	*get_gid(gid_t sb_gid);
 
