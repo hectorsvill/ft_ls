@@ -25,11 +25,6 @@ void print_error_none_ex(t_files *none_ex)
 	}
 }
 
-
-/**
-**	Add function to open directory and set
-**	t_files within t_dirs
-**/
 void lstadd_dirs(t_dirs **head, char *dir_name)
 {
 	t_dirs *t_new;
@@ -43,8 +38,11 @@ void lstadd_dirs(t_dirs **head, char *dir_name)
 void lstadd_files(t_files **head, char *file_name, t_flags flags)
 {
 	t_files		*t_new;
+	char		*linkname;
 	struct stat	sb;
 
+
+	linkname = NULL;
 	if(!(flags & ALL_DIRS) && *file_name == '.')
 	{
 		if (!ft_strncmp(file_name, "../", 3))
@@ -63,6 +61,14 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 	t_new->uid = get_uid(sb.st_uid);
 	t_new->gid = get_gid(sb.st_gid);
 	t_new->blocks = (int)sb.st_blocks;
+	if (S_ISLNK(sb.st_mode))
+	{
+		linkname = (char*)malloc(sb.st_size + 1);
+		readlink(file_name, linkname, sb.st_size);
+		ft_printf("linkname:%s\n", linkname);
+		exit(1);
+	}
+
 
 	//printf("st_blocks: %li\n", t_new->blocks);//exit(2);
 

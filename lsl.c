@@ -21,27 +21,20 @@ void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int siz
 
 	len = 0;
 	ft_printf("%s  ", file.fileprotection);
-
 	len  = (int)ft_intmax_tlen((intmax_t)file.nlink);
 	writeformatsp(nlinkmax - len);
 	ft_printf("%i ", file.nlink);
-
 	ft_printf("%s  ", file.uid);
 	len = (int)ft_strlen(file.uid);
 	writeformatsp(uidmax - len);
-
 	ft_printf("%s  ", file.gid);
 	len = (int)ft_strlen(file.gid);
 	writeformatsp(gidmax - len);
-
 	len  = ft_intmax_tlen((intmax_t)file.size);
 	writeformatsp(sizemax - len);
 	ft_printf("%li ", file.size);
-
 	ft_printf("%s ", file.mtime);
-
 	ft_putendl(file.file);
-
 //	ft_printf("%s  %li %s  %s  %li %s %s\n", file.fileprotection,
 //		file.nlink, file.uid, file.gid, file.size, file.mtime, file.file);
 }
@@ -63,10 +56,16 @@ char		*file_mtime(time_t *timer)
 {
 	char	*sctime;
 	char	*new_stime;
+//	time_t	tnow;
 /**
 **		if last time acceessed more then 6 month ago
 **		display year in time section(one extra space on left)!
 **/
+
+//	tnow = time(NULL);
+//	printf("%s\n", ctime(&tnow));
+//	exit(1);
+
 	sctime = ctime(timer);
 	sctime += 4;
 	new_stime = ft_strnew(12);
@@ -98,7 +97,14 @@ char 		*fileprotection(short st_mode)
 	char *str;
 
 	str = ft_strnew(10);
-	str[0] = S_ISDIR(st_mode) ? 'd' : '-';
+
+	//str[0] = S_ISDIR(st_mode) ? 'd' : '-';
+	if (S_ISDIR(st_mode))
+		str[0] = 'd';
+	else if (S_ISLNK(st_mode))
+		str[0] = 'l';
+	else
+		str[0] = '-';
 	str[1] = st_mode & S_IRUSR ? 'r' : '-';
 	str[2] = st_mode & S_IWUSR ? 'w' : '-';
 	str[3] = st_mode & S_IXUSR ? 'x' : '-';
