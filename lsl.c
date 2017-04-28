@@ -29,7 +29,10 @@ char		*file_mtime(time_t *timer)
 {
 	char	*sctime;
 	char	*new_stime;
-
+/**
+**		if last time acceessed more then 6 month ago
+**		display year in time section(one extra space on left)!
+**/
 	sctime = ctime(timer);
 	sctime += 4;
 	new_stime = ft_strnew(12);

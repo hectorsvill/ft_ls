@@ -12,8 +12,55 @@
 
 #include "ft_ls.h"
 
+/*
+➜  ft_ls git:(master) ✗ ls -l
+total 144
+-rw-r--r--  1 hvillasa  august   1316 Apr 25 19:30 Makefile
+-rw-r--r--  1 hvillasa  august   1431 Apr 26 18:10 addto_spec_list.c
+*/
+
+
+void getmax_nbr(t_files *files, int *max, char section)
+{
+	int size;
+
+	size = 0;
+	while (files)
+	{
+		if (section == 'n')
+			size = ft_intmax_tlen((intmax_t)files->nlink);
+		else if (section == 's')
+			size = ft_intmax_tlen((intmax_t)files->size);
+		else if (section == 'u')
+			size = ft_strlen(files->uid);
+		else if (section == 'g')
+			size = ft_strlen(files->gid);
+
+		if (size > *max)
+			*max = size;
+		files = files->next;
+	}
+
+}
+
+
 void printfileslist(t_files *list, t_flags flags)
 {
+	int nlinkmax = 0;
+	int sizemax = 0;
+	int uidmax = 0;
+	int gidmax = 0;
+
+	if (LONG_FORMAT & flags)
+	{
+		getmax_nbr(list, &nlinkmax, 'n');
+		getmax_nbr(list, &sizemax, 's');
+		getmax_nbr(list, &uidmax, 'u');
+		getmax_nbr(list, &gidmax, 'g');
+	}
+
+	ft_printf("n:%i s:%i u:%i g:%i\n", nlinkmax, sizemax, uidmax, gidmax);
+	exit(1);
 	while (list)
 	{
 		if (LONG_FORMAT & flags)

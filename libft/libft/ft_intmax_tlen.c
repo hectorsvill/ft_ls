@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdint.h>
 
-intmax_t		ft_intmax_tlen(intmax_t n)
+int	ft_intmax_tlen(intmax_t n)
 {
 	intmax_t	len;
 
