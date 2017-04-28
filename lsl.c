@@ -9,28 +9,33 @@
 
 void writeformatsp(int len)
 {
-	while (len)
+	while (len > 0)
 	{
 		ft_putchar(' ');
 		len--;
 	}
 }
-
 void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax)
 {
+	int len;
 
+	len = 0;
 	ft_printf("%s  ", file.fileprotection);
 
-	writeformatsp(nlinkmax - ft_intmax_tlen((intmax_t)file.nlink));
+	len  = (int)ft_intmax_tlen((intmax_t)file.nlink);
+	writeformatsp(nlinkmax - len);
 	ft_printf("%i ", file.nlink);
 
 	ft_printf("%s  ", file.uid);
-	writeformatsp(uidmax - (int)ft_strlen(file.uid));
+	len = (int)ft_strlen(file.uid);
+	writeformatsp(uidmax - len);
 
 	ft_printf("%s  ", file.gid);
-	writeformatsp(gidmax - (int)ft_strlen(file.gid));
+	len = (int)ft_strlen(file.gid);
+	writeformatsp(gidmax - len);
 
-	writeformatsp(sizemax - ft_intmax_tlen((intmax_t)file.size));
+	len  = ft_intmax_tlen((intmax_t)file.size);
+	writeformatsp(sizemax - len);
 	ft_printf("%li ", file.size);
 
 	ft_printf("%s ", file.mtime);
@@ -48,11 +53,9 @@ int	gettotalblocks(t_files *files)
 	total = 0;
 	while (files)
 	{
-//		ft_printf("%i\n", files->blocks);
 		total += files->blocks;
 		files = files->next;
 	}
-//	ft_printf("total = %i\n", total);exit(1);
 	return (total);
 }
 

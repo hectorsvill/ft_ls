@@ -19,7 +19,6 @@ total 144
 -rw-r--r--  1 hvillasa  august   1792 Apr 26 23:55 valid_flags.c
 */
 
-
 void getmax_nbr(t_files *files, int *max, char section)
 {
 	int size;
@@ -35,14 +34,11 @@ void getmax_nbr(t_files *files, int *max, char section)
 			size = ft_strlen(files->uid);
 		else if (section == 'g')
 			size = ft_strlen(files->gid);
-
 		if (size > *max)
 			*max = size;
 		files = files->next;
 	}
-
 }
-
 
 void printfileslist(t_files *list, t_flags flags)
 {
