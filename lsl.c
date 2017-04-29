@@ -65,17 +65,25 @@ char		*file_mtime(time_t *timer)
 {
 	char	*sctime;
 	char	*new_stime;
-//	time_t	tnow;
+	time_t	tnow;
 /**
 **		if last time acceessed more then 6 month ago
 **		display year in time section(one extra space on left)!
+
+	if (tnow + 6 month) > timer < (tnow - 6 months)
+		output year instead of time.
+
 **/
 
-//	tnow = time(NULL);
-//	printf("%s\n", ctime(&tnow));
-//	exit(1);
 
 	sctime = ctime(timer);
+	tnow = time(NULL);
+	printf("tnow:%li\nsctime:%li\n", tnow, *timer);
+	//if (tnow > timer)
+
+	exit(1);
+//-----------------------
+	//sctime = ctime(timer);
 	sctime += 4;
 	new_stime = ft_strnew(12);
 	ft_strncpy(new_stime, sctime, 12);
@@ -106,8 +114,6 @@ char 		*fileprotection(short st_mode)
 	char *str;
 
 	str = ft_strnew(10);
-
-	//str[0] = S_ISDIR(st_mode) ? 'd' : '-';
 	if (S_ISDIR(st_mode))
 		str[0] = 'd';
 	else if (S_ISLNK(st_mode))
