@@ -66,27 +66,24 @@ char		*file_mtime(time_t *timer)
 	char	*sctime;
 	char	*new_stime;
 	time_t	tnow;
-/**
-**		if last time acceessed more then 6 month ago
-**		display year in time section(one extra space on left)!
-
-	if (tnow + 6 month) > timer < (tnow - 6 months)
-		output year instead of time.
-
-**/
-
 
 	sctime = ctime(timer);
 	tnow = time(NULL);
-	printf("tnow:%li\nsctime:%li\n", tnow, *timer);
+	//printf("tnow:%li\nsctime:%li\n", tnow, *timer);
 	//if (tnow > timer)
 
-	exit(1);
+	//exit(1);
 //-----------------------
 	//sctime = ctime(timer);
 	sctime += 4;
 	new_stime = ft_strnew(12);
-	ft_strncpy(new_stime, sctime, 12);
+
+	if (*timer < (tnow - 15780000))
+	{
+		new_stime = NULL;
+	}
+	else
+		ft_strncpy(new_stime, sctime, 12);
 	return (new_stime);
 }
 
