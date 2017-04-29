@@ -80,7 +80,13 @@ char		*file_mtime(time_t *timer)
 
 	if (*timer < (tnow - 15780000))
 	{
-		new_stime = NULL;
+		//Oct 21 12:33:00 2016
+		ft_strncpy(new_stime, sctime, 7);
+		sctime += 15;
+		ft_strncat(new_stime, sctime, 5);
+		//ft_putendl(sctime);exit(1);
+
+
 	}
 	else
 		ft_strncpy(new_stime, sctime, 12);
