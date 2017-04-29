@@ -78,7 +78,7 @@ char		*file_mtime(time_t *timer)
 	sctime += 4;
 	new_stime = ft_strnew(12);
 
-	if (*timer < (tnow - 15780000))
+	if (*timer < (tnow - 15780000) || *timer > tnow)
 	{
 		//Oct 21 12:33:00 2016
 		ft_strncpy(new_stime, sctime, 7);
