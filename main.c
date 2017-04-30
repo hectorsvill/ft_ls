@@ -169,7 +169,10 @@ int main(int ac, char **av)
 					if (ent.flags & LONG_FORMAT)
 						ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
 					opendir_getnames(&ent.dirs->files, *av, ent.flags);
-					mergesort_files(&ent.dirs->files);
+					if (ent.flags & TIMEMODIFIED_SORT)
+						mergesort_ltmod(&ent.dirs->files);
+					else
+						mergesort_files(&ent.dirs->files);
 					printfileslist(ent.dirs->files, ent.flags);
 				}
 				else

@@ -32,7 +32,10 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
 	opendir_getnames(&t_new->files, t_new->dir_name, flags);
-	mergesort_files(&t_new->files);
+	if (flags & TIMEMODIFIED_SORT)
+		mergesort_ltmod(&t_new->files);
+	else
+		mergesort_files(&t_new->files);
 	t_new->next = *head;
 	*head = t_new;
 }

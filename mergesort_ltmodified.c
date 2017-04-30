@@ -70,6 +70,24 @@ static t_files	*sortedmerge(t_files *a, t_files *b)
 	}
 	return (result);
 }
+void reverse_files(t_files **head)
+{
+	t_files	*prev;
+	t_files	*current;
+	t_files *next;
+
+	prev = NULL;
+	next = NULL;
+	current = *head;
+	while (current)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*head = prev;
+}
 
 void 			mergesort_ltmod(t_files **headref)
 {
@@ -84,4 +102,8 @@ void 			mergesort_ltmod(t_files **headref)
 	mergesort_ltmod(&a);
 	mergesort_ltmod(&b);
 	*headref = sortedmerge(a, b);
+	reverse_files(headref);
+	//printfileslist(*headref, 0);
+	//headref needs to be backwards
+	//its printing 1 2 3 instead of  3 2 1
 }
