@@ -72,8 +72,6 @@ void print_all_dirs(t_dirs *dir_list, t_flags flags)
 {
 	while (dir_list)
 	{
-		opendir_getnames(&dir_list->files, dir_list->dir_name, flags);
-		mergesort_files(&dir_list->files);
 		ft_printf("%s:\n", dir_list->dir_name);
 		if (flags & LONG_FORMAT)
 			ft_printf("total %i\n", gettotalblocks(dir_list->files));
@@ -99,7 +97,12 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 		return (0);
 	}
 	while ((sd = readdir(dir)) != NULL)
-		lstadd_files(files, sd->d_name, flags);
+	{
+		//if (ft_strcmp(dir_name, "."))
+			//ft_putendl(dir_name);
+		//ft_putendl(sd->d_name);
+		lstadd_files(files, dir_name, sd->d_name, flags);
+	}
 	closedir(dir);
 	return (1);
 }

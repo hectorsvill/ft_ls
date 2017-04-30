@@ -28,11 +28,11 @@ void addto_list(char **av, t_entries *ent)
 		if (!ft_strcmp(*av, "--"))
 			;
 		else if ((stat(*av, &sb)) == -1)
-			lstadd_files(&ent->none_ex, *av, ent->flags);
+			lstadd_files(&ent->none_ex, ".", *av, ent->flags);
 		else if (S_ISREG(sb.st_mode))
-			lstadd_files(&ent->file_list, *av, ent->flags);
+			lstadd_files(&ent->file_list, ".", *av, ent->flags);
 		else if(S_ISDIR(sb.st_mode))
-			lstadd_dirs(&ent->dirs, *av);
+			lstadd_dirs(&ent->dirs, *av, ent->flags);
 		av++;
 	}
 }

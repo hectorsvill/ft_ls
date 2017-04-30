@@ -25,22 +25,25 @@ void print_error_none_ex(t_files *none_ex)
 	}
 }
 
-void lstadd_dirs(t_dirs **head, char *dir_name)
+void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 {
 	t_dirs *t_new;
 
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
+	opendir_getnames(&t_new->files, t_new->dir_name, flags);
+	mergesort_files(&t_new->files);
+
 	t_new->next = *head;
 	*head = t_new;
 }
 
-void lstadd_files(t_files **head, char *file_name, t_flags flags)
+void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags)
 {
 	t_files		*t_new;
 	char		*lnklocstr;
 	struct stat	sb;
-
+	char		*path;
 
 	lnklocstr = NULL;
 	if(!(flags & ALL_DIRS) && *file_name == '.')
@@ -50,7 +53,16 @@ void lstadd_files(t_files **head, char *file_name, t_flags flags)
 		else
 			return ;
 	}
-	lstat(file_name, &sb);
+	path = ft_strnew(ft_strlen(dir_name) + ft_strlen(file_name) + 1);
+	ft_strcpy(path, dir_name);
+	ft_strcat(path, "/");
+	ft_strcat(path, file_name);
+
+	//ft_putendl(path); exit(1);
+	if (lstat(path, &sb) == -1)
+	{
+		return ;
+	}
 	t_new = (t_files*)malloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
 	if (S_ISLNK(sb.st_mode))
