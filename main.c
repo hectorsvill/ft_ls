@@ -54,9 +54,6 @@ void printfileslist(t_files *list, t_flags flags)
 		getmax_nbr(list, &uidmax, 'u');
 		getmax_nbr(list, &gidmax, 'g');
 	}
-
-//	ft_printf("n:%i s:%i u:%i g:%i\n", nlinkmax, sizemax, uidmax, gidmax);
-//	exit(1);
 	while (list)
 	{
 		if (LONG_FORMAT & flags)
@@ -97,12 +94,7 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 		return (0);
 	}
 	while ((sd = readdir(dir)) != NULL)
-	{
-		//if (ft_strcmp(dir_name, "."))
-			//ft_putendl(dir_name);
-		//ft_putendl(sd->d_name);
 		lstadd_files(files, dir_name, sd->d_name, flags);
-	}
 	closedir(dir);
 	return (1);
 }
@@ -171,6 +163,8 @@ int main(int ac, char **av)
 					ft_putchar('\n');
 				if (ent.dirs->next == NULL)
 				{
+					if (ent.flags & LONG_FORMAT)
+						ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
 					opendir_getnames(&ent.dirs->files, *av, ent.flags);
 					mergesort_files(&ent.dirs->files);
 					printfileslist(ent.dirs->files, ent.flags);
