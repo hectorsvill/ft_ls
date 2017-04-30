@@ -58,7 +58,7 @@ static t_files	*sortedmerge(t_files *a, t_files *b)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (a->stmtime <= b->stmtime)
+	if (a->stmtime > b->stmtime)
 	{
 		result = a;
 		result->next = sortedmerge(a->next , b);
@@ -102,7 +102,7 @@ void 			mergesort_ltmod(t_files **headref)
 	mergesort_ltmod(&a);
 	mergesort_ltmod(&b);
 	*headref = sortedmerge(a, b);
-	reverse_files(headref);
+	//reverse_files(headref);
 	//printfileslist(*headref, 0);
 	//headref needs to be backwards
 	//its printing 1 2 3 instead of  3 2 1

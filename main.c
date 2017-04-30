@@ -138,11 +138,11 @@ int main(int ac, char **av)
 		{
 			ent.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-
 			if (ent.flags & TIMEMODIFIED_SORT)
 				mergesort_ltmod(&ent.dirs->files);
 			else
 				mergesort_files(&ent.dirs->files);
+
 			//if (ent.flags & RECURISIVE_LIST)
 			//	recursiveprint(ent);
 			//else
@@ -155,7 +155,10 @@ int main(int ac, char **av)
 			av++;
 			//ft_putendl(*av);exit(2);
 			addto_list(av, &ent);
-			mergesort_files(&ent.file_list);
+			if (ent.flags & TIMEMODIFIED_SORT)
+				mergesort_ltmod(&ent.file_list);
+			else
+				mergesort_files(&ent.file_list);
 			mergesort_files(&ent.none_ex);
 			mergesort_dirs(&ent.dirs);
 			print_error_none_ex(ent.none_ex);
