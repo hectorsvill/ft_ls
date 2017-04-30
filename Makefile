@@ -23,6 +23,7 @@ SRC = 	main.c \
 		ftls_list.c \
 		mergesort_files.c \
 		mergesort_dirs.c \
+		mergesort_ltmodified.c \
 		addto_spec_list.c \
 		valid_flags.c \
 		recursiveprint.c \

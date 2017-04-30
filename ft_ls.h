@@ -36,6 +36,7 @@ typedef struct	s_files
 	char		*gid;
 	char		*mtime;
 	char		*lnklocstr;
+	time_t		stmtime;
 	short		mode;
 	long		size;
 	long		nlink;
@@ -84,10 +85,14 @@ void 	mergesort_files(t_files **headref);
 **	mergesort_dirs.c
 **/
 void 	mergesort_dirs(t_dirs **headref);
-/*
+/**
 **	addto_spec_list.c
-*/
+**/
 void 	addto_list(char **av, t_entries *ent);
+/**
+**	mergesort_ltmodified.c
+**/
+void 	mergesort_ltmod(t_files **headref);
 /*
 **	valid_flags.c
 */

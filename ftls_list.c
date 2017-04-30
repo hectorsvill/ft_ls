@@ -33,7 +33,6 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 	t_new->dir_name = ft_strdup(dir_name);
 	opendir_getnames(&t_new->files, t_new->dir_name, flags);
 	mergesort_files(&t_new->files);
-
 	t_new->next = *head;
 	*head = t_new;
 }
@@ -57,12 +56,7 @@ void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags
 	ft_strcpy(path, dir_name);
 	ft_strcat(path, "/");
 	ft_strcat(path, file_name);
-
-	//ft_putendl(path); exit(1);
-	if (lstat(path, &sb) == -1)
-	{
-		return ;
-	}
+	lstat(path, &sb);
 	t_new = (t_files*)malloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
 	if (S_ISLNK(sb.st_mode))
@@ -75,6 +69,7 @@ void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags
 	t_new->size = (long)sb.st_size;
 	t_new->mtime = file_mtime(&sb.st_mtime);
 	t_new->nlink = sb.st_nlink;
+	t_new->stmtime = sb.st_mtime;
 	ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
 	t_new->uid = get_uid(sb.st_uid);
 	t_new->gid = get_gid(sb.st_gid);
