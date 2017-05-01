@@ -46,8 +46,9 @@ typedef struct	s_files
 
 typedef struct	s_dirs
 {
-	char			*dir_name;		//name of specific dir
-	t_files			*files; //files of this dir_name
+	char		*dir_name;		//name of specific dir
+	t_files		*files; //files of this dir_name
+	time_t		stmtime;
 	struct s_dirs	*next;
 }				t_dirs;
 

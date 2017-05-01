@@ -102,8 +102,4 @@ void 			mergesort_ltmod(t_files **headref)
 	mergesort_ltmod(&a);
 	mergesort_ltmod(&b);
 	*headref = sortedmerge(a, b);
-	//reverse_files(headref);
-	//printfileslist(*headref, 0);
-	//headref needs to be backwards
-	//its printing 1 2 3 instead of  3 2 1
 }
