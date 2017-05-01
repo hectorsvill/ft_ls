@@ -156,13 +156,17 @@ int main(int ac, char **av)
 			addto_list(av, &ent);
 
 			if (ent.flags & TIMEMODIFIED_SORT)
+			{
+			
 				mergesort_ltmod(&ent.file_list);
+				mergesort_ltmod_dirs(&ent.dirs);
+			}
 			else
+			{
 				mergesort_files(&ent.file_list);
-
+				mergesort_dirs(&ent.dirs);
+			}
 			mergesort_files(&ent.none_ex);
-			mergesort_dirs(&ent.dirs);
-
 			print_error_none_ex(ent.none_ex);
 			printfileslist(ent.file_list, ent.flags);
 
@@ -174,7 +178,6 @@ int main(int ac, char **av)
 				{
 					if (ent.flags & LONG_FORMAT)
 						ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
-					//opendir_getnames(&ent.dirs->files, *av, ent.flags);
 					if (ent.flags & TIMEMODIFIED_SORT)
 						mergesort_ltmod(&ent.dirs->files);
 					else

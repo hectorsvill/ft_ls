@@ -94,6 +94,7 @@ void 	addto_list(char **av, t_entries *ent);
 **	mergesort_ltmodified.c
 **/
 void 	mergesort_ltmod(t_files **headref);
+void 	mergesort_ltmod_dirs(t_dirs **headref);
 /*
 **	valid_flags.c
 */

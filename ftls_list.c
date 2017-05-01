@@ -28,9 +28,11 @@ void print_error_none_ex(t_files *none_ex)
 void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 {
 	t_dirs *t_new;
-
+	struct stat sb;
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
+	lstat(dir_name, &sb);
+	t_new->stmtime = sb.st_mtime;
 	opendir_getnames(&t_new->files, t_new->dir_name, flags);
 	if (flags & TIMEMODIFIED_SORT)
 		mergesort_ltmod(&t_new->files);

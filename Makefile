@@ -24,6 +24,7 @@ SRC = 	main.c \
 		mergesort_files.c \
 		mergesort_dirs.c \
 		mergesort_ltmodified.c \
+		mergesort_ltmod_dirs.c \
 		addto_spec_list.c \
 		valid_flags.c \
 		recursiveprint.c \
