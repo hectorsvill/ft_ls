@@ -71,7 +71,29 @@ static t_files	*sortedmerge(t_files *a, t_files *b)
 	return (result);
 }
 
-void 			mergesort_files(t_files **headref)
+
+static t_files	*sortedmerge_reverse(t_files *a, t_files *b)
+{
+	t_files		*result = NULL;
+
+	if (a == NULL)
+		return (b);
+	else if (b == NULL)
+		return (a);
+	if (ft_strcmp(a->file, b->file) > 0)	//reverse order > 0
+	{
+		result = a;
+		result->next = sortedmerge_reverse(a->next , b);
+	}
+	else
+	{
+		result = b;
+		result->next = sortedmerge_reverse(a, b->next);
+	}
+	return (result);
+}
+
+void 			mergesort_files(t_files **headref, t_flags flags)
 {
 	t_files		*head;
 	t_files		*a;
@@ -81,7 +103,10 @@ void 			mergesort_files(t_files **headref)
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 	frontbacksplit(head, &a, &b);
-	mergesort_files(&a);
-	mergesort_files(&b);
-	*headref = sortedmerge(a, b);
+	mergesort_files(&a, flags);
+	mergesort_files(&b, flags);
+	if (flags & REVERSE_ORDER)
+		*headref = sortedmerge_reverse(a, b);
+	else
+		*headref = sortedmerge(a, b);
 }

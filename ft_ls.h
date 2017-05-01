@@ -81,11 +81,11 @@ t_entries	entries_init(void);
 /**
 **	mergesort_files.c
 **/
-void 	mergesort_files(t_files **headref);
+void 	mergesort_files(t_files **headref, t_flags flags);
 /**
 **	mergesort_dirs.c
 **/
-void 	mergesort_dirs(t_dirs **headref);
+void 	mergesort_dirs(t_dirs **headref, t_flags flags);
 /**
 **	addto_spec_list.c
 **/

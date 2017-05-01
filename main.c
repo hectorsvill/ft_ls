@@ -113,7 +113,7 @@ int main(int ac, char **av)
 		**/
 		ent.dirs->dir_name = ft_strdup(".");
  		opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-		mergesort_files(&ent.dirs->files);
+		mergesort_files(&ent.dirs->files, ent.flags);
 		printfileslist(ent.dirs->files, ent.flags);
 		return (0);
 	}
@@ -127,6 +127,7 @@ int main(int ac, char **av)
 			ent.flags = setfield(*av);
 		else
 		{
+			//!!!!________
 			if (flagcheck != '1')
 			{
 				ft_printf("ft_ls: illegal option -- %c\n", flagcheck);
@@ -138,7 +139,7 @@ int main(int ac, char **av)
 		{
 			ent.dirs->dir_name = ft_strdup(".");
 			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-			mergesort_files(&ent.dirs->files);
+			mergesort_files(&ent.dirs->files, ent.flags);
 			if (ent.flags & TIMEMODIFIED_SORT)
 				mergesort_ltmod(&ent.dirs->files);
 			//if (ent.flags & RECURISIVE_LIST)
@@ -152,15 +153,15 @@ int main(int ac, char **av)
 		{
 			av++;
 			addto_list(av, &ent);
-			mergesort_files(&ent.file_list);
-			mergesort_dirs(&ent.dirs);
+			mergesort_files(&ent.file_list, ent.flags);
+			mergesort_dirs(&ent.dirs, ent.flags);
 			if (ent.flags & TIMEMODIFIED_SORT)
 			{
 
 				mergesort_ltmod(&ent.file_list);
 				mergesort_ltmod_dirs(&ent.dirs);
 			}
-			mergesort_files(&ent.none_ex);
+			mergesort_files(&ent.none_ex, ent.flags);
 			print_error_none_ex(ent.none_ex);
 			printfileslist(ent.file_list, ent.flags);
 
@@ -175,7 +176,7 @@ int main(int ac, char **av)
 					if (ent.flags & TIMEMODIFIED_SORT)
 						mergesort_ltmod(&ent.dirs->files);
 					else
-						mergesort_files(&ent.dirs->files);
+						mergesort_files(&ent.dirs->files, ent.flags);
 					printfileslist(ent.dirs->files, ent.flags);
 				}
 				else
@@ -197,9 +198,9 @@ int main(int ac, char **av)
 		**	file names are now in file_list and none existent in none_ex
 		**/
 		addto_list(av, &ent);
-		mergesort_dirs(&ent.dirs);
-		mergesort_files(&ent.file_list);
-		mergesort_files(&ent.none_ex);
+		mergesort_dirs(&ent.dirs, ent.flags);
+		mergesort_files(&ent.file_list, ent.flags);
+		mergesort_files(&ent.none_ex, ent.flags);
 		print_error_none_ex(ent.none_ex);
 		printfileslist(ent.file_list, ent.flags);
 		if (ent.dirs != NULL)
@@ -209,7 +210,7 @@ int main(int ac, char **av)
 			if (ac == 2)
 			{
 				opendir_getnames(&ent.dirs->files, *av, ent.flags);
-				mergesort_files(&ent.dirs->files);
+				mergesort_files(&ent.dirs->files, ent.flags);
 				printfileslist(ent.dirs->files, ent.flags);
 			}
 			else

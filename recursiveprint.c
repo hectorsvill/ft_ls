@@ -37,6 +37,6 @@ void 	recursiveprint(t_entries ent)
 
 	rootdir = ent.dirs->dir_name;
 	rec(rootdir, &ent.dirs, ent.flags);
-	mergesort_dirs(&ent.dirs);
+	mergesort_dirs(&ent.dirs, ent.flags);
 	print_all_dirs(ent.dirs, ent.flags);
 }

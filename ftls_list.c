@@ -37,7 +37,7 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 	if (flags & TIMEMODIFIED_SORT)
 		mergesort_ltmod(&t_new->files);
 	else
-		mergesort_files(&t_new->files);
+		mergesort_files(&t_new->files, flags);
 	t_new->next = *head;
 	*head = t_new;
 }

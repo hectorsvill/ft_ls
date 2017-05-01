@@ -70,11 +70,31 @@ static t_dirs	*sortedmerge(t_dirs *a, t_dirs *b)
 	}
 	return (result);
 }
-/**
-**	I need a merge sort for dir_names!
-**	or just keep order in file_list!
-**/
-void 			mergesort_dirs(t_dirs **headref)
+
+
+static t_dirs	*sortedmerge_reverse(t_dirs *a, t_dirs *b)
+{
+	t_dirs		*result = NULL;
+
+	if (a == NULL)
+		return (b);
+	else if (b == NULL)
+		return (a);
+	if (ft_strcmp(a->dir_name, b->dir_name) > 0)
+	{
+		result = a;
+		result->next = sortedmerge(a->next , b);
+	}
+	else
+	{
+		result = b;
+		result->next = sortedmerge(a, b->next);
+	}
+	return (result);
+}
+
+
+void 			mergesort_dirs(t_dirs **headref, t_flags flags)
 {
 	t_dirs		*head;
 	t_dirs		*a;
@@ -84,7 +104,10 @@ void 			mergesort_dirs(t_dirs **headref)
 	if ((head == NULL) || (head->next == NULL))
 		return ;
 	frontbacksplit(head, &a, &b);
-	mergesort_dirs(&a);
-	mergesort_dirs(&b);
-	*headref = sortedmerge(a, b);
+	mergesort_dirs(&a, flags);
+	mergesort_dirs(&b, flags);
+	if (flags & REVERSE_ORDER)
+		*headref = sortedmerge_reverse(a, b);
+	else
+		*headref = sortedmerge(a, b);
 }
