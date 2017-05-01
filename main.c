@@ -152,17 +152,13 @@ int main(int ac, char **av)
 		{
 			av++;
 			addto_list(av, &ent);
-
+			mergesort_files(&ent.file_list);
+			mergesort_dirs(&ent.dirs);
 			if (ent.flags & TIMEMODIFIED_SORT)
 			{
 
 				mergesort_ltmod(&ent.file_list);
 				mergesort_ltmod_dirs(&ent.dirs);
-			}
-			else
-			{
-				mergesort_files(&ent.file_list);
-				mergesort_dirs(&ent.dirs);
 			}
 			mergesort_files(&ent.none_ex);
 			print_error_none_ex(ent.none_ex);
