@@ -61,24 +61,26 @@ void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags
 	ft_strcpy(path, dir_name);
 	ft_strcat(path, "/");
 	ft_strcat(path, file_name);
-	lstat(path, &sb);
 	t_new = (t_files*)malloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
-	if (S_ISLNK(sb.st_mode))
+	if (lstat(path, &sb) != -1)
 	{
-		lnklocstr = (char*)malloc(sb.st_size + 1);
-		readlink(file_name, lnklocstr, sb.st_size);
-		t_new->lnklocstr = ft_strdup(lnklocstr);
+		if (S_ISLNK(sb.st_mode))
+		{
+			lnklocstr = (char*)malloc(sb.st_size + 1);
+			readlink(file_name, lnklocstr, sb.st_size);
+			t_new->lnklocstr = ft_strdup(lnklocstr);
+		}
+		t_new->mode = (short)sb.st_mode;
+		t_new->size = (long)sb.st_size;
+		t_new->mtime = file_mtime(&sb.st_mtime);
+		t_new->nlink = sb.st_nlink;
+		t_new->stmtime = sb.st_mtime;
+		ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
+		t_new->uid = get_uid(sb.st_uid);
+		t_new->gid = get_gid(sb.st_gid);
+		t_new->blocks = (int)sb.st_blocks;
 	}
-	t_new->mode = (short)sb.st_mode;
-	t_new->size = (long)sb.st_size;
-	t_new->mtime = file_mtime(&sb.st_mtime);
-	t_new->nlink = sb.st_nlink;
-	t_new->stmtime = sb.st_mtime;
-	ft_strcpy(t_new->fileprotection, fileprotection(sb.st_mode));
-	t_new->uid = get_uid(sb.st_uid);
-	t_new->gid = get_gid(sb.st_gid);
-	t_new->blocks = (int)sb.st_blocks;
 	t_new->next = *head;
 	*head = t_new;
 }

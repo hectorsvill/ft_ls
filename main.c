@@ -122,16 +122,20 @@ int main(int ac, char **av)
 
 	if (**av == '-')
 	{
+		if (!ft_strcmp(*av, "-"))
+		{
+			ft_putendl("ls: -: No such file or directory");
+			exit(1);
+		}
 		flagcheck = checkflags(*av);
 		if (flagcheck == 1)
 			ent.flags = setfield(*av);
 		else
 		{
-			//!!!!________
 			if (flagcheck != '1')
 			{
-				ft_printf("ft_ls: illegal option -- %c\n", flagcheck);
-				ft_putendl("usage: ft_ls [-lRart] [file ...]");
+				ft_printf("/bin/ls: illegal option -- %c\n", flagcheck);
+				ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
 				exit(1);
 			}
 		}
