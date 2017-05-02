@@ -51,7 +51,12 @@ void 	recursiveprint(t_entries ent)
 	rec(rootdir, &entr.dirs, ent.flags);
 	mergesort_dirs(&entr.dirs, ent.flags);
 
+	mergesort_files(&entr.dirs->files, ent.flags);
+	printfileslist(entr.dirs->files, ent.flags);
+	entr.dirs = entr.dirs->next;
+	ft_putchar('\n');
 	print_all_dirs(entr.dirs, ent.flags);
+
 
 
 	//print_all_dirs(ent.dirs, ent.flags);
