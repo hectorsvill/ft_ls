@@ -40,24 +40,28 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 	return ;
 }
 
-void 	recursiveprint(t_entries ent)
+void  	recursiveprint(char *rootdir, t_flags flags)
 {
-	char *rootdir;
 	t_entries entr;
-	entr = entries_init();
-	rootdir = ent.dirs->dir_name;
-	entr.dirs->dir_name = rootdir;
-	opendir_getnames(&entr.dirs->files, rootdir, ent.flags);
-	rec(rootdir, &entr.dirs, ent.flags);
-	mergesort_dirs(&entr.dirs, ent.flags);
 
-	mergesort_files(&entr.dirs->files, ent.flags);
-	printfileslist(entr.dirs->files, ent.flags);
+	entr = entries_init();
+
+	entr.dirs->dir_name = ft_strdup(rootdir);
+	opendir_getnames(&entr.dirs->files, rootdir, flags);
+	rec(rootdir, &entr.dirs, flags);
+	mergesort_dirs(&entr.dirs, flags);
+	mergesort_files(&entr.dirs->files, flags);
+	printfileslist(entr.dirs->files, flags);
 	entr.dirs = entr.dirs->next;
 	ft_putchar('\n');
-	print_all_dirs(entr.dirs, ent.flags);
+	print_all_dirs(entr.dirs, flags);
+}
 
-
-
-	//print_all_dirs(ent.dirs, ent.flags);
+void printalldirsrec(t_dirs *head, t_flags flags)
+{
+	while (head)
+	{
+		recursiveprint(head->dir_name, flags);
+		head = head->next;
+	}
 }

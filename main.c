@@ -150,17 +150,12 @@ int main(int ac, char **av)
 
 			//printer
 			if (ent.flags & RECURISIVE_LIST)
-			{
-
-				recursiveprint(ent);
-				//print_all_dirs(ent.dirs, ent.flags);
-
-
-			}
+				recursiveprint(".", ent.flags);
 			else
 			{
 				if (ent.flags & LONG_FORMAT)
 					ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
+				printfileslist(ent.dirs->files, ent.flags);
 
 			}
 
@@ -196,7 +191,12 @@ int main(int ac, char **av)
 					printfileslist(ent.dirs->files, ent.flags);
 				}
 				else
-					print_all_dirs(ent.dirs, ent.flags);
+				{
+					if (ent.flags & RECURISIVE_LIST)
+						printalldirsrec(ent.dirs, ent.flags);
+					else
+						print_all_dirs(ent.dirs, ent.flags);
+				}
 			}
 		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
 				recursiveprint(ent);
