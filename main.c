@@ -89,8 +89,8 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 
 	if (!(dir = opendir(dir_name)))
 	{
-		ft_printf("ft_ls: %s: ", dir_name);
-		perror("");
+		ft_printf("ls: %s", dir_name);
+		perror(": ");
 		return (0);
 	}
 	while ((sd = readdir(dir)) != NULL)
@@ -146,12 +146,24 @@ int main(int ac, char **av)
 			mergesort_files(&ent.dirs->files, ent.flags);
 			if (ent.flags & TIMEMODIFIED_SORT)
 				mergesort_ltmod(&ent.dirs->files);
-			//if (ent.flags & RECURISIVE_LIST)
-			//	recursiveprint(ent);
-			//else
-			if (ent.flags & LONG_FORMAT)
-				ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
-			printfileslist(ent.dirs->files, ent.flags);
+
+
+			//printer
+			if (ent.flags & RECURISIVE_LIST)
+			{
+
+				recursiveprint(ent);
+				//print_all_dirs(ent.dirs, ent.flags);
+
+
+			}
+			else
+			{
+				if (ent.flags & LONG_FORMAT)
+					ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
+
+			}
+
 		}
 		else if (ac > 2)
 		{

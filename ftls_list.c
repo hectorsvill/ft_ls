@@ -20,7 +20,7 @@ void print_error_none_ex(t_files *none_ex)
 		if (!ft_strcmp(none_ex->file, "-1"))
 			;
 		else
-			ft_printf("ft_ls: %s: No such file or directory\n", none_ex->file);
+			ft_printf("ls: %s: No such file or directory\n", none_ex->file);
 		none_ex = none_ex->next;
 	}
 }
@@ -31,7 +31,9 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 	struct stat sb;
 	t_new = (t_dirs*)malloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
+
 	lstat(dir_name, &sb);
+
 	t_new->stmtime = sb.st_mtime;
 	opendir_getnames(&t_new->files, t_new->dir_name, flags);
 	if (flags & TIMEMODIFIED_SORT)
