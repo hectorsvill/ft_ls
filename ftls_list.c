@@ -47,11 +47,9 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags)
 {
 	t_files		*t_new;
-	char		*lnklocstr;
 	struct stat	sb;
 	char		*path;
 
-	lnklocstr = NULL;
 	if(!(flags & ALL_DIRS) && *file_name == '.')
 	{
 		if (!ft_strncmp(file_name, "../", 3))
@@ -69,9 +67,8 @@ void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags
 	{
 		if (S_ISLNK(sb.st_mode))
 		{
-			lnklocstr = (char*)malloc(sb.st_size + 1);
-			readlink(file_name, lnklocstr, sb.st_size);
-			t_new->lnklocstr = ft_strdup(lnklocstr);
+			t_new->lnklocstr = (char*)malloc(sb.st_size + 1);
+			readlink(path, t_new->lnklocstr, sb.st_size);
 		}
 		t_new->mode = (short)sb.st_mode;
 		t_new->size = (long)sb.st_size;
