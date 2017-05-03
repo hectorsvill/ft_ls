@@ -188,7 +188,11 @@ int main(int ac, char **av)
 						mergesort_ltmod(&ent.dirs->files);
 					else
 						mergesort_files(&ent.dirs->files, ent.flags);
-					printfileslist(ent.dirs->files, ent.flags);
+
+					if (ent.flags & RECURISIVE_LIST)
+						printalldirsrec(ent.dirs, ent.flags);
+					else
+						printfileslist(ent.dirs->files, ent.flags);
 				}
 				else
 				{

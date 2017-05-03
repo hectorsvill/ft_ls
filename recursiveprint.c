@@ -30,6 +30,7 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 			{
 				if (!dir_name)
 					return ;
+				flags &= ALL_DIRS;
 				lstadd_dirs(head, tmp, flags);
 			}
 
@@ -59,11 +60,13 @@ void  	recursiveprint(char *rootdir, t_flags flags)
 
 void printalldirsrec(t_dirs *head, t_flags flags)
 {
+	// if (flags)
+	// {}
+
 	while (head)
 	{
 		//ft_printf("%s:\n", head->dir_name);
 		recursiveprint(head->dir_name, flags);
-		
 		head = head->next;
 	}
 }
