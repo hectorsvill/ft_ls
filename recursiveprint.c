@@ -1,6 +1,10 @@
 #include "ft_ls.h"
 
 
+
+
+
+
 void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 {
 	struct stat		sb;
@@ -11,7 +15,7 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 
 
 
-	ft_bzero((void*)tmp, sizeof(tmp));
+	//ft_bzero((void*)tmp, sizeof(tmp));
 	if (!(dir = opendir(dir_name)))
 		return ;
 
@@ -28,9 +32,6 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 			stat(tmp, &sb);
 			if (S_ISDIR(sb.st_mode))
 			{
-				if (!dir_name)
-					return ;
-				flags &= ALL_DIRS;
 				lstadd_dirs(head, tmp, flags);
 			}
 
@@ -41,21 +42,74 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 	return ;
 }
 
+void free_files(t_files *files)
+{
+	t_files *f_tmp;
+	t_files *node;
+
+	node = files;
+	while (node)
+	{
+		f_tmp = node;
+		node = node->next;
+		free((void*)f_tmp->file);
+		free((void*)f_tmp->uid);
+		free((void*)f_tmp->gid);
+		free((void*)f_tmp->mtime);
+		free((void*)f_tmp->lnklocstr);
+	}
+	files = NULL;
+}
+
+void free_dirs(t_dirs *dirs)
+{
+	t_dirs	*d_tmp;
+	t_dirs	*node;
+
+	node = dirs;
+	while (node)
+	{
+		d_tmp = node;
+		node = node->next;
+		free((void*)d_tmp->dir_name);
+		//free_files(d_tmp->files);
+		free((void*)d_tmp);
+	}
+	dirs = NULL;
+}
+
 void  	recursiveprint(char *rootdir, t_flags flags)
 {
-	t_entries entr;
+//	t_entries entr;
+	t_dirs 	*dirs;
+	t_dirs	*free_d;
 
-	entr = entries_init();
+	dirs = NULL;
+	dirs = (t_dirs*)malloc(sizeof(t_dirs));
+	dirs->dir_name = NULL;
+	dirs->stmtime = 0;
+	dirs->files = (t_files*)malloc(sizeof(t_files));
+	dirs->files->file = NULL;
+	dirs->files->uid = NULL;
+	dirs->files->gid = NULL;
+	dirs->files->mtime = NULL;
+	dirs->files->lnklocstr = NULL;
 
-	entr.dirs->dir_name = ft_strdup(rootdir);
-	opendir_getnames(&entr.dirs->files, rootdir, flags);
-	rec(rootdir, &entr.dirs, flags);
-	mergesort_dirs(&entr.dirs, flags);
-	mergesort_files(&entr.dirs->files, flags);
-	printfileslist(entr.dirs->files, flags);
-	entr.dirs = entr.dirs->next;
+
+	dirs->dir_name = ft_strdup(rootdir);
+	opendir_getnames(&dirs->files, rootdir, flags);
+	rec(rootdir, &dirs, flags);
+	mergesort_dirs(&dirs, flags);
+	mergesort_files(&dirs->files, flags);
+
+	free_d = dirs;
+
+	printfileslist(dirs->files, flags);
 	ft_putchar('\n');
-	print_all_dirs(entr.dirs, flags);
+	dirs = dirs->next;
+
+	print_all_dirs(dirs, flags);
+//	free_dirs(free_d);
 }
 
 void printalldirsrec(t_dirs *head, t_flags flags)
@@ -65,8 +119,9 @@ void printalldirsrec(t_dirs *head, t_flags flags)
 
 	while (head)
 	{
-		//ft_printf("%s:\n", head->dir_name);
+		ft_printf("\n%s:\n", head->dir_name);
 		recursiveprint(head->dir_name, flags);
 		head = head->next;
+		//free_dirs(head);
 	}
 }

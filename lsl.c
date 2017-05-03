@@ -69,15 +69,8 @@ char		*file_mtime(time_t *timer)
 
 	sctime = ctime(timer);
 	tnow = time(NULL);
-	//printf("tnow:%li\nsctime:%li\n", tnow, *timer);
-	//if (tnow > timer)
-
-	//exit(1);
-//-----------------------
-	//sctime = ctime(timer);
 	sctime += 4;
 	new_stime = ft_strnew(12);
-
 	if (*timer < (tnow - 15780000) || *timer > (tnow + 15780000))
 	{
 		//Oct 21 12:33:00 2016

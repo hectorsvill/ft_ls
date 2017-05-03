@@ -89,13 +89,31 @@ t_entries entries_init(void)
 	t_entries ent;
 
 	ent.flags = (t_flags)0;
+
 	ent.dirs = (t_dirs*)malloc(sizeof(t_dirs));
+	ent.dirs->dir_name = NULL;
+	ent.dirs->stmtime = 0;
+
+
 	ent.dirs->files = (t_files*)malloc(sizeof(t_files));
-	//init dir->files
+	ent.dirs->files->file = NULL;
 	ent.dirs->files->uid = NULL;
 	ent.dirs->files->gid = NULL;
+	ent.dirs->files->mtime = NULL;
 	ent.dirs->files->lnklocstr = NULL;
+
 	ent.file_list = (t_files*)malloc(sizeof(t_files));
+	ent.file_list->file = NULL;
+	ent.file_list->uid = NULL;
+	ent.file_list->gid = NULL;
+	ent.file_list->mtime = NULL;
+	ent.file_list->lnklocstr = NULL;
+
 	ent.none_ex = (t_files*)malloc(sizeof(t_files));
+	ent.none_ex->file = NULL;
+	ent.none_ex->uid = NULL;
+	ent.none_ex->gid = NULL;
+	ent.none_ex->mtime = NULL;
+	ent.none_ex->lnklocstr = NULL;
 	return (ent);
 }
