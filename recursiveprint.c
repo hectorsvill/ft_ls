@@ -42,6 +42,54 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 	return ;
 }
 
+void  	recursiveprint(char *rootdir, t_flags flags)
+{
+//	t_entries entr;
+	t_dirs 	*dirs;
+	t_dirs	*free_d;
+
+	dirs = NULL;
+	dirs = ft_memalloc(sizeof(t_dirs));
+	dirs->dir_name = NULL;
+	dirs->stmtime = 0;
+	dirs->files = ft_memalloc(sizeof(t_files));
+	dirs->files->file = NULL;
+	dirs->files->uid = NULL;
+	dirs->files->gid = NULL;
+	dirs->files->mtime = NULL;
+	dirs->files->lnklocstr = NULL;
+
+
+	dirs->dir_name = ft_strdup(rootdir);
+	opendir_getnames(&dirs->files, rootdir, flags);
+	rec(rootdir, &dirs, flags);
+	mergesort_dirs(&dirs, flags);
+	mergesort_files(&dirs->files, flags);
+
+	free_d = dirs;
+
+	printfileslist(dirs->files, flags);
+	ft_putchar('\n');
+	dirs = dirs->next;
+
+	print_all_dirs(dirs, flags);
+}
+
+void printalldirsrec(t_dirs *head, t_flags flags)
+{
+	// if (flags)
+	// {}
+
+	while (head)
+	{
+		ft_printf("\n%s:\n", head->dir_name);
+		recursiveprint(head->dir_name, flags);
+		head = head->next;
+		//free_dirs(head);
+	}
+}
+
+/*
 void free_files(t_files *files)
 {
 	t_files *f_tmp;
@@ -78,50 +126,4 @@ void free_dirs(t_dirs *dirs)
 	dirs = NULL;
 }
 
-void  	recursiveprint(char *rootdir, t_flags flags)
-{
-//	t_entries entr;
-	t_dirs 	*dirs;
-	t_dirs	*free_d;
-
-	dirs = NULL;
-	dirs = (t_dirs*)malloc(sizeof(t_dirs));
-	dirs->dir_name = NULL;
-	dirs->stmtime = 0;
-	dirs->files = (t_files*)malloc(sizeof(t_files));
-	dirs->files->file = NULL;
-	dirs->files->uid = NULL;
-	dirs->files->gid = NULL;
-	dirs->files->mtime = NULL;
-	dirs->files->lnklocstr = NULL;
-
-
-	dirs->dir_name = ft_strdup(rootdir);
-	opendir_getnames(&dirs->files, rootdir, flags);
-	rec(rootdir, &dirs, flags);
-	mergesort_dirs(&dirs, flags);
-	mergesort_files(&dirs->files, flags);
-
-	free_d = dirs;
-
-	printfileslist(dirs->files, flags);
-	ft_putchar('\n');
-	dirs = dirs->next;
-
-	print_all_dirs(dirs, flags);
-//	free_dirs(free_d);
-}
-
-void printalldirsrec(t_dirs *head, t_flags flags)
-{
-	// if (flags)
-	// {}
-
-	while (head)
-	{
-		ft_printf("\n%s:\n", head->dir_name);
-		recursiveprint(head->dir_name, flags);
-		head = head->next;
-		//free_dirs(head);
-	}
-}
+*/

@@ -29,7 +29,7 @@ void lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags)
 {
 	t_dirs *t_new;
 	struct stat sb;
-	t_new = (t_dirs*)malloc(sizeof(t_dirs));
+	t_new = (t_dirs*)ft_memalloc(sizeof(t_dirs));
 	t_new->dir_name = ft_strdup(dir_name);
 
 	lstat(dir_name, &sb);
@@ -61,13 +61,13 @@ void lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags
 	ft_strcpy(path, dir_name);
 	ft_strcat(path, "/");
 	ft_strcat(path, file_name);
-	t_new = (t_files*)malloc(sizeof(t_files));
+	t_new = (t_files*)ft_memalloc(sizeof(t_files));
 	t_new->file = ft_strdup(file_name);
 	if (lstat(path, &sb) != -1)
 	{
 		if (S_ISLNK(sb.st_mode))
 		{
-			t_new->lnklocstr = (char*)malloc(sb.st_size + 1);
+			t_new->lnklocstr = (char*)ft_memalloc(sb.st_size + 1);
 			readlink(path, t_new->lnklocstr, sb.st_size);
 		}
 		t_new->mode = (short)sb.st_mode;
@@ -90,26 +90,26 @@ t_entries entries_init(void)
 
 	ent.flags = (t_flags)0;
 
-	ent.dirs = (t_dirs*)malloc(sizeof(t_dirs));
+	ent.dirs = (t_dirs*)ft_memalloc(sizeof(t_dirs));
 	ent.dirs->dir_name = NULL;
 	ent.dirs->stmtime = 0;
 
 
-	ent.dirs->files = (t_files*)malloc(sizeof(t_files));
+	ent.dirs->files = (t_files*)ft_memalloc(sizeof(t_files));
 	ent.dirs->files->file = NULL;
 	ent.dirs->files->uid = NULL;
 	ent.dirs->files->gid = NULL;
 	ent.dirs->files->mtime = NULL;
 	ent.dirs->files->lnklocstr = NULL;
 
-	ent.file_list = (t_files*)malloc(sizeof(t_files));
+	ent.file_list = (t_files*)ft_memalloc(sizeof(t_files));
 	ent.file_list->file = NULL;
 	ent.file_list->uid = NULL;
 	ent.file_list->gid = NULL;
 	ent.file_list->mtime = NULL;
 	ent.file_list->lnklocstr = NULL;
 
-	ent.none_ex = (t_files*)malloc(sizeof(t_files));
+	ent.none_ex = (t_files*)ft_memalloc(sizeof(t_files));
 	ent.none_ex->file = NULL;
 	ent.none_ex->uid = NULL;
 	ent.none_ex->gid = NULL;

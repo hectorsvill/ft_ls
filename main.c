@@ -190,7 +190,7 @@ int main(int ac, char **av)
 						mergesort_files(&ent.dirs->files, ent.flags);
 
 					if (ent.flags & RECURISIVE_LIST)
-						recursiveprint(ent.dirs->dir_name, ent.flags);//printalldirsrec(ent.dirs, ent.flags);
+						recursiveprint(ent.dirs->dir_name, ent.flags);
 					else
 						printfileslist(ent.dirs->files, ent.flags);
 				}
@@ -202,11 +202,7 @@ int main(int ac, char **av)
 						print_all_dirs(ent.dirs, ent.flags);
 				}
 			}
-		/*	if ((ent.dirs != NULL) && (ent.flags & RECURISIVE_LIST))
-				recursiveprint(ent);
-			else if (ent.dirs != NULL)
-				printfileslist(ent.dirs->files, ent.flags);
-		*/
+
 		}
 
 	}
