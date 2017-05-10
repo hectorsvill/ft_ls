@@ -12,13 +12,6 @@
 
 #include "ft_ls.h"
 
-/*
-➜  ft_ls git:(master) ✗ ls -l
-total 144
--rw-r--r--  1 hvillasa  august    764 Apr 26 13:15 recursiveprint.c
--rw-r--r--  1 hvillasa  august   1792 Apr 26 23:55 valid_flags.c
-*/
-
 void getmax_nbr(t_files *files, int *max, char section)
 {
 	int size;
@@ -190,7 +183,11 @@ int main(int ac, char **av)
 						mergesort_files(&ent.dirs->files, ent.flags);
 
 					if (ent.flags & RECURISIVE_LIST)
+					{
+						if (ent.none_ex != NULL || ent.file_list != NULL)
+						 	ft_printf("%s:\n", ent.dirs->dir_name);
 						recursiveprint(ent.dirs->dir_name, ent.flags);
+					}
 					else
 						printfileslist(ent.dirs->files, ent.flags);
 				}
