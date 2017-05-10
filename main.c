@@ -134,18 +134,20 @@ int main(int ac, char **av)
 		}
 		if (ac == 2)
 		{
-			ent.dirs->dir_name = ft_strdup(".");
-			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-			mergesort_files(&ent.dirs->files, ent.flags);
-			if (ent.flags & TIMEMODIFIED_SORT)
-				mergesort_ltmod(&ent.dirs->files);
 
 
 			//printer
 			if (ent.flags & RECURISIVE_LIST)
+			{
 				recursiveprint(".", ent.flags);
+			}
 			else
 			{
+				ent.dirs->dir_name = ft_strdup(".");
+				opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
+				mergesort_files(&ent.dirs->files, ent.flags);
+				if (ent.flags & TIMEMODIFIED_SORT)
+					mergesort_ltmod(&ent.dirs->files);
 				if (ent.flags & LONG_FORMAT)
 					ft_printf("total %i\n", gettotalblocks(ent.dirs->files));
 				printfileslist(ent.dirs->files, ent.flags);

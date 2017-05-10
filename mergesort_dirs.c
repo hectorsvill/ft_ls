@@ -75,12 +75,20 @@ static t_dirs	*sortedmerge(t_dirs *a, t_dirs *b)
 static t_dirs	*sortedmerge_reverse(t_dirs *a, t_dirs *b)
 {
 	t_dirs		*result = NULL;
+	char		*as;
+	char		*bs;
 
 	if (a == NULL)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (ft_strcmp(a->dir_name, b->dir_name) > 0)
+
+	as = a->dir_name;
+	bs = b->dir_name;
+	as += 2;
+	bs += 2;
+	//ft_putendl(as);ft_putendl(b->dir_name);
+	if (ft_strcmp(as, bs) > 0)
 	{
 		result = a;
 		result->next = sortedmerge(a->next , b);

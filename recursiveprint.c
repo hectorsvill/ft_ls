@@ -47,13 +47,16 @@ void  	recursiveprint(char *rootdir, t_flags flags)
 	dirs->files->lnklocstr = NULL;
 	dirs->dir_name = ft_strdup(rootdir);
 	opendir_getnames(&dirs->files, rootdir, flags);
-	rec(rootdir, &dirs, flags);
-	mergesort_dirs(&dirs, flags);
 	mergesort_files(&dirs->files, flags);
 	printfileslist(dirs->files, flags);
+	dirs = dirs->next;
+	rec(rootdir, &dirs, flags);
+	mergesort_dirs(&dirs, flags);
+
+
+
 	ft_putchar('\n');
 
-	dirs = dirs->next;
 	print_all_dirs(dirs, flags);
 }
 
