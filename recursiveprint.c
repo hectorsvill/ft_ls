@@ -51,6 +51,7 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 			stat(tmp, &sb);
 			if (S_ISDIR(sb.st_mode))
 			{
+				//ft_putendl(tmp);
 				lstadd_dirs(head, tmp, flags);
 			}
 			rec(tmp, head, flags);
@@ -70,10 +71,30 @@ void printalldirsrec(t_dirs *head, t_flags flags)
 	}
 }
 
+void recurthisdir(t_dirs *dirs, t_flags flags)
+{
+	t_dirs 	*d;
+	char	*rd;
+
+	printfileslist(dirs->files, flags);
+	d = add_too_dirlist(dirs->files, flags);
+	mergesort_dirs(&d, flags);
+
+
+	while (d)
+	{
+		ft_putendl(d->dir_name);exit(2);
+		rd = ft_strjoin(dirs->dir_name, d->dir_name);
+		ft_printf("\n%s:\n", rd);
+		recursiveprint(rd, flags);//printalldirsrec(rd, ent.flags);
+
+		d = d->next;
+	}
+}
+
 void  	recursiveprint(char *rootdir, t_flags flags)
 {
 	t_dirs 	*dirs;
-	//t_dirs	*head;
 
 	dirs = init_d();
 	dirs->dir_name = ft_strdup(rootdir);
@@ -81,9 +102,8 @@ void  	recursiveprint(char *rootdir, t_flags flags)
 	mergesort_files(&dirs->files, flags);
 	printfileslist(dirs->files, flags);
 	dirs = dirs->next;
-
 	rec(rootdir, &dirs, flags);
-	mergesort_dirs(&dirs, flags);
+	// mergesort_dirs(&dirs, flags);
 	ft_putchar('\n');
 	print_all_dirs(dirs, flags);
 }

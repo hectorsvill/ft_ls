@@ -105,6 +105,7 @@ t_flags setfield(char *str_flags);
 /*
 **	recursiveprint.c
 */
+void 	recurthisdir(t_dirs *dirs, t_flags flags);
 void 	recursiveprint(char *rootdir, t_flags flags);
 void 	printalldirsrec(t_dirs *head, t_flags flags);
 t_dirs 	*init_d(void);
