@@ -33,3 +33,18 @@ void addto_list(char **av, t_entries *ent)
 		av++;
 	}
 }
+
+t_dirs *add_too_dirlist(t_files *files, t_flags flag)
+{
+	t_dirs *d;
+
+	d = NULL;
+
+	while (files)
+	{
+		if (S_ISDIR(files->mode))
+			lstadd_dirs(&d, files->file, flag);
+		files = files->next;
+	}
+	return (d);
+}

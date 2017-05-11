@@ -80,7 +80,7 @@ static t_files	*sortedmerge_reverse(t_files *a, t_files *b)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (ft_strcmp(a->file, b->file) > 0)	//reverse order > 0
+	if (ft_strcmp(a->file, b->file) > 0)
 	{
 		result = a;
 		result->next = sortedmerge_reverse(a->next , b);

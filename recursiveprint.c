@@ -64,7 +64,7 @@ void printalldirsrec(t_dirs *head, t_flags flags)
 {
 	while (head)
 	{
-		ft_printf("\n%s:\n", head->dir_name);
+		ft_printf("%s:\n", head->dir_name);
 		recursiveprint(head->dir_name, flags);
 		head = head->next;
 	}
@@ -81,6 +81,7 @@ void  	recursiveprint(char *rootdir, t_flags flags)
 	mergesort_files(&dirs->files, flags);
 	printfileslist(dirs->files, flags);
 	dirs = dirs->next;
+
 	rec(rootdir, &dirs, flags);
 	mergesort_dirs(&dirs, flags);
 	ft_putchar('\n');

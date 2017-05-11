@@ -89,6 +89,7 @@ void 	mergesort_dirs(t_dirs **headref, t_flags flags);
 /**
 **	addto_spec_list.c
 **/
+t_dirs 	*add_too_dirlist(t_files *files, t_flags flag);
 void 	addto_list(char **av, t_entries *ent);
 /**
 **	mergesort_ltmodified.c
@@ -106,7 +107,7 @@ t_flags setfield(char *str_flags);
 */
 void 	recursiveprint(char *rootdir, t_flags flags);
 void 	printalldirsrec(t_dirs *head, t_flags flags);
-
+t_dirs 	*init_d(void);
 /*
 **	ls-l.c
 */

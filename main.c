@@ -134,18 +134,31 @@ int main(int ac, char **av)
 		}
 		if (ac == 2)
 		{
-
-
-			//printer
+			ent.dirs->dir_name = ft_strdup("./");
+			opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
+			mergesort_files(&ent.dirs->files, ent.flags);
 			if (ent.flags & RECURISIVE_LIST)
 			{
-				recursiveprint(".", ent.flags);
+				t_dirs *d;
+				char	*rd;
+
+
+				printfileslist(ent.dirs->files, ent.flags);
+				d = add_too_dirlist(ent.dirs->files, ent.flags);
+				mergesort_dirs(&d, ent.flags);
+				while (d)
+				{
+					//rd = ft_strnew(ft_strlen(d->dir_name) + ft_strlen(ent.dirs->dir_name));
+
+					rd = ft_strjoin(ent.dirs->dir_name, d->dir_name);
+					ft_printf("\n%s:\n", rd);
+					recursiveprint(rd, ent.flags);//printalldirsrec(rd, ent.flags);
+					d = d->next;
+				}
 			}
 			else
 			{
-				ent.dirs->dir_name = ft_strdup(".");
-				opendir_getnames(&ent.dirs->files, ent.dirs->dir_name, ent.flags);
-				mergesort_files(&ent.dirs->files, ent.flags);
+
 				if (ent.flags & TIMEMODIFIED_SORT)
 					mergesort_ltmod(&ent.dirs->files);
 				if (ent.flags & LONG_FORMAT)
