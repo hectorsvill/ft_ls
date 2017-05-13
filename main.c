@@ -95,9 +95,9 @@ int opendir_getnames(t_files **files, char *dir_name, t_flags flags)
 int main(int ac, char **av)
 {
 	t_entries ent;
-	char flagcheck;
 
-	flagcheck = 0;
+
+
 	ent = entries_init();
 	if (ac == 1)
 	{
@@ -115,23 +115,7 @@ int main(int ac, char **av)
 
 	if (**av == '-')
 	{
-		if (!ft_strcmp(*av, "-"))
-		{
-			ft_putendl("ls: -: No such file or directory");
-			exit(1);
-		}
-		flagcheck = checkflags(*av);
-		if (flagcheck == 1)
-			ent.flags = setfield(*av);
-		else
-		{
-			if (flagcheck != '1')
-			{
-				ft_printf("/bin/ls: illegal option -- %c\n", flagcheck);
-				ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
-				exit(1);
-			}
-		}
+		ent.flags = getallflags(av);
 		if (ac == 2)
 		{
 			ent.dirs->dir_name = ft_strdup("./");

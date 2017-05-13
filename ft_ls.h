@@ -99,6 +99,7 @@ void 	mergesort_ltmod_dirs(t_dirs **headref);
 /*
 **	valid_flags.c
 */
+t_flags getallflags(char **av);
 char 	checkflags(char *cf);
 t_flags setfield(char *str_flags);
 

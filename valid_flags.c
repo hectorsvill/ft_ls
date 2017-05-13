@@ -36,11 +36,7 @@ t_flags setfield(char *str_flags)
 	}
 	return (flags);
 }
-/**
-**	TODO: Check for valid flags.
-**		  retunr 1 if all valid flags else 0.
-**		  valid flags: l R a r t
-**/
+
 static char checkflag(char cf)
 {
 	char *flags;
@@ -65,4 +61,31 @@ char checkflags(char *cf)
 		cf++;
 	}
 	return(1);
+}
+
+t_flags getallflags(char **av)
+{
+	t_flags flags;
+	char flagcheck;
+
+	flagcheck = 0;
+	flags = 0;
+	if (!ft_strcmp(*av, "-"))
+	{
+		ft_putendl("ls: -: No such file or directory");
+		exit(1);
+	}
+	flagcheck = checkflags(*av);
+	if (flagcheck == 1)
+		flags = setfield(*av);
+	else
+	{
+		if (flagcheck != '1')
+		{
+			ft_printf("/bin/ls: illegal option -- %c\n", flagcheck);
+			ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
+			exit(1);
+		}
+	}
+	return (flags);
 }
