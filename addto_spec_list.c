@@ -26,10 +26,17 @@ void addto_list(char **av, t_entries *ent)
 			;
 		else if ((lstat(*av, &sb)) == -1)
 			lstadd_files(&ent->none_ex, ".", *av, ent->flags);
-		else if (S_ISREG(sb.st_mode) || S_ISLNK(sb.st_mode))
+		else if (S_ISREG(sb.st_mode))
 			lstadd_files(&ent->file_list, ".", *av, ent->flags);
 		else if(S_ISDIR(sb.st_mode))
 			lstadd_dirs(&ent->dirs, *av, ent->flags);
+		else if (S_ISLNK(sb.st_mode))
+		{
+			if (opendir(*av) == NULL)
+				lstadd_files(&ent->file_list, ".", *av, ent->flags);
+			else
+				lstadd_dirs(&ent->dirs, *av, ent->flags);
+		}
 		av++;
 	}
 }
