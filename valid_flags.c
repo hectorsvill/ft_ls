@@ -32,6 +32,8 @@ t_flags setfield(char *str_flags)
 			flags |= REVERSE_ORDER;
 		else if (*str_flags == 't')
 			flags |= TIMEMODIFIED_SORT;
+		else if (*str_flags == 'g')
+			flags |= GROUP_NAME;
 		str_flags++;
 	}
 	return (flags);
@@ -41,7 +43,7 @@ static char checkflag(char cf)
 {
 	char *flags;
 
-	flags = ft_strndup("1lRart", 6);
+	flags = ft_strndup("1lRartg", 7);
 	while (*flags)
 	{
 		if (cf == *flags)
@@ -84,7 +86,7 @@ t_flags getallflags(char **av)
 		if (flagcheck != '1')
 		{
 			ft_printf("/bin/ls: illegal option -- %c\n", flagcheck);
-			ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
+			ft_putendl("usage: ls [-lrartg] [file ...]");
 			exit(1);
 		}
 	}

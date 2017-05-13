@@ -15,7 +15,7 @@ void writeformatsp(int len)
 		len--;
 	}
 }
-void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax)
+void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax, t_flags flags)
 {
 	int len;
 
@@ -24,9 +24,13 @@ void printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int siz
 	len  = (int)ft_intmax_tlen((intmax_t)file.nlink);
 	writeformatsp(nlinkmax - len);
 	ft_printf("%i ", file.nlink);
-	ft_printf("%s  ", file.uid);
-	len = (int)ft_strlen(file.uid);
-	writeformatsp(uidmax - len);
+
+	if (!(flags & GROUP_NAME))
+	{
+		ft_printf("%s  ", file.uid);
+		len = (int)ft_strlen(file.uid);
+		writeformatsp(uidmax - len);
+	}
 	ft_printf("%s  ", file.gid);
 	len = (int)ft_strlen(file.gid);
 	writeformatsp(gidmax - len);

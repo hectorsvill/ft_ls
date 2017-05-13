@@ -15,7 +15,7 @@
 void addto_list(char **av, t_entries *ent)
 {
 	struct stat sb;
-
+	DIR 		*dir;
 
 	ent->dirs = NULL;
 	ent->file_list = NULL;
@@ -32,10 +32,13 @@ void addto_list(char **av, t_entries *ent)
 			lstadd_dirs(&ent->dirs, *av, ent->flags);
 		else if (S_ISLNK(sb.st_mode))
 		{
-			if (opendir(*av) == NULL)
+			if (!(dir = opendir(*av)))
 				lstadd_files(&ent->file_list, ".", *av, ent->flags);
 			else
+			{
 				lstadd_dirs(&ent->dirs, *av, ent->flags);
+				closedir(dir);
+			}
 		}
 		av++;
 	}

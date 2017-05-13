@@ -40,7 +40,7 @@ void printfileslist(t_files *list, t_flags flags)
 	int uidmax = 0;
 	int gidmax = 0;
 
-	if (LONG_FORMAT & flags)
+	if (flags & LONG_FORMAT || flags & GROUP_NAME)
 	{
 		getmax_nbr(list, &nlinkmax, 'n');
 		getmax_nbr(list, &sizemax, 's');
@@ -49,8 +49,8 @@ void printfileslist(t_files *list, t_flags flags)
 	}
 	while (list)
 	{
-		if (LONG_FORMAT & flags)
-			printlongformat(*list, nlinkmax, uidmax, gidmax, sizemax);
+		if (flags & LONG_FORMAT || flags & GROUP_NAME)
+			printlongformat(*list, nlinkmax, uidmax, gidmax, sizemax, flags);
 		else
 			ft_putendl(list->file);
 		list = list->next;
@@ -63,7 +63,7 @@ void print_all_dirs(t_dirs *dir_list, t_flags flags)
 	while (dir_list)
 	{
 		ft_printf("%s:\n", dir_list->dir_name);
-		if (flags & LONG_FORMAT)
+		if (flags & LONG_FORMAT || flags & GROUP_NAME)
 			ft_printf("total %i\n", gettotalblocks(dir_list->files));
 		printfileslist(dir_list->files, flags);
 		if (dir_list->next != NULL)

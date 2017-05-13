@@ -26,6 +26,7 @@ typedef enum s_flags
 	ALL_DIRS = 4,
 	REVERSE_ORDER = 8,
  	TIMEMODIFIED_SORT = 16,
+	GROUP_NAME = 32,
 }			t_flags;
 
 typedef struct	s_files
@@ -117,8 +118,7 @@ t_dirs 	*init_d(void);
 int		gettotalblocks(t_files *files);
 char	*fileprotection(short st_mode);
 char	*file_mtime(time_t *timer);
-void 	printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax);
-
+void 	printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax, t_flags);
 char	*get_uid(uid_t sb_uid);
 char	*get_gid(gid_t sb_gid);
 
