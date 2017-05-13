@@ -68,6 +68,7 @@ t_flags getallflags(char **av)
 	t_flags flags;
 	char flagcheck;
 
+
 	flagcheck = 0;
 	flags = 0;
 	if (!ft_strcmp(*av, "-"))

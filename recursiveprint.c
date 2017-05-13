@@ -51,8 +51,8 @@ void 	rec(char *dir_name, t_dirs **head, t_flags flags)
 			stat(tmp, &sb);
 			if (S_ISDIR(sb.st_mode))
 			{
-				//ft_putendl(tmp);
-				lstadd_dirs(head, tmp, flags);
+				ft_putendl(tmp);
+				//lstadd_dirs(head, tmp, flags);
 			}
 			rec(tmp, head, flags);
 		}
@@ -103,7 +103,8 @@ void  	recursiveprint(char *rootdir, t_flags flags)
 	printfileslist(dirs->files, flags);
 	dirs = dirs->next;
 	rec(rootdir, &dirs, flags);
-	// mergesort_dirs(&dirs, flags);
+	//exit(1);
+	mergesort_dirs(&dirs, flags);
 	ft_putchar('\n');
 	print_all_dirs(dirs, flags);
 }

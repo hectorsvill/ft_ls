@@ -132,8 +132,6 @@ int main(int ac, char **av)
 				mergesort_dirs(&d, ent.flags);
 				while (d)
 				{
-					//rd = ft_strnew(ft_strlen(d->dir_name) + ft_strlen(ent.dirs->dir_name));
-
 					rd = ft_strjoin(ent.dirs->dir_name, d->dir_name);
 					ft_printf("\n%s:\n", rd);
 					recursiveprint(rd, ent.flags);//printalldirsrec(rd, ent.flags);
