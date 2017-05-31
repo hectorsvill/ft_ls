@@ -93,15 +93,28 @@
 // 	return (1);
 // }
 
+t_bol file_accessible(char *file)
+{
+	struct stat st;
+
+	if (lstat(file, &st) == 0)
+		return (1);
+	else
+	{
+		ft_printf("ft_ls: %s: %s", file, strerror(errno));
+		return (0);
+	}
+}
+
 void error_flag(char c)
 {
-	ft_putstr_fd("ft_ls:illegal option --", 2);
+	ft_putstr_fd("ft_ls: illegal option --", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("\nusage: ft_ls [-alrRtg] [file ....]\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-t_flags *getallflags(int ac, char **av)
+static t_flags *getallflags(int ac, char **av)
 {
 	t_flags	*flags;
 	int		i;
@@ -126,31 +139,31 @@ t_flags *getallflags(int ac, char **av)
 		}
 	}
 	return (flags);
+}
 
+static t_list	get_filelist(int ac, char *av, int *valid_avs)
+{
+	t_list		*file_list;
+	t_file		*tmp;
+	int 		i;
+
+	i = 0;
+	file_list = NULL;
+	tmp = (t_file*)ft_memalloc(sizeof(t_file))
+	//file_list = get_valid_files(ac, av, &valid_avs);
+
+	return (file_list);
 }
 
 int main (int ac, char **av)
 {
 	t_flags *flags;
-	//t_list 	*file_list;
-	//int		list_length;
+	t_list 	*file_list;
+	int		valid_avs;
 
 	flags = getallflags(ac, av);
-	if (flags->a)
-		printf("-a\n");
-	if (flags->l)
-		printf("-l\n");
-	if (flags->up_r)
-		printf("-R\n");
-	if (flags->r)
-		printf("-r\n");
-	if (flags->t)
-		printf("-t\n");
-	if (flags->g)
-		printf("-g\n");
-
-
-
+	file_list = get_filelist(ac, av, &valid_avs);
+	free((void*)flags);
 	return (0);
 }
 
