@@ -59,9 +59,10 @@ static t_list *get_valid_files(int ac, char **av, int *valid_files)
 	tmp = (t_file *)ft_memalloc(sizeof(t_file));
 	while (++i < ac)
 	{
+	//	ft_putendl(av[i]);
 		if (av[i][0] != '-' && !file_accessible(av[i]))
 		{
-			ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+			//ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
 			(*valid_files)++;
 		}
 		else if(ft_strchr(&av[i][0], '-') == 0 && !ft_strequ(av[i], "./ft_ls"))
@@ -72,6 +73,7 @@ static t_list *get_valid_files(int ac, char **av, int *valid_files)
 			(*valid_files)++;
 		}
 	}
+	exit(2);
 	free(tmp);
 	return (file_list);
 }
@@ -85,13 +87,6 @@ static t_list	*get_filelist(int ac, char **av, t_flags *flags)
 	valid_files = 0;
 	tmp = (t_file*)ft_memalloc(sizeof(t_file));
 	file_list = get_valid_files(ac, av, &valid_files);
-	ft_printf("%i\n", ft_lst_len(file_list));
-
-	while (file_list){
-		ft_putendl(file_list->content);
-		file_list = file_list->next;
-	}
-exit(2);
 	if (valid_files == 0 && !ft_lst_len(file_list))
 	{
 		tmp->name = ft_strdup(".");
@@ -101,6 +96,9 @@ exit(2);
 	else
 		ft_printf("%i\n", flags);//lst_sort(file_list, (flags));
 	free(tmp);
+	//ft_printf("%i\n%s\n", ft_lst_len(file_list), tmp->name);
+	ft_printf("%i\n%s\n", ft_lst_len(file_list), file_list->content);
+
 	return (file_list);
 }
 

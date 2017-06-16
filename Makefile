@@ -111,6 +111,7 @@ FT_PRINTF =	ft_flagc.o \
 CC = gcc -Wall -Wextra -Werror
 
 FT_LS =	main.o \
+		ls_help.o \
 
 COMPILED = $(LIBFT) $(FT_PRINTF) $(FT_LS)
 
