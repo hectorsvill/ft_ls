@@ -12,18 +12,6 @@
 
 #include "ft_ls.h"
 
-int file_accessible(char *file)
-{
-	struct stat st;
-
-	if (lstat(file, &st) == 0)
-		return (1);
-	else
-	{
-		ft_printf("ft_ls: %s: %s\n", file, strerror(errno));
-		return (0);
-	}
-}
 
 void error_flag(char c)
 {
@@ -73,14 +61,14 @@ static t_list *get_valid_files(int ac, char **av, int *valid_files)
 	{
 		if (av[i][0] != '-' && !file_accessible(av[i]))
 		{
-			//ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+			ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
 			(*valid_files)++;
 		}
-		else //if(ft_strchr(&av[i][0], '-') == 0 && !ft_strequ(av[i], "./ft_ls"))
+		else if(ft_strchr(&av[i][0], '-') == 0 && !ft_strequ(av[i], "./ft_ls"))
 		{
 			tmp->name = ft_strdup(av[i]);
 			lstat(tmp->name, &(tmp->stats));
-			//ft_lst_append(&file_list, ft_lstnew(tmp, sizeof(t_file)));
+			ft_lst_append(&file_list, ft_lstnew(tmp, sizeof(t_file)));
 			(*valid_files)++;
 		}
 	}
@@ -92,21 +80,27 @@ static t_list	*get_filelist(int ac, char **av, t_flags *flags)
 {
 	t_list		*file_list;
 	t_file		*tmp;
-	int 		valid_avs;
+	int 		valid_files;
 
-	printf("%i\n", (int)flags);
-	valid_avs = 0;
+	valid_files = 0;
 	tmp = (t_file*)ft_memalloc(sizeof(t_file));
-	file_list = get_valid_files(ac, av, &valid_avs);
-	// if (valid_files == 0 && !ft_lst_len(file_list))
-	// {
-	// 	tmp->name = ft_strdup(".");
-	// 	lstat(tmp->name, &(tmp->stats));
-	// 	ft_lst_append(&file_list, ft_lstnew(tmp, sizeof(t_file)));
-	// }
-	// else
-	// 	lst_sort(file_list, (flag));
-	// free(tmp);
+	file_list = get_valid_files(ac, av, &valid_files);
+	ft_printf("%i\n", ft_lst_len(file_list));
+
+	while (file_list){
+		ft_putendl(file_list->content);
+		file_list = file_list->next;
+	}
+exit(2);
+	if (valid_files == 0 && !ft_lst_len(file_list))
+	{
+		tmp->name = ft_strdup(".");
+		lstat(tmp->name, &(tmp->stats));
+		ft_lst_append(&file_list, ft_lstnew(tmp, sizeof(t_file)));
+	}
+	else
+		ft_printf("%i\n", flags);//lst_sort(file_list, (flags));
+	free(tmp);
 	return (file_list);
 }
 
@@ -115,14 +109,9 @@ int main (int ac, char **av)
 	t_flags *flags;
 	t_list 	*file_list;
 
-	ft_printf("%-10.3s", "test, ");
-	ft_putendl("");
 	flags = getallflags(ac, av);
 	file_list = get_filelist(ac, av, flags);
-	while (file_list){
-		ft_putendl((char*)file_list->content);
-		file_list = file_list->next;
-	}
+
 	//free((void*)flags);
 	return (0);
 }

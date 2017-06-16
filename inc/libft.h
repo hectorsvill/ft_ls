@@ -104,5 +104,7 @@ char			*ft_strtouper(char *toup);
 void			ft_lstfree(t_list *head);
 void			ft_lstprint(t_list *head);
 int				ft_abs(int num);
+void 			ft_lst_append(t_list **alst, t_list *new_lst);
+size_t 			ft_lst_len(t_list *head);
 
 #endif

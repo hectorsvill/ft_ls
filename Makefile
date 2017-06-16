@@ -93,6 +93,8 @@ LIBFT =		ft_strlen.o \
 			ft_lstfree.o \
 			ft_lstprint.o \
 			ft_abs.o \
+			ft_lst_append.o \
+			ft_lst_len.o \
 
 FT_PRINTF =	ft_flagc.o \
 			ft_flagi.o \
@@ -136,3 +138,4 @@ clean:
 fclean: clean
 	@rm $(NAME)
 	@echo "Fcleaned" $(NAME)
+.Phony: all re clean fclean

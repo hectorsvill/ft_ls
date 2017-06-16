@@ -21,16 +21,6 @@
 # include <stdio.h>
 # include <errno.h>
 
-// typedef enum s_flags
-// {
-// 	LONG_FORMAT = 1,
-// 	RECURISIVE_LIST = 2,
-// 	ALL_DIRS = 4,
-// 	REVERSE_ORDER = 8,
-//  	TIMEMODIFIED_SORT = 16,
-// 	GROUP_NAME = 32,
-// }			t_flags;
-
 typedef struct	s_flags
 {
 	unsigned int l:1;
@@ -46,6 +36,12 @@ typedef struct	s_file
 	char 		*name;
 	struct stat	stats;
 }				t_file;
+
+/**
+** ls_help.c
+**/
+int file_accessible(char *file);
+
 
 //
 // typedef struct	s_files
