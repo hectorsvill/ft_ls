@@ -31,7 +31,6 @@ static t_flags *getallflags(int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-
 		j = 0;
 		while (av[i][0] == '-' && av[i][j++] != '\0')
 		{
@@ -59,12 +58,8 @@ static t_list *get_valid_files(int ac, char **av, int *valid_files)
 	tmp = (t_file *)ft_memalloc(sizeof(t_file));
 	while (++i < ac)
 	{
-	//	ft_putendl(av[i]);
 		if (av[i][0] != '-' && !file_accessible(av[i]))
-		{
-			//ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
 			(*valid_files)++;
-		}
 		else if(ft_strchr(&av[i][0], '-') == 0 && !ft_strequ(av[i], "./ft_ls"))
 		{
 			tmp->name = ft_strdup(av[i]);
@@ -73,7 +68,7 @@ static t_list *get_valid_files(int ac, char **av, int *valid_files)
 			(*valid_files)++;
 		}
 	}
-	exit(2);
+
 	free(tmp);
 	return (file_list);
 }
@@ -94,11 +89,8 @@ static t_list	*get_filelist(int ac, char **av, t_flags *flags)
 		ft_lst_append(&file_list, ft_lstnew(tmp, sizeof(t_file)));
 	}
 	else
-		ft_printf("%i\n", flags);//lst_sort(file_list, (flags));
+		lst_sort(file_list, (flags->t ? &cmp_lex : &cmp_alpha), flags->r);
 	free(tmp);
-	//ft_printf("%i\n%s\n", ft_lst_len(file_list), tmp->name);
-	ft_printf("%i\n%s\n", ft_lst_len(file_list), file_list->content);
-
 	return (file_list);
 }
 
@@ -106,10 +98,22 @@ int main (int ac, char **av)
 {
 	t_flags *flags;
 	t_list 	*file_list;
+	int 	list_length;
 
 	flags = getallflags(ac, av);
 	file_list = get_filelist(ac, av, flags);
+	list_length = ft_lst_len(file_list);
+//	process_arguments(file_list, flags, list_length);
+	//ft_lstdel(&file_list, &ft_lstfree);
 
-	//free((void*)flags);
+
+	// t_list *tmp2 = file_list;
+	// while (tmp2)
+	// {
+	// 	ft_putendl(tmp2->content);
+	// 	tmp2 = tmp2->next;
+	// }
+	// exit(2);
+	free(flags);
 	return (0);
 }
