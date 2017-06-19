@@ -100,7 +100,7 @@ int					main(int ac, char **av)
 	// ft_printf("%i\n", list_length);
 	// exit(1);
 	process_arguments(file_list, flags, list_length);
-	// ft_lstdel(&file_list, &ft_lst_free);
-	// free(flags);
+	ft_lstdel(&file_list, &ft_lst_free);
+	free(flags);
 	return (0);
 }

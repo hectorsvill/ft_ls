@@ -14,12 +14,16 @@
 #define FT_LS_H
 
 # include "ft_printf.h"
+# include <grp.h>
+# include <pwd.h>
+# include <uuid/uuid.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <dirent.h>
 # include <time.h>
 # include <stdio.h>
 # include <errno.h>
+
 
 typedef struct	s_flags
 {
@@ -40,25 +44,21 @@ typedef struct	s_file
 /**
 ** ls_help.c
 **/
-int file_accessible(char *file);
-
+int 	file_accessible(char *file);
+void	calc_col_width_get_dev_info(t_list *file_list, unsigned int *w);
+void	unknown_option(char c);
+void	error_message(char *filename, char *error_msg_prefix, int close);
 /**
 ** sort.c
 **/
-
 void 	ls_sort(t_list *start, int (*f)(t_file*, t_file *, int), int reverse_cmp);
 int		cmp_alpha(t_file *p1, t_file *p2, int reverse_cmp);
 int		cmp_lex(t_file *p1, t_file *p2, int reverse_cmp);
-
 /**
 ** process_arguments.c
 **/
-
 void process_arguments(t_list *file_list, t_flags *flags, int list_len);
 void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags);
-
-
-
 //
 // typedef struct	s_files
 // {

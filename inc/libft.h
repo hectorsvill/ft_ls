@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 
+# define MAX(A, B) (((A) > (B)) ? (A) : (B))
 # define IFTRUE(x, y) if(x) return (y)
 # define BUFF_SIZE 32
 
