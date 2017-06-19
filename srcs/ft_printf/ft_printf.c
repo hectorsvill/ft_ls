@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int static	vallid_asset(const char *fmt)
+static int	vallid_asset(const char *fmt)
 {
 	while (*fmt)
 	{

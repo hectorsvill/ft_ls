@@ -42,6 +42,14 @@ typedef struct	s_file
 **/
 int file_accessible(char *file);
 
+/**
+** sort.c
+**/
+
+void 	ls_sort(t_list *start, int (*f)(t_file*, t_file *, int), int reverse_cmp);
+int		cmp_alpha(t_file *p1, t_file *p2, int reverse_cmp);
+int		cmp_lex(t_file *p1, t_file *p2, int reverse_cmp);
+
 
 //
 // typedef struct	s_files

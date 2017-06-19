@@ -112,6 +112,7 @@ CC = gcc -Wall -Wextra -Werror
 
 FT_LS =	main.o \
 		ls_help.o \
+		sort.o \
 
 COMPILED = $(LIBFT) $(FT_PRINTF) $(FT_LS)
 
