@@ -3,11 +3,14 @@
 
 char *ft_tolower_str(char *str)
 {
-	while (*str)
+	char *tmp;
+
+	tmp = str;
+	while (*tmp)
 	{
-		if (*str >= 65 && *str <= 90)
-			*str += 32;
-		str++;
+		if (*tmp >= 65 && *tmp <= 90)
+			*tmp += 32;
+		tmp++;
 	}
 	return (str);
 }

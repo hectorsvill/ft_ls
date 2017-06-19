@@ -1,4 +1,4 @@
-#include "ft_ls"
+#include "ft_ls.h"
 
 static void		print_blocks(t_list *file_list)
 {
@@ -26,7 +26,7 @@ static void print_dir_contents(t_list *parent, t_list *file_list, t_flags *flags
 		return ;
 	if (flags->l)
 		print_blocks(entries);
-	lst_sort(entries, (flags->t) ? cmp_lex : cmp_alpha, flags->r);
+	ls_sort(entries, (flags->t) ? cmp_lex : cmp_alpha, flags->r);
 	tmp_entries = entries;
 	calc_col_width_get_dev_info(entries, info);
 	while (entries)
@@ -47,9 +47,9 @@ void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags
 {
 	while (entries)
 	{
-		if (S_ISDIR((t_file*)entries->content)->stats.st_mode) &&
-				!ft_strequ(((t_file*)entries->content)->stats.st_mode, ".") &&
-				!ft_strequ(((t_file*)entries->content)->stats.st_mode, ".."))
+		if (S_ISDIR(((t_file*)entries->content)->stats.st_mode) &&
+				!ft_strequ(((t_file*)entries->content)->name, ".") &&
+				!ft_strequ(((t_file*)entries->content)->name, ".."))
 			print_dir_contents(file_list, entries, flags);
 		entries = entries->next;
 	}
@@ -57,13 +57,13 @@ void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags
 }
 
 
-static void process_dir_contents(t_list *file_list, t_flags *flags, t_list *prev, int lisst_len)
+static void process_dir_contents(t_list *file_list, t_flags *flags, t_list *prev, int list_length)
 {
 	if (!ft_strequ(".", ((t_file *)file_list->content)->name))
 	{
 		if (prev)
 			ft_putchar('\n');
-		if (list_len > 1)
+		if (list_length > 1)
 			ft_printf("%s:\n", ((t_file *)file_list->content)->name);
 	}
 	print_dir_contents(NULL, file_list, flags);

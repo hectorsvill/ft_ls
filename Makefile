@@ -95,6 +95,8 @@ LIBFT =		ft_strlen.o \
 			ft_abs.o \
 			ft_lst_append.o \
 			ft_lst_len.o \
+			ft_tolower_str.o \
+			ft_lst_free.o \
 
 FT_PRINTF =	ft_flagc.o \
 			ft_flagi.o \
@@ -108,11 +110,13 @@ FT_PRINTF =	ft_flagc.o \
 			ft_setAssets.o \
 			ft_whitesp.o \
 
-CC = gcc -Wall -Wextra -Werror
+
+CC = gcc -Wall -Wextra -Werror -g
 
 FT_LS =	main.o \
 		ls_help.o \
 		sort.o \
+		process_arguments.o \
 
 COMPILED = $(LIBFT) $(FT_PRINTF) $(FT_LS)
 

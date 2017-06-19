@@ -106,5 +106,7 @@ void			ft_lstprint(t_list *head);
 int				ft_abs(int num);
 void 			ft_lst_append(t_list **alst, t_list *new_lst);
 size_t 			ft_lst_len(t_list *head);
+char 			*ft_tolower_str(char *str);
+void 			ft_lst_free(void *content, size_t content_size);
 
 #endif

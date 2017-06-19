@@ -50,6 +50,14 @@ void 	ls_sort(t_list *start, int (*f)(t_file*, t_file *, int), int reverse_cmp);
 int		cmp_alpha(t_file *p1, t_file *p2, int reverse_cmp);
 int		cmp_lex(t_file *p1, t_file *p2, int reverse_cmp);
 
+/**
+** process_arguments.c
+**/
+
+void process_arguments(t_list *file_list, t_flags *flags, int list_len);
+void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags);
+
+
 
 //
 // typedef struct	s_files
