@@ -26,7 +26,7 @@ static t_flags		*read_options(int ac, char **av)
 		while (av[i][0] == '-' && av[i][j++] != '\0')
 		{
 			if (!ft_strchr("alrRt", av[i][j]))
-				{}//unknown_option(av[i][j]);
+				unknown_option(av[i][j]);
 			flags->a = (av[i][j] == 'a' ? 1 : flags->a);
 			flags->l = (av[i][j] == 'l' ? 1 : flags->l);
 			flags->r = (av[i][j] == 'r' ? 1 : flags->r);
