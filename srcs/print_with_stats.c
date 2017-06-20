@@ -103,7 +103,7 @@ void print_filetype(mode_t m)
 		ft_putchar('f');
 	else if (S_ISDIR(m))
 		ft_putchar('d');
-	print_permsissions(m);
+	print_permissions(m);
 	//ACL
 }
 

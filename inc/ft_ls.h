@@ -24,6 +24,7 @@
 # include <stdio.h>
 # include <errno.h>
 
+#define SIX_MONTHS 15552000
 
 typedef struct	s_flags
 {

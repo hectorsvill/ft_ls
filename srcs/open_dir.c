@@ -1,7 +1,7 @@
 #include "ft_ls.h"
 
 
-t_list read_directorys(Dir *directory, t_list *file_list, t_flags *flags)
+static t_list 		*read_directorys(DIR *directory, t_list *file_list, t_flags *flags)
 {
 	struct dirent 	*file;
 	t_file			*current;
@@ -12,7 +12,7 @@ t_list read_directorys(Dir *directory, t_list *file_list, t_flags *flags)
 	file = readdir(directory);
 	while (file)
 	{
-		if (flag->a || file->d_name[0] != '.')
+		if (flags->a || file->d_name[0] != '.')
 		{
 			current->name = ft_strdup(file->d_name);
 			lstat(ft_strjoin(((t_file *)file_list->content)->name, file->d_name), &current->stats);
@@ -23,7 +23,6 @@ t_list read_directorys(Dir *directory, t_list *file_list, t_flags *flags)
 	free(current);
 	return (entries);
 }
-
 
 static t_list *modify_folder_name(t_list *parent, t_list *file_list)
 {
@@ -68,7 +67,7 @@ t_list			*open_directory(t_list *parent, t_list *file_list, t_flags *flags)
 	directory = opendir(((t_file*)file_list->content)->name);
 	if (!directory)
 	{
-		ft_printf("ft_ls: %s: %s\n" file_name, strerror(errno));
+		ft_printf("ft_ls: %s: %s\n", file_name, strerror(errno));
 		return (NULL);
 	}
 	free(file_name);
