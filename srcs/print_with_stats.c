@@ -107,11 +107,28 @@ void print_filetype(mode_t m)
 	//ACL
 }
 
+void writeformatsp(int len)
+{
+	while (len > 0)
+	{
+		ft_putchar(' ');
+		len--;
+	}
+}
+
+void print_sp(t_file *file, int len)
+{
+	writeformatsp(len - 1);
+	ft_printf(" %d", file->stats.st_nlink);
+}
 
 void			print_with_stats(t_file *file, t_file *parent, unsigned int *i)
 {
 	print_filetype(file->stats.st_mode);
-	ft_printf(" %*d ", i[0], file->stats.st_nlink);
+
+	//ft_printf(" %*d ", i[0], file->stats.st_nlink);
+	print_sp(file, i[0]);
+
 	if (getpwuid(file->stats.st_uid))
 		ft_printf(i[6] ? "%-s " : "%*s ", i[1],
 			getpwuid(file->stats.st_uid)->pw_name);

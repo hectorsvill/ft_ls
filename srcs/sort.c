@@ -6,8 +6,8 @@ int				cmp_alpha(t_file *p1, t_file *p2, int reverse_cmp)
 	char	*tmp1;
 	char	*tmp2;
 
-	tmp1 = ft_tolower_str(ft_strdup(p1->name));
-	tmp2 = ft_tolower_str(ft_strdup(p2->name));
+	tmp1 = ft_strdup(p1->name);
+	tmp2 = ft_strdup(p2->name);
 	result = (ft_strcmp(tmp1, tmp2));
 	free(tmp1);
 	free(tmp2);

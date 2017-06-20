@@ -15,7 +15,8 @@ static t_list 		*read_directorys(DIR *directory, t_list *file_list, t_flags *fla
 		if (flags->a || file->d_name[0] != '.')
 		{
 			current->name = ft_strdup(file->d_name);
-			lstat(ft_strjoin(((t_file *)file_list->content)->name, file->d_name), &current->stats);
+			lstat(ft_strjoin(((t_file *)file_list->content)->name,
+				file->d_name), &current->stats);
 			ft_lst_append(&entries, ft_lstnew(current, sizeof(t_file)));
 		}
 		file = readdir(directory);
@@ -33,7 +34,7 @@ static t_list *modify_folder_name(t_list *parent, t_list *file_list)
 	parent_folder = NULL;
 	if (parent)
 		parent_name = ft_strdup(((t_file*)parent->content)->name);
-	file_name = ft_strdup(((t_file*)parent->content)->name);
+	file_name = ft_strdup(((t_file*)file_list->content)->name);
 	if (parent && (!ft_strequ(parent_name, file_name)))
 	{
 		parent_folder = ft_strjoin(parent_name, file_name);
@@ -47,11 +48,11 @@ static t_list *modify_folder_name(t_list *parent, t_list *file_list)
 		ft_putnstr(file_name, ft_strlen(file_name) - 1);
 		ft_putchar('\n');
 	}
-	free(((t_file*)parent->content)->name);
-	((t_file*)parent->content)->name = file_name;
+	free(((t_file*)file_list->content)->name);
+	((t_file*)file_list->content)->name = file_name;
 	if (parent)
 		free(parent);
-	free(parent_folder);
+	free(parent_folder)	;
 	return (file_list);
 }
 
