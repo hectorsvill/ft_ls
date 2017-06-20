@@ -117,6 +117,8 @@ FT_LS =	main.o \
 		ls_help.o \
 		sort.o \
 		process_arguments.o \
+		print_with_stats.o	\
+		open_dir.o \
 
 COMPILED = $(LIBFT) $(FT_PRINTF) $(FT_LS)
 

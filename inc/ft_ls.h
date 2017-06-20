@@ -59,38 +59,41 @@ int		cmp_lex(t_file *p1, t_file *p2, int reverse_cmp);
 **/
 void process_arguments(t_list *file_list, t_flags *flags, int list_len);
 void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags);
+
+/**
+** print_with_stats.c
+**/
+void print_with_stats(t_file *file, t_file *parent, unsigned int *i);
+
+/**
+** open_dir.c
+**/
+t_list		*open_directory(t_list *parent, t_list *file_list, t_flags *flags);
+
+/*
+**	lsl.c
+*/
 //
-// typedef struct	s_files
-// {
-// 	char		*file;
-// 	char		fileprotection[10];
-// 	char		*uid;
-// 	char		*gid;
-// 	char		*mtime;
-// 	char		*lnklocstr;
-// 	time_t		stmtime;
-// 	short		mode;
-// 	long		size;
-// 	long		nlink;
-// 	int			blocks;
-// 	struct s_files	*next;
-// }				t_files;
-//
-// typedef struct	s_dirs
-// {
-// 	char		*dir_name;		//name of specific dir
-// 	t_files		*files; //files of this dir_name
-// 	time_t		stmtime;
-// 	struct s_dirs	*next;
-// }				t_dirs;
-//
-// typedef struct s_entries
-// {
-// 	t_dirs		*dirs;	//hold list of dirs
-// 	t_files		*file_list; //hold list of files to output
-// 	t_files		*none_ex; //holds files that are non existent
-// 	t_flags		flags;
-// }				t_entries;
+// int		gettotalblocks(t_files *files);
+// char	*fileprotection(short st_mode);
+// char	*file_mtime(time_t *timer);
+// void 	printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax, t_flags);
+// char	*get_uid(uid_t sb_uid);
+// char	*get_gid(gid_t sb_gid);
+
+
+
+
+// /*
+// **	recursiveprint.c
+// */
+// void 	recurthisdir(t_dirs *dirs, t_flags flags);
+// void 	recursiveprint(char *rootdir, t_flags flags);
+// void 	printalldirsrec(t_dirs *head, t_flags flags);
+// t_dirs 	*init_d(void);
+
+
+
 
 /**
 **	main.c
@@ -98,6 +101,8 @@ void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags
 
 // int 	opendir_getnames(t_files **files, char *dir_name, t_flags flags);
 //
+
+
 // /*
 // **	ftls_list.c
 // */
@@ -110,6 +115,11 @@ void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags
 // void 		lstadd_files(t_files **head, char *dir_name, char *file_name, t_flags flags);
 // void 		lstadd_dirs(t_dirs **head, char *dir_name, t_flags flags);
 // t_entries	entries_init(void);
+
+
+
+
+
 // /**
 // **	mergesort_files.c
 // **/
@@ -128,31 +138,18 @@ void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags
 // **/
 // void 	mergesort_ltmod(t_files **headref);
 // void 	mergesort_ltmod_dirs(t_dirs **headref);
+
+
+
+
 /*
 **	valid_flags.c
 */
-
 // char 	checkflags(char *cf);
 // t_flags setfield(char *str_flags);
 
-// /*
-// **	recursiveprint.c
-// */
-// void 	recurthisdir(t_dirs *dirs, t_flags flags);
-// void 	recursiveprint(char *rootdir, t_flags flags);
-// void 	printalldirsrec(t_dirs *head, t_flags flags);
-// t_dirs 	*init_d(void);
-// /*
-// **	ls-l.c
-// */
-//
-// int		gettotalblocks(t_files *files);
-// char	*fileprotection(short st_mode);
-// char	*file_mtime(time_t *timer);
-// void 	printlongformat(t_files file, int nlinkmax, int uidmax, int gidmax, int sizemax, t_flags);
-// char	*get_uid(uid_t sb_uid);
-// char	*get_gid(gid_t sb_gid);
-//
+
+
 
 
 

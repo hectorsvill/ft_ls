@@ -50,7 +50,7 @@ static t_list		*populate_valid_args(int ac, char **av, int *valid_args)
 	{
 		if (av[i][0] != '-' && !file_accessible(av[i]))
 		{
-			ft_printf("ft_ls: %s: %s", av[i], strerror(errno));
+			//ft_printf("ft_ls: %s: %s", av[i], strerror(errno));
 			(*valid_args)++;
 		}
 		else if (ft_strchr(&av[i][0], '-') == 0 &&
@@ -97,8 +97,6 @@ int					main(int ac, char **av)
 	file_list = init_list_from_args(ac, av, flags);
 
 	list_length = ft_lst_len(file_list);
-	// ft_printf("%i\n", list_length);
-	// exit(1);
 	process_arguments(file_list, flags, list_length);
 	ft_lstdel(&file_list, &ft_lst_free);
 	free(flags);
