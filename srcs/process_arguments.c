@@ -13,7 +13,7 @@ static void		print_blocks(t_list *file_list)
 		total += ((t_file *)file_list->content)->stats.st_blocks;
 		file_list = file_list->next;
 	}
-	ft_printf("total %zu blocks (%ukb blocksize)\n", total, blksize);
+	ft_printf("total %zu\n", total);
 }
 
 static void print_dir_contents(t_list *parent, t_list *file_list, t_flags *flags)
@@ -31,10 +31,9 @@ static void print_dir_contents(t_list *parent, t_list *file_list, t_flags *flags
 	calc_col_width_get_dev_info(entries, info);
 	while (entries)
 	{
-
-
 		if (flags->l)
-			print_with_stats((t_file *)entries->content, ((t_file *)file_list->content), info);
+			print_with_stats((t_file *)entries->content,
+				((t_file *)file_list->content), info);
 		else
 			ft_printf("%s\n", ((t_file *)entries->content)->name);
 		entries = entries->next;

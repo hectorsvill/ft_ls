@@ -116,32 +116,30 @@ void writeformatsp(int len)
 	}
 }
 
-void print_sp(t_file *file, int len)
-{
-	writeformatsp(len - 1);
-	ft_printf(" %d", file->stats.st_nlink);
-
-}
 
 void			print_with_stats(t_file *file, t_file *parent, unsigned int *i)
 {
 	print_filetype(file->stats.st_mode);
 
 	//ft_printf(" %*d ", i[0], file->stats.st_nlink);
-	print_sp(file, i[0]);
+	writeformatsp(i[0]);
+	ft_printf("%d", file->stats.st_nlink);
 
 	if (getpwuid(file->stats.st_uid))
-		ft_printf(i[6] ? "%-s " : "%*s ", i[1],
-			getpwuid(file->stats.st_uid)->pw_name);
-	else
-		ft_printf(i[6] ? "%-*s " : "%*s ", i[1], ft_itoa(file->stats.st_uid));
-
-	exit(1);
+	{
+		writeformatsp(i[6]);
+		ft_printf(" %s ", getpwuid(file->stats.st_uid)->pw_name);
+	}//ft_printf(i[6] ? "%-s " : "%*s ", i[1], getpwuid(file->stats.st_uid)->pw_name);
+	// else
+	// 	ft_printf(i[6] ? "%-*s " : "%*s ", i[1], ft_itoa(file->stats.st_uid));
 	if (getgrgid(file->stats.st_gid))
-		ft_printf(i[6] ? "%-*s " : " %*s ", i[2],
-			getgrgid(file->stats.st_gid)->gr_name);
-	else
-		ft_printf(i[6] ? "%-*s " : " %*s ", i[2], ft_itoa(file->stats.st_uid));
+	{
+		writeformatsp(i[6]);
+		ft_printf(" %s ", getgrgid(file->stats.st_gid)->gr_name);
+		//ft_printf(i[6] ? "%-*s " : " %*s ", i[2], getgrgid(file->stats.st_gid)->gr_name);
+	}
+	// else
+	// 	ft_printf(i[6] ? "%-*s " : " %*s ", i[2], ft_itoa(file->stats.st_uid));
 	if (i[6])
 	{
 		if ((file->stats.st_mode & S_IFMT) == S_IFLNK)
@@ -151,7 +149,11 @@ void			print_with_stats(t_file *file, t_file *parent, unsigned int *i)
 		ft_printf(" %*d ", i[5], file->stats.st_rdev & 0xFFFFFF);
 	}
 	else
-		ft_printf(" %*lld ", i[3], file->stats.st_size);
+	{
+		writeformatsp(i[4]);
+		ft_printf(" %lld ", file->stats.st_size);
+		//ft_printf(" %*lld ", i[3], file->stats.st_size);
+	}
 	print_time(file->stats.st_mtime);
 	print_name_or_link(file, parent, file->stats.st_mode);
 }

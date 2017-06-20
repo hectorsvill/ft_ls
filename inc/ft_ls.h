@@ -58,7 +58,7 @@ int		cmp_lex(t_file *p1, t_file *p2, int reverse_cmp);
 /**
 ** process_arguments.c
 **/
-void process_arguments(t_list *file_list, t_flags *flags, int list_len);
+void 	process_arguments(t_list *file_list, t_flags *flags, int list_len);
 void 	traverse_subdirectories(t_list *entries, t_list *file_list, t_flags *flags);
 
 /**

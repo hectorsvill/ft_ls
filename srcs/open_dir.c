@@ -1,6 +1,41 @@
 #include "ft_ls.h"
 
 
+
+
+static t_list	*modify_folder_name(t_list *parent, t_list *file_list)
+{
+	char		*parent_folder;
+	char		*parent_name;
+	char		*file_name;
+
+	parent_folder = NULL;
+	if (parent)
+		parent_name = ft_strdup(((t_file *)parent->content)->name);
+	file_name = ft_strdup(((t_file *)file_list->content)->name);
+	if (parent && (!ft_strequ(parent_name, file_name)))
+	{
+		parent_folder = ft_strjoin(parent_name, file_name);
+		file_name = ft_strjoin(parent_folder, "/");
+	}
+	else
+		file_name = ft_strjoin(file_name, "/");
+	if (parent && !ft_strequ("./", file_name))
+	{
+		ft_putstr("\n");
+		ft_putnstr(file_name, ft_strlen(file_name) - 1);
+		ft_putstr(":\n");
+
+		//ft_printf("\n%.*s:\n", ft_strlen(file_name) - 1, file_name);
+	}
+	free(((t_file *)file_list->content)->name);
+	((t_file *)file_list->content)->name = file_name;
+	if (parent)
+		free(parent_name);
+	free(parent_folder);
+	return (file_list);
+}
+
 static t_list 		*read_directorys(DIR *directory, t_list *file_list, t_flags *flags)
 {
 	struct dirent 	*file;
@@ -23,37 +58,6 @@ static t_list 		*read_directorys(DIR *directory, t_list *file_list, t_flags *fla
 	}
 	free(current);
 	return (entries);
-}
-
-static t_list *modify_folder_name(t_list *parent, t_list *file_list)
-{
-	char 	*parent_folder;
-	char 	*parent_name;
-	char 	*file_name;
-
-	parent_folder = NULL;
-	if (parent)
-		parent_name = ft_strdup(((t_file*)parent->content)->name);
-	file_name = ft_strdup(((t_file*)file_list->content)->name);
-	if (parent && (!ft_strequ(parent_name, file_name)))
-	{
-		parent_folder = ft_strjoin(parent_name, file_name);
-		file_name = ft_strjoin(parent_folder, "/");
-	}
-	else
-		file_name = ft_strjoin(file_name, "/");
-	if (parent && !ft_strequ("./", file_name))
-	{
-		ft_putchar('\n');
-		ft_putnstr(file_name, ft_strlen(file_name) - 1);
-		ft_putchar('\n');
-	}
-	free(((t_file*)file_list->content)->name);
-	((t_file*)file_list->content)->name = file_name;
-	if (parent)
-		free(parent);
-	free(parent_folder)	;
-	return (file_list);
 }
 
 t_list			*open_directory(t_list *parent, t_list *file_list, t_flags *flags)
