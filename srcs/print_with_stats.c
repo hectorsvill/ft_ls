@@ -120,6 +120,7 @@ void print_sp(t_file *file, int len)
 {
 	writeformatsp(len - 1);
 	ft_printf(" %d", file->stats.st_nlink);
+
 }
 
 void			print_with_stats(t_file *file, t_file *parent, unsigned int *i)
@@ -134,6 +135,8 @@ void			print_with_stats(t_file *file, t_file *parent, unsigned int *i)
 			getpwuid(file->stats.st_uid)->pw_name);
 	else
 		ft_printf(i[6] ? "%-*s " : "%*s ", i[1], ft_itoa(file->stats.st_uid));
+
+	exit(1);
 	if (getgrgid(file->stats.st_gid))
 		ft_printf(i[6] ? "%-*s " : " %*s ", i[2],
 			getgrgid(file->stats.st_gid)->gr_name);
