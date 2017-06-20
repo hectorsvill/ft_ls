@@ -25,8 +25,6 @@ static t_list	*modify_folder_name(t_list *parent, t_list *file_list)
 		ft_putstr("\n");
 		ft_putnstr(file_name, ft_strlen(file_name) - 1);
 		ft_putstr(":\n");
-
-		//ft_printf("\n%.*s:\n", ft_strlen(file_name) - 1, file_name);
 	}
 	free(((t_file *)file_list->content)->name);
 	((t_file *)file_list->content)->name = file_name;
