@@ -20,6 +20,8 @@ t_list read_directorys(Dir *directory, t_list *file_list, t_flags *flags)
 		}
 		file = readdir(directory);
 	}
+	free(current);
+	return (entries);
 }
 
 
@@ -70,7 +72,7 @@ t_list			*open_directory(t_list *parent, t_list *file_list, t_flags *flags)
 		return (NULL);
 	}
 	free(file_name);
-	// entries = read_directorys(directory, file_list, flags);
-	// closedir(directory);
+	entries = read_directorys(directory, file_list, flags);
+	closedir(directory);
 	return (entries);
 }
