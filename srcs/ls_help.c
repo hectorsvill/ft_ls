@@ -52,7 +52,9 @@ void		calc_col_width_get_dev_info(t_list *file_list, unsigned int *w)
 		w[5] = MAX(ft_intmax_tlen(tmp->stats.st_rdev & 0xFFFFFF), w[5]);
 		w[6] = (((tmp->stats.st_mode & S_IFMT) == S_IFBLK) ||
 				((tmp->stats.st_mode & S_IFMT) == S_IFCHR) ? 1 : 0);
+
 		file_list = file_list->next;
+
 	}
 	w[0]++;
 }
