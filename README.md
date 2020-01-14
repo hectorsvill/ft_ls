@@ -13,7 +13,7 @@ int  main(int ac, char **av)
 {
 	t_flags		*flags;
 	t_list		*file_list;
-	int			list_length;
+	int		list_length;
 
 	flags = read_options(ac, av);
 	file_list = init_list_from_args(ac, av, flags);
