@@ -8,7 +8,7 @@ DESCRIPTION
 
 ## main
 
-```
+```c
 int  main(int ac, char **av)
 {
 	t_flags		*flags;
